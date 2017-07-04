@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="register-wrapper">
+    <h2 class="heading">Register</h2>
+    <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit(userForm.valid)">
+
+      <!--first name-->
+      <div class="form-group row" formGroupName="name">
+        <label for="fname" class="col-sm-3 col-form-label">First Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="fname" formControlName="fname" placeholder="First Name">
+          <p *ngIf="submitted && userForm.get('name').get('fname').hasError('required')" class="error-msg">
+              First name is required.
+          </p>
+          <p *ngIf="submitted && userForm.get('name').get('fname').hasError('minlength')" class="error-msg">
+            First name must be at least 2 characters long.
+          </p>
+          <p *ngIf="submitted && userForm.get('name').get('fname').hasError('pattern')" class="error-msg">
+            Only alphabets are allowed.
+          </p>
+        </div>
+      </div>
+
+      <!--last name-->
+      <div class="form-group row" formGroupName="name">
+        <label for="lname" class="col-sm-3 col-form-label">Last Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="lname" formControlName="lname" placeholder="Last Name">
+          <p *ngIf="submitted && userForm.get('name').get('lname').hasError('required')" class="error-msg">
+              Last name is required.
+          </p>
+          <p *ngIf="submitted && userForm.get('name').get('lname').hasError('minlength')" class="error-msg">
+            Last name must be at least 2 characters long.
+          </p>
+          <p *ngIf="submitted && userForm.get('name').get('lname').hasError('pattern')" class="error-msg">
+            Only alphabets are allowed.
+          </p>
+        </div>
+      </div>
+
+      <!--email-->
+      <div class="form-group row">
+        <label for="email" class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+          <p *ngIf="submitted && userForm.get('email').hasError('required')" class="error-msg">
+              Email is required.
+          </p>
+          <p *ngIf="submitted && userForm.get('email').hasError('pattern')" class="error-msg">
+            Please enter a valid email.
+          </p>
+        </div>
+      </div>
+
+      <!--password-->
+      <div class="form-group row" formGroupName="credentials">
+        <label for="password" class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+          <p *ngIf="submitted && userForm.get('credentials').get('password').hasError('required')" class="error-msg">
+              Password is required.
+          </p>
+        </div>
+      </div>
+
+      <!--confirm password-->
+      <div class="form-group row" formGroupName="credentials">
+        <label for="confirm-password" class="col-sm-3 col-form-label">Confirm Password</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control" id="confirm-password" formControlName="confirmPassword" placeholder="Confirm Password">
+          <p class="error-msg" *ngIf="submitted && userForm.get('credentials').hasError('nomatch')">
+            Entered password does not match.
+          </p>
+        </div>
+      </div>
+
+      <!--phone-->
+      <div class="form-group row">
+        <label for="phone" class="col-sm-3 col-form-label">Phone</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" id="phone" formControlName="phone" placeholder="Phone">
+          <p *ngIf="submitted && userForm.get('phone').hasError('required')" class="error-msg">
+              Phone number is required.
+          </p>
+          <p *ngIf="submitted && userForm.get('phone').hasError('pattern')" class="error-msg">
+            Please enter a valid phone number.
+          </p>
+        </div>
+      </div>
+
+      <!--designation-->
+      <div class="form-group row">
+        <label for="designation" class="col-sm-3 col-form-label">Designation</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="designation" formControlName="designation">
+          <option [selected]="true">Select Designation</option>
+            <option value="bta">BTA</option>
+            <option value="consultant">Consultant</option>
+            <option value="sr-consultant">Senior Consultant</option>
+            <option value="manager">Manager</option>
+            <option value="sr-manager">Senior Manager</option>
+          </select>
+          <p *ngIf="submitted && userForm.get('designation').hasError('required')" class="error-msg">
+              Designation is required.
+          </p>
+        </div>
+      </div>
+
+      <!--profile img-->
+      <div class="form-group">
+  	    <label for="profile-img">Profile Image</label>
+  	    <input type="file" id="profile-img">
+  	    <p class="help-block">Upload file size limit 1 MB.</p>
+        <p class="error-msg">
+          File size limit exceeds.
+        </p>
+  	  </div>
+
+      <!--role-->
+      <div class="form-group row">
+        <label for="role" class="col-sm-3 col-form-label">Role</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="role" formControlName="role">
+            <option [selected]="true">Please Select Role</option>
+            <option value="1">Admin</option>
+            <option value="2">Publisher</option>
+            <option value="3">User</option>
+          </select>
+          <p *ngIf="submitted && userForm.get('role').hasError('required')" class="error-msg">
+              This field is required.
+          </p>
+        </div>
+      </div>
+
+      <!--submit btn-->
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Register</button>
+        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+        <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
+      </div>
+
+    </form>
+  </div>
+</div>

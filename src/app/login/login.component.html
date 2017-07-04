@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="login-wrapper">
+    <h2 class="heading">Login</h2>
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit(loginForm.valid)">
+
+      <!--email-->
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+          <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
+              Email is required.
+          </p>
+          <p *ngIf="submitted && loginForm.get('email').hasError('pattern')" class="error-msg">
+            Please enter a valid email.
+          </p>
+        </div>
+      </div>
+
+      <!--password-->
+      <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+          <p *ngIf="submitted && loginForm.get('password').hasError('required')" class="error-msg">
+              Password is required.
+          </p>
+        </div>
+      </div>
+
+      <!--submit btn-->
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+        <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
+      </div>
+    </form>
+  </div>
+</div>
