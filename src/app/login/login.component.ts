@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import { AuthenticationService } from '../_services';
 
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
 	public submitted: boolean = false;
 	private credentials;
-  private loading = false;
+  loading = false;
   private returnUrl: string;
 
   constructor(private _fb: FormBuilder,
@@ -23,6 +24,10 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    const userInfo = JSON.parse(Cookie.get('userInfo'));
+    if(userInfo && userInfo.tokens) {
+      this.router.navigate(['/']);
+    }
     this.buildLoginForm();
 
     // get return url from route parameters or default to '/'
@@ -47,14 +52,23 @@ export class LoginComponent implements OnInit {
     this.credentials = this.loginForm.value;
     if(isValid) {
       this.loading = true;
-        this.authenticationService.login(this.credentials.email, this.credentials.password)
+        /*this.authenticationService.login(this.credentials.email, this.credentials.password)
           .subscribe(
               data => {
                   this.router.navigate([this.returnUrl]);
               },
               error => {
                   this.loading = false;
-              });
+              });*/
+
+              //---------
+
+             let authenticate = this.authenticationService.login(this.credentials.email, this.credentials.password);
+             if(authenticate) {
+               this.router.navigate([this.returnUrl]);
+             }
+
+             //---------- 
     }
 
   }

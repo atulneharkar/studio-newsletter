@@ -93,11 +93,11 @@
         <div class="col-sm-9">
           <select class="form-control" id="designation" formControlName="designation">
           <option [selected]="true">Select Designation</option>
-            <option value="bta">BTA</option>
-            <option value="consultant">Consultant</option>
-            <option value="sr-consultant">Senior Consultant</option>
-            <option value="manager">Manager</option>
-            <option value="sr-manager">Senior Manager</option>
+            <option value="BTA">BTA</option>
+            <option value="Consultant">Consultant</option>
+            <option value="Senior Consultant">Senior Consultant</option>
+            <option value="Manager">Manager</option>
+            <option value="Senior Manager">Senior Manager</option>
           </select>
           <p *ngIf="submitted && userForm.get('designation').hasError('required')" class="error-msg">
               Designation is required.
@@ -121,9 +121,9 @@
         <div class="col-sm-9">
           <select class="form-control" id="role" formControlName="role">
             <option [selected]="true">Please Select Role</option>
-            <option value="1">Admin</option>
-            <option value="2">Publisher</option>
-            <option value="3">User</option>
+            <option value="admin">Admin</option>
+            <option value="publisher">Publisher</option>
+            <option value="user">User</option>
           </select>
           <p *ngIf="submitted && userForm.get('role').hasError('required')" class="error-msg">
               This field is required.

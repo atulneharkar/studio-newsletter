@@ -28,6 +28,10 @@ import { FaqComponent } from './content/faq/faq.component';
 import { UserListComponent } from './content/user/user-list.component';
 import { EventListComponent } from './content/event/event-list.component';
 import { ClientListComponent } from './content/client/client-list.component';
+import { MeetingComponent } from './content/meeting/meeting.component';
+import { MeetingListComponent } from './content/meeting/meeting-list.component';
+import { TelegramFeedsComponent } from './content/telegram-feeds.component';
+import { BirthdayComponent } from './content/birthday.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { ClientListComponent } from './content/client/client-list.component';
     FaqComponent,
     UserListComponent,
     EventListComponent,
-    ClientListComponent
+    ClientListComponent,
+    MeetingComponent,
+    MeetingListComponent,
+    TelegramFeedsComponent,
+    BirthdayComponent
   ],
   imports: [
     BrowserModule,
