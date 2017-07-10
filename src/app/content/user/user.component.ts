@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
 	public userForm: FormGroup;
 	public submitted: boolean = false;
   private user;
-  private loading = false;
+  loading = false;
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
