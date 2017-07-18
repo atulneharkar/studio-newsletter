@@ -69,6 +69,8 @@ footer p { margin: 0; }
   box-shadow: -7px 8px 17px -8px;
 }
 
+.login-wrapper { margin-bottom: 250px; }
+
 .login-wrapper .heading,
 .register-wrapper .heading {
   margin: 0 0 20px;

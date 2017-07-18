@@ -1,9 +1,6 @@
 export interface User {
   id: number;
-  name: {
-  	fname: string;
-	  lname: string;
-  };
+  name: string;
 	email: string;
 	credentials: {
 	  password: string;
@@ -11,6 +8,8 @@ export interface User {
 	};
 	phone: string;
 	designation: string;
-	img: string;
+	avatar: string;
 	role: string;
+	dob: string;
+	doj: string;
 }

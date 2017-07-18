@@ -5,6 +5,10 @@ import { LoginComponent } from './login';
 import { UserComponent, UserListComponent } from './content/user';
 import { EventComponent, EventListComponent } from './content/event';
 import { ClientComponent, ClientListComponent } from './content/client';
+import { AwardsComponent, AwardsListComponent } from './content/awards';
+import { MeetingComponent, MeetingListComponent } from './content/meeting';
+import { FiComponent, FiListComponent } from './content/fi';
+import { RfpComponent, RfpListComponent } from './content/rfp';
 import { FaqComponent } from './content/faq';
 
 import { AuthGuard } from './_guards/index';
@@ -30,12 +34,32 @@ const routes: Routes = [
   },
   {
     path: 'clients',
-    component: ClientComponent,
+    component: ClientListComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'events',
-    component: EventComponent,
+    component: EventListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'awards',
+    component: AwardsListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'meeting',
+    component: MeetingListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'fi',
+    component: FiListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'rfp',
+    component: RfpListComponent,
     canActivate: [AuthGuard]
   },
   {

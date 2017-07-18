@@ -32,6 +32,12 @@ import { MeetingComponent } from './content/meeting/meeting.component';
 import { MeetingListComponent } from './content/meeting/meeting-list.component';
 import { TelegramFeedsComponent } from './content/telegram-feeds.component';
 import { BirthdayComponent } from './content/birthday.component';
+import { FiComponent } from './content/fi/fi.component';
+import { AwardsComponent } from './content/awards/awards.component';
+import { RfpComponent } from './content/rfp/rfp.component';
+import { FiListComponent } from './content/fi/fi-list.component';
+import { RfpListComponent } from './content/rfp/rfp-list.component';
+import { AwardsListComponent } from './content/awards/awards-list.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +59,13 @@ import { BirthdayComponent } from './content/birthday.component';
     MeetingComponent,
     MeetingListComponent,
     TelegramFeedsComponent,
-    BirthdayComponent
+    BirthdayComponent,
+    FiComponent,
+    AwardsComponent,
+    RfpComponent,
+    FiListComponent,
+    RfpListComponent,
+    AwardsListComponent
   ],
   imports: [
     BrowserModule,

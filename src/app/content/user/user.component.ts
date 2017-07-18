@@ -28,20 +28,12 @@ export class UserComponent implements OnInit {
   buildUserForm(): void {
     //initialize our form 
     this.userForm = this._fb.group({
-      name: this._fb.group({
-        fname: ['', [
-            Validators.required, 
-            Validators.minLength(2),
-            Validators.pattern(/^[a-zA-Z]*$/)
-          ]
-        ],
-        lname: ['', [
-            Validators.required, 
-            Validators.minLength(2),
-            Validators.pattern(/^[a-zA-Z]*$/)
-          ]
+      name: ['', [
+          Validators.required, 
+          Validators.minLength(2),
+          Validators.pattern(/^[a-zA-Z]*$/)
         ]
-      }),
+      ],
       email: ['', [
           Validators.required,
            Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
@@ -57,8 +49,10 @@ export class UserComponent implements OnInit {
         ]
       ],
       designation: ['', [Validators.required]],
-      img: ['', ''],
-      role: ['', [Validators.required]]
+      avatar: ['', ''],
+      role: ['', [Validators.required]],
+      dob: ['', [Validators.required]],
+      doj: ['', [Validators.required]]
     });
 
   }

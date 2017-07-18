@@ -5,12 +5,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav" *ngIf="userInfo">
-            <li [routerLinkActive]="['active']"><a>FI</a></li>
             <li [routerLinkActive]="['active']"><a [routerLink]="['/users']">Folks</a></li>
-            <li [routerLinkActive]="['active']"><a>RFPs</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="['/fi']">FI</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="['/rfp']">RFP</a></li>
             <li [routerLinkActive]="['active']"><a [routerLink]="['/clients']">Client</a></li>
-            <li [routerLinkActive]="['active']"><a>Award</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="['/meeting']">Meeting</a></li>
             <li [routerLinkActive]="['active']"><a [routerLink]="['/events']">Event</a></li>
+            <li [routerLinkActive]="['active']"><a [routerLink]="['/awards']">Awards</a></li>
             <li [routerLinkActive]="['active']"><a [routerLink]="['/faq']">FAQs</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right" *ngIf="userInfo">
@@ -18,7 +19,6 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="assets/img/default_user_icon.png" class="header-profile-img" /> 
                         <strong>{{userInfo?.fname}} {{userInfo?.lname}}</strong>
-                        <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
