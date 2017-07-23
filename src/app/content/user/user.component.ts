@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import { UserService } from '../../_services';
 import { User } from '../../_interfaces';
@@ -22,6 +23,10 @@ export class UserComponent implements OnInit {
         private userService: UserService) { }
 
   ngOnInit() {
+    let userInfo = JSON.parse(Cookie.get('userInfo'));
+    if(userInfo) {
+      this.router.navigate(['/']);
+    }
     this.buildUserForm();
   }
 
@@ -36,7 +41,7 @@ export class UserComponent implements OnInit {
       ],
       email: ['', [
           Validators.required,
-           Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+          Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
         ]
       ],
       credentials: this._fb.group({
@@ -50,7 +55,7 @@ export class UserComponent implements OnInit {
       ],
       designation: ['', [Validators.required]],
       avatar: ['', ''],
-      role: ['', [Validators.required]],
+      role: ['user', ''],
       dob: ['', [Validators.required]],
       doj: ['', [Validators.required]]
     });
@@ -63,13 +68,13 @@ export class UserComponent implements OnInit {
     if(isValid) {
       this.loading = true;
         this.userService.create(this.user)
-            .subscribe(
-                data => {
-                    this.router.navigate(['/home']);
-                },
-                error => {
-                    this.loading = false;
-                });
+          .subscribe(
+            data => {
+                this.router.navigate(['/home']);
+            },
+            error => {
+                this.loading = false;
+            });
     }
 
   }

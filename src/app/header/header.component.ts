@@ -1,44 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { Subscription } from 'rxjs/Subscription';
 
-import { AuthenticationService } from '../_services';
+import { AuthenticationService, CommonService } from '../_services';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
 	private token: string;
-
   public userInfo: object;
+  private subscription: Subscription;
 
   constructor(private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private authenticationService: AuthenticationService,
+        private commonService: CommonService,
+        private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.getUserInfo();
+
+    this.subscription = this.commonService.notifyObservable$.subscribe(() => {
+      this.getUserInfo();
+    });
+  }
+
+  getUserInfo() {
     this.userInfo = JSON.parse(Cookie.get('userInfo'));
+    this.ref.detectChanges();
   }
 
   logout() {
-  	const tokenInfo = JSON.parse(Cookie.get('userInfo'));
-    this.token = tokenInfo.tokens;
-    /*this.authenticationService.logout(this.token)
-      .subscribe(
-          data => {
-          		//remove token from cookies
-              Cookie.delete('userInfo');
-              this.router.navigate(['/login']);
-          },
-          error => {
+    Cookie.delete('userInfo');
+    Cookie.delete('userToken');
+    this.getUserInfo();
+  	this.router.navigate(['/login']);
+  }
 
-          });*/
-
-          //-----------
-          this.authenticationService.logout(this.token);
-          this.router.navigate(['/login']);
-          //-----------
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

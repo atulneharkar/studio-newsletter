@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { appRouterModule } from "./app.routing";
 
 //services
-import { AuthenticationService, UserService } from './_services/index';
+import { AuthenticationService, UserService, CommonService } from './_services/index';
 
 //guards
 import { AuthGuard } from './_guards';
@@ -77,7 +77,8 @@ import { AwardsListComponent } from './content/awards/awards-list.component';
   providers: [
     AuthGuard,
     AuthenticationService,
-    UserService
+    UserService,
+    CommonService
   ],
   bootstrap: [AppComponent]
 })

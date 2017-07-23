@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractCon
 import { Router, ActivatedRoute } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
-import { AuthenticationService } from '../_services';
+import { AuthenticationService, CommonService } from '../_services';
 
 @Component({
   selector: 'app-login',
@@ -21,11 +21,12 @@ export class LoginComponent implements OnInit {
   constructor(private _fb: FormBuilder,
   			private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private authenticationService: AuthenticationService,
+        private commonService: CommonService) { }
 
   ngOnInit() {
-    const userInfo = JSON.parse(Cookie.get('userInfo'));
-    if(userInfo && userInfo.tokens) {
+    let userInfo = JSON.parse(Cookie.get('userInfo'));
+    if(userInfo) {
       this.router.navigate(['/']);
     }
     this.buildLoginForm();
@@ -35,7 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   buildLoginForm(): void {
-    //initialize our form 
     this.loginForm = this._fb.group({
       email: ['', [
           Validators.required,
@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       ],
       password: ['', [Validators.required]]
     });
-
   }
 
   onSubmit(isValid: boolean) {
@@ -52,23 +51,15 @@ export class LoginComponent implements OnInit {
     this.credentials = this.loginForm.value;
     if(isValid) {
       this.loading = true;
-        /*this.authenticationService.login(this.credentials.email, this.credentials.password)
+        this.authenticationService.login(this.credentials.email, this.credentials.password)
           .subscribe(
-              data => {
-                  this.router.navigate([this.returnUrl]);
-              },
-              error => {
-                  this.loading = false;
-              });*/
-
-              //---------
-
-             let authenticate = this.authenticationService.login(this.credentials.email, this.credentials.password);
-             if(authenticate) {
-               this.router.navigate([this.returnUrl]);
-             }
-
-             //---------- 
+            data => {
+              this.commonService.notifyHeader();
+              this.router.navigate([this.returnUrl]);
+            },
+            error => {
+              this.loading = false;
+            });
     }
 
   }
