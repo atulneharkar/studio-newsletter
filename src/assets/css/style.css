@@ -4,9 +4,6 @@
 body {
     background-color: #eee;
 }
-.content .container {
-    margin: 30px auto;
-}
 
 div {
     outline: none;
@@ -262,4 +259,27 @@ article.navigation-links p {
 
 .photo-gallery {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+/* ==========================================================================
+   Client List Section
+   ========================================================================== */
+.clientlist-section .client-desc {
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    margin-bottom: 30px;
+    padding: 15px;
+}
+
+.clientlist-section .row:last-child .client-desc {
+    margin-bottom: 0;
+}
+
+.clientlist-section .client-desc h4 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cecece;
+}
+
+.clientlist-section .client-desc p {
+    margin: 10px 0;
 }
