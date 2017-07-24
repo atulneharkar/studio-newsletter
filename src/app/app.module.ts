@@ -38,6 +38,8 @@ import { RfpComponent } from './content/rfp/rfp.component';
 import { FiListComponent } from './content/fi/fi-list.component';
 import { RfpListComponent } from './content/rfp/rfp-list.component';
 import { AwardsListComponent } from './content/awards/awards-list.component';
+import { EventsSnapshotComponent } from './content/events-snapshot.component';
+import { MeetingSnapshotComponent } from './content/meeting-snapshot.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { AwardsListComponent } from './content/awards/awards-list.component';
     RfpComponent,
     FiListComponent,
     RfpListComponent,
-    AwardsListComponent
+    AwardsListComponent,
+    EventsSnapshotComponent,
+    MeetingSnapshotComponent
   ],
   imports: [
     BrowserModule,
