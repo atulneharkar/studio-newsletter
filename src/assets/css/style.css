@@ -356,3 +356,68 @@ article.navigation-links p {
     color: #9a9a9a;
     font-style: italic;
 }
+
+/* ==========================================================================
+   Event snapshot section
+   ========================================================================== */
+.events-snapshot {
+    padding: 10px;
+}
+
+.events-snapshot .event-snapshot-heading {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #cecece;
+}
+
+.events-snapshot .event-snapshot-heading h3 {
+    display: inline-block;
+    font-size: 18px;
+}
+
+.events-snapshot .event-snapshot-heading span {
+    padding: 0 5px;
+}
+
+.events-snapshot .event-snapshot-content .row {
+    margin: 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #cecece;
+}
+
+.events-snapshot .event-snapshot-content .row:last-of-type {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.events-snapshot .event-snapshot-content .row .col-xs-2:first-of-type {
+    padding-left: 0;
+}
+
+.events-snapshot .event-snapshot-content .row .col-xs-8 span {
+    display: block;
+}
+
+/* ==========================================================================
+   Birthday snapshot section
+   ========================================================================== */
+.birthdays-snapshot {
+    padding: 10px;
+}
+
+.birthdays-snapshot .birthday-heading {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #cecece;
+}
+
+.birthdays-snapshot .birthday-heading h3 {
+    font-size: 18px;
+    display: inline-block;
+}
+
+.birthdays-snapshot .birthday-heading span {
+    padding: 0 5px;
+}
+
+.birthdays-snapshot .birthday-content > div {
+    margin: 5px 0;
+}
