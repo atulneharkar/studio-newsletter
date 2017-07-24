@@ -340,6 +340,10 @@ article.navigation-links p {
     padding: 10px;
 }
 
+.telegram-feeds h3 {
+    font-size: 18px;
+}
+
 .telegram-card {
     border: 1px solid #cecece;
     margin: 10px 0;
