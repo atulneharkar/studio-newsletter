@@ -1,5 +1,5 @@
 export interface User {
-  id: number;
+  _id: number;
   name: string;
 	email: string;
 	credentials: {
@@ -12,4 +12,5 @@ export interface User {
 	role: string;
 	dob: string;
 	doj: string;
+	status: string;
 }

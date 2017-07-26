@@ -11,62 +11,39 @@
         <th>DOB</th>
         <th>DOJ</th>
         <th>Role</th>
-        <th>Status</th>
-        <th>Delete</th>
+        <th *ngIf="currentUser.role === 'admin'">Status</th>
+        <th *ngIf="currentUser.role === 'admin'">Delete</th>
       </tr> 
     </thead> 
 
     <tbody> 
-      <tr> 
-        <td>Photo</td> 
-        <td>Atul Neharkar</td> 
-        <td>Consultant</td> 
-        <td>aneharkar@deloitte.com</td>
-        <td>1234567890</td>
-        <td>19-07-2017</td>
-        <td>19-07-2017</td>
-        <td><a>Remove Admin</a></td>
-        <td><span class="btn btn-primary">Approve</span></td>
-        <td><span class="btn btn-danger">Delete</span></td>
-      </tr>
-
-      <tr> 
-        <td>Photo</td> 
-        <td>Atul Neharkar</td> 
-        <td>Consultant</td> 
-        <td>aneharkar@deloitte.com</td>
-        <td>1234567890</td>
-        <td>19-07-2017</td>
-        <td>19-07-2017</td>
-        <td><a>Make Admin</a></td>
-        <td>Active</td>
-        <td><span class="btn btn-danger">Delete</span></td>
-      </tr>
-
-      <tr> 
-        <td>Photo</td> 
-        <td>Atul Neharkar</td> 
-        <td>Consultant</td> 
-        <td>aneharkar@deloitte.com</td>
-        <td>1234567890</td>
-        <td>19-07-2017</td>
-        <td>19-07-2017</td>
-        <td><a>Remove Admin</a></td>
-        <td><span class="btn btn-primary">Activate</span></td>
-        <td>Deleted</td>
-      </tr>
-
-      <tr> 
-        <td>Photo</td> 
-        <td>Atul Neharkar</td> 
-        <td>Consultant</td> 
-        <td>aneharkar@deloitte.com</td>
-        <td>1234567890</td>
-        <td>19-07-2017</td>
-        <td>19-07-2017</td>
-        <td><a>Make Admin</a></td>
-        <td>Active</td>
-        <td><span class="btn btn-danger">Delete</span></td>
+      <tr *ngFor="let user of users"> 
+        <td>
+          <img src="{{user.avatar}}" width="50" *ngIf="user.avatar" />
+          <img src="assets/img/default_user_icon.png" width="50" *ngIf="!user.avatar" />
+        </td> 
+        <td>{{user.name}}</td> 
+        <td>{{user.designation}}</td> 
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.dob}}</td>
+        <td>{{user.doj}}</td>
+        <td>
+          <span *ngIf="currentUser.role === 'user'">{{user.role}}</span>
+          <div *ngIf="currentUser.role === 'admin'">
+            <a (click)="changeRole(user._id, 'user')" *ngIf="user.role === 'admin'">Remove Admin</a>
+            <a (click)="changeRole(user._id, 'admin')" *ngIf="user.role !== 'admin'">Make Admin</a>
+          </div>
+        </td>
+        <td *ngIf="currentUser.role === 'admin'">
+          <span class="btn btn-primary" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'pending'">Approve</span>
+          <span *ngIf="user.status === 'active'">Active</span>
+          <span class="btn btn-primary" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'inactive'">Activate</span>
+        </td>
+        <td *ngIf="currentUser.role === 'admin'">
+          <span class="btn btn-danger" (click)="changeStatus(user._id, 'inactive')" *ngIf="user.status === 'active'">X</span>
+          <span class="btn btn-danger disabled" *ngIf="user.status !== 'active'">X</span>
+        </td>
       </tr>
     </tbody> 
   </table>

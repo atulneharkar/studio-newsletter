@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import { UserService } from '../../_services';
@@ -17,17 +17,36 @@ export class UserComponent implements OnInit {
 	public submitted: boolean = false;
   private user;
   loading = false;
+  id: number;
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
+        private route: ActivatedRoute,
         private userService: UserService) { }
 
   ngOnInit() {
+    this.getParamId();
+
+    if(!this.id) {
+      this.checkIfLoggedIn();
+    }
+
+    this.buildUserForm();
+  }
+
+  getParamId() {
+    this.route.params.subscribe(
+      (params : Params) => {
+        this.id = params["id"];
+      }
+    );
+  }
+
+  checkIfLoggedIn() {
     let userInfo = JSON.parse(Cookie.get('userInfo'));
     if(userInfo) {
       this.router.navigate(['/']);
     }
-    this.buildUserForm();
   }
 
   buildUserForm(): void {
