@@ -1,6 +1,7 @@
 <div class="container">
   <div class="register-wrapper">
-    <h2 class="heading">Register</h2>
+    <h2 class="heading" *ngIf="!userId">Register</h2>
+    <h2 class="heading" *ngIf="userId">My Profile</h2>
     <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit(userForm.valid)">
 
       <!--first name-->
@@ -75,12 +76,8 @@
         <label for="designation" class="col-sm-4 col-form-label">Designation</label>
         <div class="col-sm-8">
           <select class="form-control" id="designation" formControlName="designation">
-          <option [selected]="true">Select Designation</option>
-            <option value="BTA">BTA</option>
-            <option value="Consultant">Consultant</option>
-            <option value="Senior Consultant">Senior Consultant</option>
-            <option value="Manager">Manager</option>
-            <option value="Senior Manager">Senior Manager</option>
+            <option [selected]="!selectedDesignation">Select Designation</option>
+            <option *ngFor="let name of designations" [selected]="selectedDesignation === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && userForm.get('designation').hasError('required')" class="error-msg">
               Designation is required.
@@ -124,7 +121,8 @@
 
       <!--submit btn-->
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary" *ngIf="!userId">Register</button>
+        <button type="submit" class="btn btn-primary" *ngIf="userId">Update</button>
         <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
         <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
       </div>

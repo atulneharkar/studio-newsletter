@@ -18,11 +18,15 @@ export class UserService {
   }
 
   create(user: User) {
-    return this.http.post('http://localhost:3000/user/create', user).map((response: Response) => this.setUserCookies(response, 'create'));
+    return this.http.post('http://localhost:3000/user/create', user).map((response: Response) => response.json());
   }
 
-  update(id: number, user: object) {
-    return this.http.put('http://localhost:3000/user/' + id, user, this.jwt()).map((response: Response) => this.setUserCookies(response, 'update'));
+  update(id: number, user: object, updateType: string) {
+    return this.http.put('http://localhost:3000/user/' + id, user, this.jwt()).map((response: Response) => {
+        if(updateType === 'self') {
+          this.setUserCookies(response);
+        }
+      });
   }
 
   // private helper method to get JWT token
@@ -35,14 +39,10 @@ export class UserService {
   }
 
   // private helper method to set user cookies
-  private setUserCookies(user, type) {
+  private setUserCookies(user) {
     let userInfo = user.json();
-    let userToken = user.headers.get('x-auth');
     if (userInfo) {
-      Cookie.set('userInfo', JSON.stringify(user));
-      if(type === 'create') {
-        Cookie.set('userToken', userToken);
-      }
+      Cookie.set('userInfo', JSON.stringify(userInfo));
     }
   }
 }

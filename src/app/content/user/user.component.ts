@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractCon
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
-import { UserService } from '../../_services';
+import { UserService, CommonService } from '../../_services';
 import { User } from '../../_interfaces';
 
 @Component({
@@ -17,17 +17,23 @@ export class UserComponent implements OnInit {
 	public submitted: boolean = false;
   private user;
   loading = false;
-  id: number;
+  userId: number;
+  userInfo: User;
+  public designations: any[] = ['BTA', 'Consultant', 'Senior Consultant', 'Manager', 'Senior Manager'];
+  selectedDesignation: string = '';
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
-        private userService: UserService) { }
+        private userService: UserService,
+        private commonService: CommonService) { }
 
   ngOnInit() {
     this.getParamId();
 
-    if(!this.id) {
+    this.userInfo = JSON.parse(Cookie.get('userInfo'));
+
+    if(!this.userId) {
       this.checkIfLoggedIn();
     }
 
@@ -37,14 +43,13 @@ export class UserComponent implements OnInit {
   getParamId() {
     this.route.params.subscribe(
       (params : Params) => {
-        this.id = params["id"];
+        this.userId = params["id"];
       }
     );
   }
 
   checkIfLoggedIn() {
-    let userInfo = JSON.parse(Cookie.get('userInfo'));
-    if(userInfo) {
+    if(this.userInfo) {
       this.router.navigate(['/']);
     }
   }
@@ -55,7 +60,7 @@ export class UserComponent implements OnInit {
       name: ['', [
           Validators.required, 
           Validators.minLength(2),
-          Validators.pattern(/^[a-zA-Z]*$/)
+          //Validators.pattern(/^[a-zA-Z]*$/)
         ]
       ],
       email: ['', [
@@ -64,8 +69,8 @@ export class UserComponent implements OnInit {
         ]
       ],
       credentials: this._fb.group({
-        password: ['', [Validators.required]],
-        confirmPassword: ['', [Validators.required]]
+        password: this.getPwdStructure(),
+        confirmPassword: this.getPwdStructure()
       }, { validator: this.pwdMatcher }),
       phone: ['', [
           Validators.required,
@@ -79,6 +84,16 @@ export class UserComponent implements OnInit {
       doj: ['', [Validators.required]]
     });
 
+    if(this.userId) {
+      //prefill the form 
+      let UserObj = this.formatUser(this.userInfo);
+
+      this.selectedDesignation = UserObj.designation;
+
+      (<FormGroup>this.userForm)
+            .setValue(UserObj, { onlySelf: true });
+    }
+
   }
 
   onSubmit(isValid: boolean) {
@@ -86,16 +101,55 @@ export class UserComponent implements OnInit {
     this.user = this.userForm.value;
     if(isValid) {
       this.loading = true;
+      if(!this.userId) {
         this.userService.create(this.user)
-          .subscribe(
-            data => {
-                this.router.navigate(['/home']);
-            },
-            error => {
-                this.loading = false;
-            });
+        .subscribe(
+          data => {
+              this.router.navigate(['/login']);
+          },
+          error => {
+              this.loading = false;
+          });
+      } else {
+        this.userService.update(this.userId, this.user, 'self')
+        .subscribe(
+          data => {
+              this.commonService.notifyHeader();
+              this.router.navigate(['/home']);
+          },
+          error => {
+              this.loading = false;
+          });
+      }
     }
 
+  }
+
+  //format user object
+  formatUser(user) {
+    return {
+      name: user.name,
+      email: user.email,
+      credentials: {
+        password: '',
+        confirmPassword: ''
+      },
+      phone: user.phone,
+      designation: user.designation,
+      avatar: '',
+      role: user.role,
+      dob: user.dob,
+      doj: user.doj
+    };
+  }
+
+  //to check if pwd is required and return pwd initialization structure
+  getPwdStructure() {
+    if(!this.userId) {
+      return ['', [Validators.required]];
+    } else {
+      return ['', []];
+    }
   }
 
   //function to check if pwd matches

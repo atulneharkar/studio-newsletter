@@ -25,14 +25,14 @@ export class UserListComponent implements OnInit {
     let user = {
       status: status
     }
-    this.userService.update(id, user).subscribe(() => { this.getAllUsers() });
+    this.userService.update(id, user, 'other').subscribe(() => { this.getAllUsers() });
   }
 
   changeRole(id: number, role: string) {
     let user = {
       role: role
     }
-    this.userService.update(id, user).subscribe(() => { this.getAllUsers() });
+    this.userService.update(id, user, 'other').subscribe(() => { this.getAllUsers() });
   }
 
   private getAllUsers() {
