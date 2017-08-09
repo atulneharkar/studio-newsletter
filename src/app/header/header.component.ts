@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AuthenticationService, CommonService } from '../_services';
@@ -29,13 +28,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   getUserInfo() {
-    this.userInfo = JSON.parse(Cookie.get('userInfo'));
+    this.userInfo = this.commonService.getUserCookies();
     this.ref.detectChanges();
   }
 
   logout() {
-    Cookie.delete('userInfo');
-    Cookie.delete('userToken');
+    this.commonService.deleteUserCookies();
     this.getUserInfo();
   	this.router.navigate(['/login']);
   }

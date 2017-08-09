@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import { AuthenticationService, CommonService } from '../_services';
 
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
         private commonService: CommonService) { }
 
   ngOnInit() {
-    let userInfo = JSON.parse(Cookie.get('userInfo'));
+    let userInfo = this.commonService.getUserCookies();
     if(userInfo) {
       this.router.navigate(['/']);
     }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
 
-import { UserService } from '../../_services';
+import { UserService, CommonService } from '../../_services';
 import { User } from '../../_interfaces';
 
 @Component({
@@ -13,8 +12,10 @@ export class UserListComponent implements OnInit {
   currentUser: User;
   users: User[] = [];
 
-  constructor(private userService: UserService) {
-    this.currentUser = JSON.parse(Cookie.get('userInfo'));
+  constructor(
+      private userService: UserService,
+      private commonService: CommonService) {
+    this.currentUser = this.commonService.getUserCookies();
   }
 
   ngOnInit() {

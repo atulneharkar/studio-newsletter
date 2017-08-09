@@ -1,31 +1,28 @@
 <div>
   <form>
       <div class="row booking-room-header">
-          <div class="col-sm-8">
+          <div class="col-sm-9 col-xs-9">
               <h2>Book a room</h2>
           </div>
-          <div class="col-sm-4">
-              <button class="btn btn-primary custom-btn" type="submit">Book Room</button>
+          <div class="col-sm-3 col-xs-3">
+              <button class="btn btn-primary pull-right" type="submit">Book Room</button>
           </div>
       </div>
 
       <div class="booking-room-content">
           <div class="form-group row date-row">
-              <div class="col-sm-2 vert-offset-col-2">
-                  <p>Date</p>
-              </div>
-              <div class="col-sm-10">
-                  <div class="row">
-                      <div class="col-sm-6">
-                          <label for="form-date" class="col-form-label">From</label>
-                          <input type="date" class="form-control" id="from-date" formControlName="fromDate" placeholder="From Date">
+              <div class="col-sm-12 col-xs-12">
+                  <div class="row form-inline">
+                      <div class="col-sm-6 col-xs-12 form-group">
+                          <label for="form-date">From</label>
+                          <input type="date" class="form-control" id="from-date" style="width: 100%" formControlName="fromDate" placeholder="From Date">
                           <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
                                 Please select date.
                             </p> -->
                       </div>
-                      <div class="col-sm-6">
-                          <label for="to-date" class="col-form-label">To</label>
-                          <input type="date" class="form-control" id="to-date" formControlName="toDate" placeholder="To Date">
+                      <div class="col-sm-6 col-xs-12 form-group">
+                          <label for="to-date">To</label>
+                          <input type="date" class="form-control" id="to-date" style="width: 100%" formControlName="toDate" placeholder="To Date">
                           <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
                                 Please select date.
                            </p> -->
@@ -35,21 +32,18 @@
           </div>
 
           <div class="form-group row time-row">
-              <div class="col-sm-2 vert-offset-col-2">
-                  <p>Time</p>
-              </div>
-              <div class="col-sm-10">
-                  <div class="row">
-                      <div class="col-sm-6">
-                          <label for="from-time" class="col-form-label">From</label>
-                          <input type="time" class="form-control" id="from-time" formControlName="fromTime" placeholder="From Time">
+              <div class="col-sm-12 col-xs-12">
+                  <div class="row form-inline">
+                      <div class="col-sm-6 col-xs-12 form-group">
+                          <label for="from-time">From</label>
+                          <input type="time" class="form-control" id="from-time" style="width: 100%" formControlName="fromTime" placeholder="From Time">
                             <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
                                 Please select date.
                             </p> -->
                       </div>
-                      <div class="col-sm-6">
-                          <label for="to-time" class="col-form-label">To</label>
-                          <input type="time" class="form-control" id="to-time" formControlName="toTime" placeholder="To Time">
+                      <div class="col-sm-6 col-xs-12 form-group">
+                          <label for="to-time">To</label>
+                          <input type="time" class="form-control" id="to-time" style="width: 100%" formControlName="toTime" placeholder="To Time">
                             <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
                                 Please select date.
                             </p> -->
@@ -58,5 +52,5 @@
               </div>
           </div>
     </div>
-	</form>
+  </form>
 </div>

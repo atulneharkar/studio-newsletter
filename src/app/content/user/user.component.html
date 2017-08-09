@@ -2,7 +2,7 @@
   <div class="register-wrapper">
     <h2 class="heading" *ngIf="!userId">Register</h2>
     <h2 class="heading" *ngIf="userId">My Profile</h2>
-    <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit(userForm.valid)">
+    <form [formGroup]="userForm" enctype="multipart/form-data" novalidate (ngSubmit)="onSubmit(userForm.valid)">
 
       <!--first name-->
       <div class="form-group row">
@@ -89,7 +89,7 @@
       <div class="form-group row">
         <label for="dob" class="col-sm-4 col-form-label">Date of Birth</label>
         <div class="col-sm-8">
-          <input type="date" class="form-control" id="dob" formControlName="dob" placeholder="Date of Birth">
+          <input type="date" class="form-control" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
           <p *ngIf="submitted && userForm.get('dob').hasError('required')" class="error-msg">
               This field is required.
           </p>
@@ -100,7 +100,7 @@
       <div class="form-group row">
         <label for="doj" class="col-sm-4 col-form-label">Date of Joining</label>
         <div class="col-sm-8">
-          <input type="date" class="form-control" id="doj" formControlName="doj" placeholder="Date of Joining">
+          <input type="date" class="form-control" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
           <p *ngIf="submitted && userForm.get('doj').hasError('required')" class="error-msg">
               This field is required.
           </p>
@@ -111,7 +111,7 @@
       <div class="form-group row">
   	    <label for="profile-img" class="col-sm-4 col-form-label">Profile Image</label>
         <div class="col-sm-8">
-    	    <input type="file" id="profile-img">
+    	    <input type="file" id="profile-img" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
     	    <p class="help-block">Upload file size limit 1 MB.</p>
           <!-- <p class="error-msg">
             File size limit exceeds.

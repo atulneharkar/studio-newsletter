@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router, Params, ActivatedRoute } from '@angular/router';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
 
-import { UserService, CommonService } from '../../_services';
+import { UserService, CommonService, FileUploadService } from '../../_services';
 import { User } from '../../_interfaces';
 
 @Component({
@@ -21,17 +20,25 @@ export class UserComponent implements OnInit {
   userInfo: User;
   public designations: any[] = ['BTA', 'Consultant', 'Senior Consultant', 'Manager', 'Senior Manager'];
   selectedDesignation: string = '';
+  private imageInfo;
+  setDobDate;
+  setDojDate;
+
+  uploadedFiles = [];
+  uploadError;
+  uploadFieldName = 'avatar';
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
         private userService: UserService,
-        private commonService: CommonService) { }
+        private commonService: CommonService,
+        private _fileUpload: FileUploadService) { }
 
   ngOnInit() {
     this.getParamId();
 
-    this.userInfo = JSON.parse(Cookie.get('userInfo'));
+    this.userInfo = this.commonService.getUserCookies();
 
     if(!this.userId) {
       this.checkIfLoggedIn();
@@ -86,12 +93,16 @@ export class UserComponent implements OnInit {
 
     if(this.userId) {
       //prefill the form 
-      let UserObj = this.formatUser(this.userInfo);
+      let userObj = this.formatUser(this.userInfo);
+      this.selectedDesignation = userObj.designation;
 
-      this.selectedDesignation = UserObj.designation;
+      let dob = new Date(userObj.dob);
+      let doj = new Date(userObj.doj);
+      this.setDobDate = dob.toISOString().substring(0, 10);
+      this.setDojDate = doj.toISOString().substring(0, 10);
 
       (<FormGroup>this.userForm)
-            .setValue(UserObj, { onlySelf: true });
+            .setValue(userObj, { onlySelf: true });
     }
 
   }
@@ -114,8 +125,12 @@ export class UserComponent implements OnInit {
         this.userService.update(this.userId, this.user, 'self')
         .subscribe(
           data => {
-              this.commonService.notifyHeader();
-              this.router.navigate(['/home']);
+              if(this.imageInfo) {
+                this.saveImage(this.imageInfo);
+              } else {
+                this.commonService.notifyHeader();
+                this.router.navigate(['/home']);
+              }
           },
           error => {
               this.loading = false;
@@ -123,6 +138,33 @@ export class UserComponent implements OnInit {
       }
     }
 
+  }
+
+  //capture uploaded file
+  profilePicChange(fieldName: string, fileList: FileList) {
+    // handle file changes
+    this.imageInfo = new FormData();
+
+    if (!fileList.length) return;
+
+    // append the files to FormData
+    Array
+      .from(Array(fileList.length).keys())
+      .map(x => {
+        this.imageInfo.append(fieldName, fileList[x], fileList[x].name);
+      });
+  }
+
+  //save profile pic
+  saveImage(data) {
+    this._fileUpload.upload(data)
+      .take(1)
+      .subscribe(x => {
+        this.commonService.notifyHeader();
+        this.router.navigate(['/home']);
+      }, err => {
+        this.uploadError = err;
+      })
   }
 
   //format user object

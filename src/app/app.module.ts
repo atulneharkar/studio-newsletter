@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { appRouterModule } from "./app.routing";
 
 //services
-import { AuthenticationService, UserService, CommonService } from './_services/index';
+import { AuthenticationService, UserService, CommonService, FileUploadService } from './_services/index';
 
 //guards
 import { AuthGuard } from './_guards';
@@ -81,8 +81,9 @@ import { MeetingSnapshotComponent } from './content/meeting-snapshot.component';
   providers: [
     AuthGuard,
     AuthenticationService,
+    CommonService,
     UserService,
-    CommonService
+    FileUploadService
   ],
   bootstrap: [AppComponent]
 })
