@@ -21,7 +21,7 @@ export class UserService {
   }
 
   create(user: User) {
-    return this.http.post(`${this.commonService.getDomainUrl()}/user/create`, user).map((response: Response) => response.json());
+    return this.http.post(`${this.commonService.getDomainUrl()}/user/create`, user).map((response: Response) => response);
   }
 
   update(id: number, user: object, updateType: string) {
@@ -30,5 +30,9 @@ export class UserService {
           this.commonService.setUserCookies(response, '');
         }
       });
+  }
+
+  getMyDetails() {
+    return this.http.get(`${this.commonService.getDomainUrl()}/user/me`, this.commonService.getJwt()).map((response: Response) => response);
   }
 }

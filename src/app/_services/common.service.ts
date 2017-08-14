@@ -18,8 +18,8 @@ export class CommonService {
   }
 
   //method to get JWT token
-  getJwt() {
-    let userToken = Cookie.get('userToken');
+  getJwt(token = '') {
+    let userToken = (token) ? token : Cookie.get('userToken');
     if (userToken) {
       let headers = new Headers({ 'x-auth': userToken });
       return new RequestOptions({ headers: headers });

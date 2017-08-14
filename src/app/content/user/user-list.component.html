@@ -31,18 +31,17 @@
         <td>
           <span *ngIf="currentUser.role === 'user'">{{user.role}}</span>
           <div *ngIf="currentUser.role === 'admin'">
-            <a (click)="changeRole(user._id, 'user')" *ngIf="user.role === 'admin'">Remove Admin</a>
-            <a (click)="changeRole(user._id, 'admin')" *ngIf="user.role !== 'admin'">Make Admin</a>
+            <button class="btn btn-primary" [disabled]="user._id === currentUser._id || user.status !== 'active'" (click)="changeRole(user._id, 'user')" *ngIf="user.role === 'admin'">Remove Admin</button>
+            <button class="btn btn-primary" [disabled]="user._id === currentUser._id || user.status !== 'active'" (click)="changeRole(user._id, 'admin')" *ngIf="user.role !== 'admin'">Make Admin</button>
           </div>
         </td>
         <td *ngIf="currentUser.role === 'admin'">
-          <span class="btn btn-primary" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'pending'">Approve</span>
+          <button class="btn btn-primary" [disabled]="user._id === currentUser._id" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'pending'">Approve</button>
           <span *ngIf="user.status === 'active'">Active</span>
-          <span class="btn btn-primary" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'inactive'">Activate</span>
+          <button class="btn btn-primary" [disabled]="user._id === currentUser._id" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'inactive'">Activate</button>
         </td>
         <td *ngIf="currentUser.role === 'admin'">
-          <span class="btn btn-danger" (click)="changeStatus(user._id, 'inactive')" *ngIf="user.status === 'active'">X</span>
-          <span class="btn btn-danger disabled" *ngIf="user.status !== 'active'">X</span>
+          <button class="btn btn-danger" [disabled]="user.status !== 'active' || user._id === currentUser._id" (click)="changeStatus(user._id, 'inactive')">X</button>
         </td>
       </tr>
     </tbody> 

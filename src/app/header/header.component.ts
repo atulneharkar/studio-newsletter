@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AuthenticationService, CommonService } from '../_services';
+import { AuthenticationService, CommonService, UserService } from '../_services';
+import { User } from '../_interfaces';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +12,14 @@ import { AuthenticationService, CommonService } from '../_services';
 export class HeaderComponent implements OnInit, OnDestroy {
 
 	private token: string;
-  public userInfo: object;
+  public userInfo: User;
   private subscription: Subscription;
 
   constructor(private router: Router,
         private authenticationService: AuthenticationService,
         private commonService: CommonService,
-        private ref: ChangeDetectorRef) { }
+        private ref: ChangeDetectorRef,
+        private userService: UserService) { }
 
   ngOnInit() {
     this.getUserInfo();
@@ -25,6 +27,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription = this.commonService.notifyObservable$.subscribe(() => {
       this.getUserInfo();
     });
+
+    //check status of the logged in user
+    this.userService.getMyDetails()
+        .subscribe(
+          data => {
+            
+          },
+          error => {
+            if(error.statusText === 'Unauthorized') {
+              this.logout();
+            }
+          });
   }
 
   getUserInfo() {

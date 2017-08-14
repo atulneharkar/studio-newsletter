@@ -112,12 +112,27 @@
   	    <label for="profile-img" class="col-sm-4 col-form-label">Profile Image</label>
         <div class="col-sm-8">
     	    <input type="file" id="profile-img" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
-    	    <p class="help-block">Upload file size limit 1 MB.</p>
-          <!-- <p class="error-msg">
+    	    <p class="help-block">Upload file size limit 3 MB.</p>
+          <p *ngIf="" class="error-msg">
             File size limit exceeds.
-          </p> -->
+          </p>
         </div>
   	  </div>
+
+      <!--email unique error-->
+      <p *ngIf="" class="error-msg">
+        Email already exists.
+      </p>
+
+      <!--phone unique error-->
+      <p *ngIf="" class="error-msg">
+        Phone number already exists.
+      </p>
+
+      <!--server connection error-->
+      <p *ngIf="" class="error-msg">
+        Could not connect to server. Please try again later.
+      </p>
 
       <!--submit btn-->
       <div class="form-group text-center">
@@ -128,5 +143,18 @@
       </div>
 
     </form>
+  </div>
+</div>
+
+<!--modal code to show registration success message-->
+<div class="overlay"></div>
+
+<div class="registration-success-modal" [hidden]="!successMsg">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        Registration successful!!
+      </div>
+    </div>
   </div>
 </div>

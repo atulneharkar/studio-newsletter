@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router, Params, ActivatedRoute } from '@angular/router';
+import { Headers } from '@angular/http';
 
 import { UserService, CommonService, FileUploadService } from '../../_services';
 import { User } from '../../_interfaces';
@@ -23,6 +24,7 @@ export class UserComponent implements OnInit {
   private imageInfo;
   setDobDate;
   setDojDate;
+  private successMsg: boolean = false;
 
   uploadedFiles = [];
   uploadError;
@@ -116,7 +118,19 @@ export class UserComponent implements OnInit {
         this.userService.create(this.user)
         .subscribe(
           data => {
-              this.router.navigate(['/login']);
+              if(this.imageInfo) {
+                let headers: Headers;
+                let token = data.headers.get('x-auth');
+                this.saveImage(this.imageInfo, token);
+              } else {
+                this.successMsg = true;
+                setTimeout(() => {
+                  this.loading = false;
+                  this.commonService.notifyHeader();
+                  this.successMsg = false;
+                  this.router.navigate(['/login']);
+                }, 3000);
+              }
           },
           error => {
               this.loading = false;
@@ -128,8 +142,12 @@ export class UserComponent implements OnInit {
               if(this.imageInfo) {
                 this.saveImage(this.imageInfo);
               } else {
-                this.commonService.notifyHeader();
-                this.router.navigate(['/home']);
+                this.successMsg = true;
+                setTimeout(() => {
+                  this.commonService.notifyHeader();
+                  this.successMsg = false;
+                  this.router.navigate(['/home']);
+                }, 3000);
               }
           },
           error => {
@@ -156,12 +174,21 @@ export class UserComponent implements OnInit {
   }
 
   //save profile pic
-  saveImage(data) {
-    this._fileUpload.upload(data)
+  saveImage(data, userToken = null) {
+    this._fileUpload.upload(data, userToken)
       .take(1)
       .subscribe(x => {
-        this.commonService.notifyHeader();
-        this.router.navigate(['/home']);
+        this.successMsg = true;
+        setTimeout(() => {
+          this.commonService.notifyHeader();
+          this.loading = false;
+          this.successMsg = false;
+          if(userToken) {
+            this.router.navigate(['/login']);
+          } else {
+            this.router.navigate(['/home']);
+          }
+        }, 3000);
       }, err => {
         this.uploadError = err;
       })

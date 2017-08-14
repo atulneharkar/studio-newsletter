@@ -28,6 +28,16 @@
         </div>
       </div>
 
+      <!--email/pwd mismatch error-->
+      <p *ngIf="" class="error-msg">
+        Email or Password does not match.
+      </p>
+
+      <!--server connection error-->
+      <p *ngIf="" class="error-msg">
+        Could not connect to server. Please try again later.
+      </p>
+
       <!--submit btn-->
       <div class="form-group text-center">
         <button type="submit" class="btn btn-primary">Login</button>
