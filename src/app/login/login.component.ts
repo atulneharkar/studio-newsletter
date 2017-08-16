@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
 	private credentials;
   loading = false;
   private returnUrl: string;
+  unauthorizedError: boolean = false;
+  serverError: boolean = false;
 
   constructor(private _fb: FormBuilder,
   			private route: ActivatedRoute,
@@ -47,6 +49,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit(isValid: boolean) {
     this.submitted = true;
+    this.unauthorizedError = false;
+    this.serverError = false;
     this.credentials = this.loginForm.value;
     if(isValid) {
       this.loading = true;
@@ -58,6 +62,11 @@ export class LoginComponent implements OnInit {
             },
             error => {
               this.loading = false;
+              if(error.status === 400) {
+                this.unauthorizedError = true;
+              } else if(error.status === 500) {
+                this.serverError = true;
+              }
             });
     }
 

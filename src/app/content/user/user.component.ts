@@ -22,10 +22,14 @@ export class UserComponent implements OnInit {
   public designations: any[] = ['BTA', 'Consultant', 'Senior Consultant', 'Manager', 'Senior Manager'];
   selectedDesignation: string = '';
   private imageInfo;
+  private fileSize: number = 0;
   setDobDate;
   setDojDate;
-  private successMsg: boolean = false;
-
+  successMsg: boolean = false;
+  uniqueEmailError: boolean = false;
+  uniquePhoneError: boolean = false;
+  fileSizeError: boolean = false;
+  serverError: boolean = false;
   uploadedFiles = [];
   uploadError;
   uploadFieldName = 'avatar';
@@ -111,6 +115,16 @@ export class UserComponent implements OnInit {
 
   onSubmit(isValid: boolean) {
     this.submitted = true;
+    this.uniqueEmailError = false;
+    this.uniquePhoneError = false;
+    this.fileSizeError = false;
+    this.serverError = false;
+
+    if(this.fileSize && this.fileSize > 3145728) {
+      this.fileSizeError = true;
+      return;
+    }
+
     this.user = this.userForm.value;
     if(isValid) {
       this.loading = true;
@@ -134,6 +148,7 @@ export class UserComponent implements OnInit {
           },
           error => {
               this.loading = false;
+              this.setError(error);
           });
       } else {
         this.userService.update(this.userId, this.user, 'self')
@@ -152,6 +167,7 @@ export class UserComponent implements OnInit {
           },
           error => {
               this.loading = false;
+              this.setError(error);
           });
       }
     }
@@ -160,8 +176,10 @@ export class UserComponent implements OnInit {
 
   //capture uploaded file
   profilePicChange(fieldName: string, fileList: FileList) {
+    this.fileSizeError = false;
     // handle file changes
     this.imageInfo = new FormData();
+    this.fileSize = fileList[0].size;
 
     if (!fileList.length) return;
 
@@ -205,7 +223,7 @@ export class UserComponent implements OnInit {
       },
       phone: user.phone,
       designation: user.designation,
-      avatar: '',
+      avatar: user.avatar || '',
       role: user.role,
       dob: user.dob,
       doj: user.doj
@@ -230,5 +248,18 @@ export class UserComponent implements OnInit {
     }
     return password.value === confirmPassword.value ? null : { nomatch: true };
   };
+
+  //set error messages
+  setError(error) {
+    if(error.status === 400) {
+      if(error._body.trim() === 'email') { 
+        this.uniqueEmailError = true;
+      } else if(error._body.trim() === 'phone') {
+        this.uniquePhoneError = true;
+      }
+    } else if(error.status === 500) {
+      this.serverError = true;
+    }
+  }
 
 }

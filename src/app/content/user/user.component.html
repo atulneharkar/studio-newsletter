@@ -113,24 +113,24 @@
         <div class="col-sm-8">
     	    <input type="file" id="profile-img" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
     	    <p class="help-block">Upload file size limit 3 MB.</p>
-          <p *ngIf="" class="error-msg">
+          <p *ngIf="fileSizeError" class="error-msg">
             File size limit exceeds.
           </p>
         </div>
   	  </div>
 
       <!--email unique error-->
-      <p *ngIf="" class="error-msg">
+      <p *ngIf="uniqueEmailError" class="error-msg">
         Email already exists.
       </p>
 
       <!--phone unique error-->
-      <p *ngIf="" class="error-msg">
+      <p *ngIf="uniquePhoneError" class="error-msg">
         Phone number already exists.
       </p>
 
       <!--server connection error-->
-      <p *ngIf="" class="error-msg">
+      <p *ngIf="serverError" class="error-msg">
         Could not connect to server. Please try again later.
       </p>
 
