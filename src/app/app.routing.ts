@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { ContentComponent } from './content';
+import { HomeComponent } from './content/home';
 import { LoginComponent } from './login';
 import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-password';
 import { UserComponent, UserListComponent } from './content/user';
@@ -17,7 +17,7 @@ import { AuthGuard } from './_guards/index';
 const routes: Routes = [
   {
     path: '',
-    component: ContentComponent,
+    component: HomeComponent,
     canActivate: [AuthGuard] 
   },
   {
