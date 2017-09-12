@@ -1,56 +1,90 @@
 <div>
   <form>
-      <div class="row booking-room-header">
-          <div class="col-sm-9 col-xs-9">
-              <h2>Book a room</h2>
-          </div>
-          <div class="col-sm-3 col-xs-3">
-              <button class="btn btn-primary pull-right" type="submit">Book Room</button>
-          </div>
+    <div class="row booking-room-header">
+      <div class="col-sm-9 col-xs-9">
+        <h2>Book a room</h2>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <button class="btn btn-primary pull-right" type="submit">Book Room</button>
+      </div>
+    </div>
+
+    <div class="booking-room-content">
+
+      <div class="form-group row">
+        <div class="col-sm-12 col-xs-12">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="fromDate" placeholder="Title">
+            <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
+                  Please select date.
+              </p> -->
+        </div>
       </div>
 
-      <div class="booking-room-content">
-          <div class="form-group row date-row">
-              <div class="col-sm-12 col-xs-12">
-                  <div class="row form-inline">
-                      <div class="col-sm-6 col-xs-12 form-group">
-                          <label for="form-date">From</label>
-                          <input type="date" class="form-control" id="from-date" style="width: 100%" formControlName="fromDate" placeholder="From Date">
-                          <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                                Please select date.
-                            </p> -->
-                      </div>
-                      <div class="col-sm-6 col-xs-12 form-group">
-                          <label for="to-date">To</label>
-                          <input type="date" class="form-control" id="to-date" style="width: 100%" formControlName="toDate" placeholder="To Date">
-                          <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                                Please select date.
-                           </p> -->
-                      </div>
-                  </div>
-              </div>
-          </div>
+      <div class="form-group row">
+        <div class="col-sm-12 col-xs-12">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control" id="description" formControlName="fromDate" placeholder="Description"></textarea>
+            <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
+                  Please select date.
+              </p> -->
+        </div>
+      </div>
 
-          <div class="form-group row time-row">
-              <div class="col-sm-12 col-xs-12">
-                  <div class="row form-inline">
-                      <div class="col-sm-6 col-xs-12 form-group">
-                          <label for="from-time">From</label>
-                          <input type="time" class="form-control" id="from-time" style="width: 100%" formControlName="fromTime" placeholder="From Time">
-                            <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                                Please select date.
-                            </p> -->
-                      </div>
-                      <div class="col-sm-6 col-xs-12 form-group">
-                          <label for="to-time">To</label>
-                          <input type="time" class="form-control" id="to-time" style="width: 100%" formControlName="toTime" placeholder="To Time">
-                            <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                                Please select date.
-                            </p> -->
-                      </div>
-                  </div>
-              </div>
+      <div class="form-group row">
+        <div class="col-sm-12 col-xs-12">
+            <label for="location">Location</label>
+            <select class="form-control" id="designation" id="location" formControlName="designation">
+            <option [selected]="true">Select Room</option>
+            <option value="colaba">Colaba</option>
+          </select>
+            <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
+                  Please select date.
+              </p> -->
+        </div>
+      </div>
+
+      <div class="form-group row date-row">
+        <div class="col-sm-12 col-xs-12">
+          <div class="row form-inline">
+            <div class="col-sm-6 col-xs-12 form-group">
+              <label for="form-date">From</label>
+              <input type="date" class="form-control" id="from-date" formControlName="fromDate" placeholder="From Date">
+              <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
+                    Please select date.
+                </p> -->
+            </div>
+            <div class="col-sm-6 col-xs-12 form-group">
+              <label for="to-date">To</label>
+              <input type="date" class="form-control" id="to-date" formControlName="toDate" placeholder="To Date">
+              <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
+                    Please select date.
+               </p> -->
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div class="form-group row time-row">
+        <div class="col-sm-12 col-xs-12">
+          <div class="row form-inline">
+            <div class="col-sm-6 col-xs-12 form-group">
+              <label for="from-time">From</label>
+              <input type="time" class="form-control" id="from-time" formControlName="fromTime" placeholder="From Time">
+                <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
+                    Please select date.
+                </p> -->
+            </div>
+            <div class="col-sm-6 col-xs-12 form-group">
+              <label for="to-time">To</label>
+              <input type="time" class="form-control" id="to-time" formControlName="toTime" placeholder="To Time">
+                <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
+                    Please select date.
+                </p> -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
 </div>

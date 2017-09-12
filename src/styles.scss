@@ -1,55 +1,9 @@
-/* ==========================================================================
-   Reset code
-   ========================================================================== */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-
-body {
-  line-height: 1;
-}
-
-ol, ul {
-  list-style: none;
-}
-
-blockquote, q {
-  quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+@import "./sass/_constants";
+@import "./sass/_mixins";
+@import "./sass/_common";
+@import "./sass/header";
+@import "./sass/content";
+@import "./sass/footer";
 
 /* ==========================================================================
    Common CSS
@@ -165,7 +119,9 @@ footer p { margin: 0; }
 .content { padding: 80px 0 50px; }
 
 .login-wrapper,
-.register-wrapper {
+.register-wrapper,
+.forgot-password-wrapper,
+.reset-password-wrapper {
   width: 100%;
   max-width: 500px;
   padding: 20px;
@@ -175,10 +131,10 @@ footer p { margin: 0; }
   box-shadow: -7px 8px 17px -8px;
 }
 
-.login-wrapper { margin-bottom: 250px; }
-
 .login-wrapper .heading,
-.register-wrapper .heading {
+.register-wrapper .heading,
+.forgot-password-wrapper .heading,
+.reset-password-wrapper .heading {
   margin: 0 0 20px;
   font-size: 20px;
   text-align: center;

@@ -40,6 +40,8 @@ import { RfpListComponent } from './content/rfp/rfp-list.component';
 import { AwardsListComponent } from './content/awards/awards-list.component';
 import { EventsSnapshotComponent } from './content/events-snapshot.component';
 import { MeetingSnapshotComponent } from './content/meeting-snapshot.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './forgot-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { MeetingSnapshotComponent } from './content/meeting-snapshot.component';
     RfpListComponent,
     AwardsListComponent,
     EventsSnapshotComponent,
-    MeetingSnapshotComponent
+    MeetingSnapshotComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

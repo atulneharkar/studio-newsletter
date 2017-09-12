@@ -35,4 +35,12 @@ export class UserService {
   getMyDetails() {
     return this.http.get(`${this.commonService.getDomainUrl()}/user/me`, this.commonService.getJwt()).map((response: Response) => response);
   }
+
+  forgotPassword(user: object) {
+    return this.http.post(`${this.commonService.getDomainUrl()}/user/forgotPassword`, user).map((response: Response) => response);
+  }
+
+  resetPassword(user: object) {
+    return this.http.post(`${this.commonService.getDomainUrl()}/user/resetPassword`, user).map((response: Response) => response);
+  }
 }

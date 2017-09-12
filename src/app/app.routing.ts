@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ContentComponent } from './content';
 import { LoginComponent } from './login';
+import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-password';
 import { UserComponent, UserListComponent } from './content/user';
 import { EventComponent, EventListComponent } from './content/event';
 import { ClientComponent, ClientListComponent } from './content/client';
@@ -26,6 +27,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: UserComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
   },
   {
     path: 'edit/:id',
