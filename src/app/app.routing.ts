@@ -6,11 +6,9 @@ import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-passwo
 import { UserComponent, UserListComponent } from './content/user';
 import { EventComponent, EventListComponent } from './content/event';
 import { ClientComponent, ClientListComponent } from './content/client';
-import { AwardsComponent, AwardsListComponent } from './content/awards';
+import { RecognitionComponent, RecognitionListComponent } from './content/recognition';
 import { MeetingComponent, MeetingListComponent } from './content/meeting';
-import { FiComponent, FiListComponent } from './content/fi';
-import { RfpComponent, RfpListComponent } from './content/rfp';
-import { FaqComponent } from './content/faq';
+import { InternalProjectComponent, InternalProjectListComponent } from './content/internal-project';
 
 import { AuthGuard } from './_guards/index';
 
@@ -37,7 +35,7 @@ const routes: Routes = [
     component: ResetPasswordComponent
   },
   {
-    path: 'edit/:id',
+    path: 'users/edit/:id',
     component: UserComponent,
     canActivate: [AuthGuard]
   },
@@ -57,8 +55,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'awards',
-    component: AwardsListComponent,
+    path: 'events/create',
+    component: EventComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'recognition',
+    component: RecognitionListComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -67,18 +70,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'fi',
-    component: FiListComponent,
+    path: 'internal-project',
+    component: InternalProjectListComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'rfp',
-    component: RfpListComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'faq',
-    component: FaqComponent,
+    path: 'internal-project/create',
+    component: InternalProjectComponent,
     canActivate: [AuthGuard]
   },
 

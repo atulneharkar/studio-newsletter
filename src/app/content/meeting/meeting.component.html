@@ -1,5 +1,5 @@
 <div>
-  <form>
+  <form [formGroup]="meetingForm" novalidate (ngSubmit)="onSubmit(meetingForm.valid)">
     <div class="row booking-room-header">
       <div class="col-sm-9 col-xs-9">
         <h2>Book a room</h2>
@@ -14,53 +14,56 @@
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" formControlName="fromDate" placeholder="Title">
-            <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                  Please select date.
-              </p> -->
+            <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+            <p *ngIf="submitted && meetingForm.get('title').hasError('required')" class="error-msg">
+              Title is required.
+            </p>
         </div>
       </div>
 
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12">
             <label for="description">Description</label>
-            <textarea type="text" class="form-control" id="description" formControlName="fromDate" placeholder="Description"></textarea>
-            <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                  Please select date.
-              </p> -->
+            <textarea type="text" class="form-control" id="description" formControlName="description" placeholder="Description"></textarea>
+            <p *ngIf="submitted && meetingForm.get('description').hasError('required')" class="error-msg">
+              Description is required.
+            </p>
         </div>
       </div>
 
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12">
             <label for="location">Location</label>
-            <select class="form-control" id="designation" id="location" formControlName="designation">
+            <select class="form-control" id="designation" id="location" formControlName="location">
             <option [selected]="true">Select Room</option>
             <option value="colaba">Colaba</option>
           </select>
-            <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                  Please select date.
-              </p> -->
+            <p *ngIf="submitted && meetingForm.get('location').hasError('required')" class="error-msg">
+              Please select location.
+            </p>
         </div>
       </div>
 
       <div class="form-group row date-row">
         <div class="col-sm-12 col-xs-12">
           <div class="row form-inline">
-            <div class="col-sm-6 col-xs-12 form-group">
+            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
               <label for="form-date">From</label>
               <input type="date" class="form-control" id="from-date" formControlName="fromDate" placeholder="From Date">
-              <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                    Please select date.
-                </p> -->
+              <p *ngIf="submitted && meetingForm.get('slots').get('fromDate').hasError('required')" class="error-msg">
+                Please select fromDate.
+              </p>
             </div>
-            <div class="col-sm-6 col-xs-12 form-group">
+            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
               <label for="to-date">To</label>
               <input type="date" class="form-control" id="to-date" formControlName="toDate" placeholder="To Date">
-              <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                    Please select date.
-               </p> -->
+              <p *ngIf="submitted && meetingForm.get('slots').get('toDate').hasError('required')" class="error-msg">
+                Please select toDate.
+             </p>
             </div>
+            <p class="error-msg" *ngIf="submitted && meetingForm.get('slots').hasError('dateError')">
+              FromDate should be less than ToDate.
+            </p>
           </div>
         </div>
       </div>
@@ -68,23 +71,36 @@
       <div class="form-group row time-row">
         <div class="col-sm-12 col-xs-12">
           <div class="row form-inline">
-            <div class="col-sm-6 col-xs-12 form-group">
+            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
               <label for="from-time">From</label>
               <input type="time" class="form-control" id="from-time" formControlName="fromTime" placeholder="From Time">
-                <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                    Please select date.
-                </p> -->
+              <p *ngIf="submitted && meetingForm.get('slots').get('fromTime').hasError('required')" class="error-msg">
+                Please select fromTime.
+              </p>
             </div>
-            <div class="col-sm-6 col-xs-12 form-group">
+            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
               <label for="to-time">To</label>
               <input type="time" class="form-control" id="to-time" formControlName="toTime" placeholder="To Time">
-                <!-- <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
-                    Please select date.
-                </p> -->
+              <p *ngIf="submitted && meetingForm.get('slots').get('toTime').hasError('required')" class="error-msg">
+                Please select toTime.
+              </p>
             </div>
+            <p class="error-msg" *ngIf="submitted && meetingForm.get('slots').hasError('timeError')">
+              FromTime should be less than ToTime.
+            </p>
           </div>
         </div>
       </div>
     </div>
+
+    <!--phone unique error-->
+    <p *ngIf="roomAlreadyBookedError" class="error-msg">
+      Room already booked.
+    </p>
+
+    <!--server connection error-->
+    <p *ngIf="serverError" class="error-msg">
+      Could not connect to server. Please try again later.
+    </p>
   </form>
 </div>

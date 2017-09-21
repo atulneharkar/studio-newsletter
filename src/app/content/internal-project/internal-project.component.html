@@ -1,0 +1,158 @@
+<div class="container">
+  <div class="project-wrapper">
+    <h2 class="heading" *ngIf="!projectId">Add Project</h2>
+    <h2 class="heading" *ngIf="projectId">Edit Project</h2>
+    <form [formGroup]="projectForm" novalidate (ngSubmit)="onSubmit(projectForm.valid)">
+
+      <!--project name-->
+      <div class="form-group row">
+        <label for="name" class="col-sm-4 col-form-label">Project Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="name" formControlName="name" placeholder="Project Name">
+          <p *ngIf="submitted && projectForm.get('name').hasError('required')" class="error-msg">
+              Project name is required.
+          </p>
+          <p *ngIf="submitted && projectForm.get('name').hasError('minlength')" class="error-msg">
+            Project name must be at least 2 characters long.
+          </p>
+          <p *ngIf="submitted && projectForm.get('name').hasError('pattern')" class="error-msg">
+            Only alphabets are allowed.
+          </p>
+        </div>
+      </div>
+
+      <!--description-->
+      <div class="form-group row">
+        <label for="description" class="col-sm-4 col-form-label">Description</label>
+        <div class="col-sm-8">
+          <textarea class="form-control" id="description" formControlName="description" placeholder="Description"></textarea>
+          <p *ngIf="submitted && projectForm.get('description').hasError('required')" class="error-msg">
+              Description is required.
+          </p>
+          <p *ngIf="submitted && projectForm.get('description').hasError('pattern')" class="error-msg">
+            Please enter a valid description.
+          </p>
+        </div>
+      </div>
+
+      <!--estimation-->
+      <div class="form-group row">
+        <label for="estimation" class="col-sm-4 col-form-label">Estimation</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="estimation" formControlName="estimation" placeholder="Estimation">
+          <p *ngIf="submitted && projectForm.get('estimation').hasError('required')" class="error-msg">
+              Duration is required.
+          </p>
+        </div>
+      </div>
+
+      <!--vacancy-->
+      <div class="form-group row" formGroupName="vacancies">
+      	<label for="domain" class="col-sm-4 col-form-label">Vacancies</label>
+      	<div>
+	        <div class="col-sm-8">
+	        	<div>
+		        	<label for="domain" class="col-form-label">Domain</label>
+		        	<select class="form-control" id="domain" formControlName="domain">
+		            <option [selected]="true">Select Domain</option>
+		            <option *ngFor="let name of domains" [ngValue]="name">{{name}}</option>
+		          </select>
+		          <!-- <p *ngIf="submitted && projectForm.get('duration').hasError('required')" class="error-msg">
+		              Duration is required.
+		          </p> -->
+	          </div>
+	          <div>
+		          <label for="count" class="col-form-label">Count</label>
+		          <input type="text" class="form-control" id="count" formControlName="count" placeholder="Count">
+		          <!-- <p *ngIf="submitted && projectForm.get('duration').hasError('required')" class="error-msg">
+		              Duration is required.
+		          </p> -->
+	          </div>
+	        </div>
+        </div>
+        <span>Add</span>
+      </div>
+
+      <!--members-->
+      <div class="form-group row">
+      	<label for="members" class="col-sm-4 col-form-label">Members</label>
+      	<div class="col-sm-8">
+	      	<select class="form-control" id="members" formControlName="members" multiple>
+	          <option *ngFor="let name of domains" [ngValue]="name">{{name}}</option>
+	        </select>
+	        <!-- <p *ngIf="submitted && projectForm.get('duration').hasError('required')" class="error-msg">
+              Duration is required.
+          </p> -->
+        </div>
+      </div>
+
+      <!--technology-->
+      <div class="form-group row">
+        <label for="technology" class="col-sm-4 col-form-label">Technology</label>
+        <div class="col-sm-8">
+          <select class="form-control" id="technology" formControlName="technology">
+            <option [selected]="!selectedTechnology">Select Technology</option>
+            <option *ngFor="let name of technologies" [selected]="selectedTechnology === name" [ngValue]="name">{{name}}</option>
+          </select>
+          <p *ngIf="submitted && projectForm.get('technology').hasError('required')" class="error-msg">
+              Technology is required.
+          </p>
+        </div>
+      </div>
+
+      <!--contact person-->
+      <div class="form-group row">
+        <label for="contactPerson" class="col-sm-4 col-form-label">Contact Person</label>
+        <div class="col-sm-8">
+          <select class="form-control" id="contactPerson" formControlName="contactPerson">
+            <option [selected]="!selectedContactPerson">Select Contact Person</option>
+            <option *ngFor="let name of contactPersons" [selected]="selectedContactPerson === name" [ngValue]="name">{{name}}</option>
+          </select>
+          <p *ngIf="submitted && projectForm.get('contactPerson').hasError('required')" class="error-msg">
+              Contact Person is required.
+          </p>
+        </div>
+      </div>
+
+      <!--project type-->
+      <div class="form-group row">
+        <label for="projectType" class="col-sm-4 col-form-label">Project type</label>
+        <div class="col-sm-8">
+          <select class="form-control" id="projectType" formControlName="projectType">
+            <option [selected]="!selectedContactPerson">Select Project Type</option>
+            <option *ngFor="let name of projectTypes" [selected]="selectedProjectType === name" [ngValue]="name">{{name}}</option>
+          </select>
+          <p *ngIf="submitted && projectForm.get('projectType').hasError('required')" class="error-msg">
+              Project type is required.
+          </p>
+        </div>
+      </div>
+
+      <!--server connection error-->
+      <p *ngIf="serverError" class="error-msg">
+        Could not connect to server. Please try again later.
+      </p>
+
+      <!--submit btn-->
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary" *ngIf="!projectId">Save</button>
+        <button type="submit" class="btn btn-primary" *ngIf="projectId">Update</button>
+        <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!--modal code to show registration success message-->
+<div class="overlay"></div>
+
+<div class="success-modal" [hidden]="!successMsg">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        Registration successful!!
+      </div>
+    </div>
+  </div>
+</div>

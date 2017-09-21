@@ -3,51 +3,59 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@ang
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
 
-import { EventService, CommonService, HelperService } from '../../_services';
-import { Event } from '../../_interfaces';
+import { ProjectService, CommonService, HelperService } from '../../_services';
+import { Project } from '../../_interfaces';
 
 @Component({
-  selector: 'app-event',
-  templateUrl: './event.component.html'
+  selector: 'app-internal-project',
+  templateUrl: './internal-project.component.html'
 })
-export class EventComponent implements OnInit {
 
-  public eventForm: FormGroup;
+export class InternalProjectComponent implements OnInit {
+
+  public projectForm: FormGroup;
 	public submitted: boolean = false;
-  private event;
+  private project;
   loading = false;
-  eventId: number;
-  eventInfo: Event;
+  projectId: number;
+  projectInfo: Project;
+  public technologies: any[] = ['Oracle', 'Node JS', 'Angular', 'React'];
+  public contactPersons: any[] = ['Karan', 'Tanvi'];
+  public projectTypes: any[] = ['FI', 'RFP', 'POC'];
+  public domains: any[] = ['UX', 'VD', 'FE', 'BA'];
+  selectedDesignation: string = '';
+  selectedContactPersons: string = '';
+  selectedProjectTypes: string = '';
   successMsg: boolean = false;
   serverError: boolean = false;
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
-        private userService: EventService,
+        private userService: ProjectService,
         private commonService: CommonService,
         private helperService: HelperService) { }
 
   ngOnInit() {
     this.getParamId();
 
-    this.eventInfo = this.commonService.getUserCookies();
+    this.projectInfo = this.commonService.getUserCookies();
 
-    this.buildEventForm();
+    this.buildProjectForm();
   }
 
   getParamId() {
     this.route.params.subscribe(
       (params : Params) => {
-        this.eventId = params["id"];
+        this.projectId = params["id"];
       }
     );
   }
 
-  buildEventForm(): void {
+  buildProjectForm(): void {
     //initialize our form 
-    this.eventForm = this._fb.group({
-      title: ['', [
+    this.projectForm = this._fb.group({
+      name: ['', [
           Validators.required, 
           //Validators.minLength(2),
           //Validators.pattern(/^[a-zA-Z]*$/)
@@ -59,22 +67,26 @@ export class EventComponent implements OnInit {
           //Validators.pattern(/^[a-zA-Z]*$/)
         ]
       ],
-      location: ['', [
+      estimation: ['', [
           Validators.required,
           //Validators.pattern(/^[a-zA-Z]*$/)
         ]
       ],
-      date: this._fb.group({
-        startDate: ['', [Validators.required]],
-        endDate: ['', [Validators.required]]
+      vacancies: this._fb.group({
+        domain: ['', [Validators.required]],
+        count: ['', [Validators.required]]
       }),
-      time: this._fb.group({
-        startTime: ['', [Validators.required]],
-        endTime: ['', [Validators.required]]
-      })
+      members: ['', [
+          Validators.required,
+          //Validators.pattern(/^[a-zA-Z]*$/)
+        ]
+      ],
+      contactPerson: ['', [Validators.required]],
+      technology: ['', [Validators.required]],
+      projectType: ['', [Validators.required]]
     });
 
-    if(this.eventId) {
+    if(this.projectId) {
       //prefill the form 
     //   this.selectedDesignation = userObj.designation;
 
@@ -88,10 +100,10 @@ export class EventComponent implements OnInit {
     this.submitted = true;
     this.serverError = false;
 
-    this.event = this.eventForm.value;
+    this.project = this.projectForm.value;
     if(isValid) {
       this.loading = true;
-      if(!this.eventId) {
+      if(!this.projectId) {
         // this.projectService.create(this.project)
         // .subscribe(
         //   data => {

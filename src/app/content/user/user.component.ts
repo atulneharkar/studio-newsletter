@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
 
-import { UserService, CommonService, FileUploadService } from '../../_services';
+import { UserService, CommonService, FileUploadService, HelperService } from '../../_services';
 import { User } from '../../_interfaces';
 
 @Component({
@@ -39,7 +39,8 @@ export class UserComponent implements OnInit {
         private route: ActivatedRoute,
         private userService: UserService,
         private commonService: CommonService,
-        private _fileUpload: FileUploadService) { }
+        private _fileUpload: FileUploadService,
+        private helperService: HelperService) { }
 
   ngOnInit() {
     this.getParamId();
@@ -84,7 +85,7 @@ export class UserComponent implements OnInit {
       credentials: this._fb.group({
         password: this.getPwdStructure(),
         confirmPassword: this.getPwdStructure()
-      }, { validator: this.pwdMatcher }),
+      }, { validator: this.helperService.pwdMatcher }),
       phone: ['', [
           Validators.required,
           Validators.pattern(/^\d+$/)
@@ -239,17 +240,7 @@ export class UserComponent implements OnInit {
     }
   }
 
-  //function to check if pwd matches
-  pwdMatcher = (control: AbstractControl): {[key: string]: boolean} => {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    if (!password || !confirmPassword) {
-      return null;
-    }
-    return password.value === confirmPassword.value ? null : { nomatch: true };
-  };
-
-  //set error messages
+  //method to set error messages
   setError(error) {
     if(error.status === 400) {
       if(error._body.trim() === 'email') { 

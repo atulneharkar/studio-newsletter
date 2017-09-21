@@ -121,7 +121,9 @@ footer p { margin: 0; }
 .login-wrapper,
 .register-wrapper,
 .forgot-password-wrapper,
-.reset-password-wrapper {
+.reset-password-wrapper,
+.project-wrapper,
+.event-wrapper {
   width: 100%;
   max-width: 500px;
   padding: 20px;
@@ -134,7 +136,9 @@ footer p { margin: 0; }
 .login-wrapper .heading,
 .register-wrapper .heading,
 .forgot-password-wrapper .heading,
-.reset-password-wrapper .heading {
+.reset-password-wrapper .heading,
+.project-wrapper .heading,
+.event-wrapper .heading {
   margin: 0 0 20px;
   font-size: 20px;
   text-align: center;
