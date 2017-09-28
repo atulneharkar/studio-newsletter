@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 
 import { CommonService, UserService } from '../_services';
 
@@ -12,22 +12,38 @@ export class ResetPasswordComponent implements OnInit {
 
   public resetPasswordForm: FormGroup;
 	public submitted: boolean = false;
-  loading: boolean = false;
-  unauthorizedError: boolean = false;
-  serverError: boolean = false;
-  private formData;
-  successMsg: boolean = false;
+  public loading: boolean = false;
+  public unauthorizedError: boolean = false;
+  public serverError: boolean = false;
+  private formData: any;
+  public successMsg: boolean = false;
+  private userId: string;
+  private otp: string;
+  public message: string = "Password Reset successfully";
+  public modalType: string = "success";
 
   constructor(private _fb: FormBuilder,
-  			private route: ActivatedRoute,
         private router: Router,
+        private route: ActivatedRoute,
         private userService: UserService,
         private commonService: CommonService) { }
 
   ngOnInit() {
+    this.getParamId();
   	this.buildResetPasswordForm();
   }
 
+  //method to get userId and otp from url query parameters
+  getParamId() {
+    this.route.params.subscribe(
+      (params : Params) => {
+        this.otp = params["otp"];
+        this.userId = params["userId"];
+      }
+    );
+  }
+
+  //create reset password form - reactive way
   buildResetPasswordForm(): void {
     this.resetPasswordForm = this._fb.group({
       credentials: this._fb.group({
@@ -37,34 +53,45 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
+  //handle form submission
   onSubmit(isValid: boolean) {
     this.submitted = true;
     this.unauthorizedError = false;
     this.serverError = false;
-    this.formData = this.resetPasswordForm.value;
+    this.formData = {
+      otp: this.otp,
+      userID: this.userId,
+      password: this.resetPasswordForm.value.credentials.password
+    };
+
     if(isValid) {
       this.loading = true;
-        this.userService.resetPassword(this.formData.credentials.password)
-          .subscribe(
-            data => {
-            	this.successMsg = true;
-              this.commonService.notifyHeader();
+
+      //method for resetting users password
+      this.userService.resetPassword(this.formData)
+        .subscribe(
+          data => {
+          	this.successMsg = true;
+            this.loading = false;
+            setTimeout(() => {
+              this.successMsg = false;
               this.router.navigate(['/login']);
-            },
-            error => {
-              this.loading = false;
-              if(error.status === 400) {
-                this.unauthorizedError = true;
-              } else if(error.status === 500) {
-                this.serverError = true;
-              }
-            });
+            }, 3000);
+          },
+          error => {
+            this.loading = false;
+            if(error.status === 400) {
+              this.unauthorizedError = true;
+            } else if(error.status === 500) {
+              this.serverError = true;
+            }
+          });
     }
 
   }
 
-  //function to check if pwd matches
-  pwdMatcher = (control: AbstractControl): {[key: string]: boolean} => {
+  //private function to check if password and confirm password matches
+  private pwdMatcher = (control: AbstractControl): {[key: string]: boolean} => {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
     if (!password || !confirmPassword) {

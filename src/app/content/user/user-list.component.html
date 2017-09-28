@@ -47,3 +47,5 @@
     </tbody> 
   </table>
 </div>
+
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!showModal" (confirmed)="countChange($event)"></app-modal>

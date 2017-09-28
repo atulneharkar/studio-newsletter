@@ -1,46 +1,48 @@
-<div class="row">
+<div class="container">
+  <div class="row">
 
-  <!--left section-->
-  <div class="col-md-8">
-    <!--main nav-->
-    <div class="content-nav-section">
-      <app-main-navigation></app-main-navigation>
+    <!--left section-->
+    <div class="col-md-8">
+      <!--main nav-->
+      <div class="content-nav-section">
+        <app-main-navigation></app-main-navigation>
+      </div>
+
+      <!--photo gallery-->
+      <div class="photo-gallery">
+        <app-main-carousel></app-main-carousel>
+      </div>
+
+      <!--feedback/news highlight section-->
+      <div class="feedback-section">
+        <app-feedback-carousel></app-feedback-carousel>
+      </div>
+
     </div>
 
-    <!--photo gallery-->
-    <div class="photo-gallery">
-      <app-main-carousel></app-main-carousel>
-    </div>
+    <!--right section-->
+    <div class="col-md-4">
+      <!--booking snapshot-->
+      <div class="booking-snapshot card">
+        <app-meeting-snapshot></app-meeting-snapshot>
+      </div>
 
-    <!--feedback/news highlight section-->
-    <div class="feedback-section">
-      <app-feedback-carousel></app-feedback-carousel>
+      <!--booking room-->
+      <div class="booking-room-section card">
+        <app-meeting></app-meeting>
+      </div>
+
+      <!--events snapshot-->
+      <div class="events-snapshot card">
+        <app-events-snapshot></app-events-snapshot>
+      </div>
+
+      <!--birthdays snapshot-->
+      <div class="birthdays-snapshot card">
+        <app-birthday></app-birthday>
+      </div>
+
     </div>
 
   </div>
-
-  <!--right section-->
-  <div class="col-md-4">
-    <!--booking snapshot-->
-    <div class="booking-snapshot card">
-      <app-meeting-snapshot></app-meeting-snapshot>
-    </div>
-
-    <!--booking room-->
-    <div class="booking-room-section card">
-      <app-meeting></app-meeting>
-    </div>
-
-    <!--events snapshot-->
-    <div class="events-snapshot card">
-      <app-events-snapshot></app-events-snapshot>
-    </div>
-
-    <!--birthdays snapshot-->
-    <div class="birthdays-snapshot card">
-      <app-birthday></app-birthday>
-    </div>
-
-  </div>
-
 </div>

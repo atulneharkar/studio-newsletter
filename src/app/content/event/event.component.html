@@ -114,15 +114,4 @@
   </div>
 </div>
 
-<!--modal code to show registration success message-->
-<div class="overlay"></div>
-
-<div class="success-modal" [hidden]="!successMsg">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        Registration successful!!
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!successMsg"></app-modal>

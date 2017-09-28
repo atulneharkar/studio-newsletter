@@ -107,6 +107,34 @@
         </div>
       </div>
 
+      <!--previous experience-->
+      <div class="form-group row">
+        <label for="previousExp" class="col-sm-4 col-form-label">Previous experience</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="previousExp" formControlName="previousExp" placeholder="Previous experience">
+          <p *ngIf="submitted && userForm.get('previousExp').hasError('required')" class="error-msg">
+              Previous Exp is required.
+          </p>
+          <p *ngIf="submitted && userForm.get('previousExp').hasError('pattern')" class="error-msg">
+            Only numbers are allowed.
+          </p>
+        </div>
+      </div>
+
+      <!--domain-->
+      <div class="form-group row">
+        <label for="domain" class="col-sm-4 col-form-label">Domain</label>
+        <div class="col-sm-8">
+          <select class="form-control" id="domain" formControlName="domain">
+            <option [selected]="!selectedDomain">Select Domain</option>
+            <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
+          </select>
+          <p *ngIf="submitted && userForm.get('domain').hasError('required')" class="error-msg">
+              Domain is required.
+          </p>
+        </div>
+      </div>
+
       <!--profile img-->
       <div class="form-group row">
   	    <label for="profile-img" class="col-sm-4 col-form-label">Profile Image</label>
@@ -146,15 +174,4 @@
   </div>
 </div>
 
-<!--modal code to show registration success message-->
-<div class="overlay"></div>
-
-<div class="success-modal" [hidden]="!successMsg">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        Registration successful!!
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!successMsg"></app-modal>

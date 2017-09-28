@@ -13,11 +13,11 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
 	public submitted: boolean = false;
-	private credentials;
-  loading = false;
+	private credentials: any;
+  public loading: boolean = false;
   private returnUrl: string;
-  unauthorizedError: boolean = false;
-  serverError: boolean = false;
+  public unauthorizedError: boolean = false;
+  public serverError: boolean = false;
 
   constructor(private _fb: FormBuilder,
   			private route: ActivatedRoute,
@@ -27,47 +27,56 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     let userInfo = this.commonService.getUserCookies();
+
+    //if user already is logged in then navigate to home page
     if(userInfo) {
       this.router.navigate(['/']);
     }
+
+    //call to create login form - reactive method
     this.buildLoginForm();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  //create login form - reactive method
   buildLoginForm(): void {
     this.loginForm = this._fb.group({
       email: ['', [
           Validators.required,
-           Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+          Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
         ]
       ],
       password: ['', [Validators.required]]
     });
   }
 
+  //handle form submitiion
   onSubmit(isValid: boolean) {
     this.submitted = true;
     this.unauthorizedError = false;
     this.serverError = false;
     this.credentials = this.loginForm.value;
+
     if(isValid) {
       this.loading = true;
-        this.authenticationService.login(this.credentials.email, this.credentials.password)
-          .subscribe(
-            data => {
-              this.commonService.notifyHeader();
-              this.router.navigate([this.returnUrl]);
-            },
-            error => {
-              this.loading = false;
-              if(error.status === 400) {
-                this.unauthorizedError = true;
-              } else if(error.status === 500) {
-                this.serverError = true;
-              }
-            });
+
+      //call to login method to check if credentilas are valid
+      this.authenticationService.login(this.credentials.email, this.credentials.password)
+        .subscribe(
+          data => {
+            this.commonService.notifyHeader();
+            this.router.navigate([this.returnUrl]);
+          },
+          error => {
+            this.loading = false;
+            if(error.status === 400) {
+              this.unauthorizedError = true;
+            } else if(error.status === 500) {
+              this.serverError = true;
+            }
+          });
     }
 
   }

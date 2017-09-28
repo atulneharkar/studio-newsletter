@@ -14,12 +14,14 @@ export class EventComponent implements OnInit {
 
   public eventForm: FormGroup;
 	public submitted: boolean = false;
-  private event;
-  loading = false;
-  eventId: number;
-  eventInfo: Event;
-  successMsg: boolean = false;
-  serverError: boolean = false;
+  private event: any;
+  public loading = false;
+  public eventId: number;
+  public eventInfo: Event;
+  public successMsg: boolean = false;
+  public serverError: boolean = false;
+  public message: string = "";
+  public modalType: string = "success";
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
@@ -36,6 +38,7 @@ export class EventComponent implements OnInit {
     this.buildEventForm();
   }
 
+  //method to fetch event id from url
   getParamId() {
     this.route.params.subscribe(
       (params : Params) => {
@@ -44,6 +47,7 @@ export class EventComponent implements OnInit {
     );
   }
 
+  //method to create event form - reactive way
   buildEventForm(): void {
     //initialize our form 
     this.eventForm = this._fb.group({
@@ -74,6 +78,7 @@ export class EventComponent implements OnInit {
       })
     });
 
+    //pre fill the values for editing form
     if(this.eventId) {
       //prefill the form 
     //   this.selectedDesignation = userObj.designation;
@@ -84,6 +89,7 @@ export class EventComponent implements OnInit {
 
   }
 
+  //method to handle form submission
   onSubmit(isValid: boolean) {
     this.submitted = true;
     this.serverError = false;
@@ -91,37 +97,44 @@ export class EventComponent implements OnInit {
     this.event = this.eventForm.value;
     if(isValid) {
       this.loading = true;
+
       if(!this.eventId) {
-        // this.projectService.create(this.project)
-        // .subscribe(
-        //   data => {
-        //     this.successMsg = true;
-        //     setTimeout(() => {
-        //       this.loading = false;
-        //       this.commonService.notifyHeader();
-        //       this.successMsg = false;
-        //       this.router.navigate(['/login']);
-        //     }, 3000);
-        //   },
-        //   error => {
-        //       this.loading = false;
-        //       this.serverError = true;
-        //   });
+        this.message = "Event added successfully";
+
+        //if event id not present then call to add event method
+      // this.projectService.create(this.project)
+      // .subscribe(
+      //   data => {
+      //     this.successMsg = true;
+      //     setTimeout(() => {
+      //       this.loading = false;
+      //       this.commonService.notifyHeader();
+      //       this.successMsg = false;
+      //       this.router.navigate(['/login']);
+      //     }, 3000);
+      //   },
+      //   error => {
+      //       this.loading = false;
+      //       this.serverError = true;
+      //   });
       } else {
-        // this.projectService.update(this.projectId, this.project)
-        // .subscribe(
-        //   data => {
-        //     this.successMsg = true;
-        //     setTimeout(() => {
-        //       this.commonService.notifyHeader();
-        //       this.successMsg = false;
-        //       this.router.navigate(['/home']);
-        //     }, 3000);
-        //   },
-        //   error => {
-        //       this.loading = false;
-        //       this.serverError = true;
-        //   });
+        this.message = "Event edited successfully";
+
+        //if event id present then call to edit event method
+      // this.projectService.update(this.projectId, this.project)
+      // .subscribe(
+      //   data => {
+      //     this.successMsg = true;
+      //     setTimeout(() => {
+      //       this.commonService.notifyHeader();
+      //       this.successMsg = false;
+      //       this.router.navigate(['/home']);
+      //     }, 3000);
+      //   },
+      //   error => {
+      //       this.loading = false;
+      //       this.serverError = true;
+      //   });
       }
     }
 

@@ -12,5 +12,7 @@ export interface User {
 	role: string;
 	dob: string;
 	doj: string;
+	previousExp: string;
+	domain: string;
 	status: string;
 }

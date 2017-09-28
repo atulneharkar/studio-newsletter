@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AuthenticationService, CommonService, UserService } from '../_services';
@@ -9,11 +9,13 @@ import { User } from '../_interfaces';
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
+
 export class HeaderComponent implements OnInit, OnDestroy {
 
 	private token: string;
   public userInfo: User;
   private subscription: Subscription;
+  private currentUrl: string;
 
   constructor(private router: Router,
         private authenticationService: AuthenticationService,
@@ -23,29 +25,46 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getUserInfo();
+    this.getCurrentUrl();
 
     this.subscription = this.commonService.notifyObservable$.subscribe(() => {
       this.getUserInfo();
     });
 
-    //check status of the logged in user
-    this.userService.getMyDetails()
-        .subscribe(
-          data => {
-            
-          },
-          error => {
-            if(error.statusText === 'Unauthorized') {
-              this.logout();
-            }
-          });
+    this.checkUserStatus();
   }
 
+  //method to get current route from the url
+  getCurrentUrl() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd ) {
+        this.currentUrl = event.url;
+      }
+    });
+  }
+
+  //method to get user information from cookies
   getUserInfo() {
     this.userInfo = this.commonService.getUserCookies();
     this.ref.detectChanges();
   }
 
+  //method to check if user's status is active otherwise logout the user
+  checkUserStatus() {
+    this.userService.getMyDetails()
+      .subscribe(
+        data => {
+          
+        },
+        error => {
+          const shouldNavigate = (this.currentUrl !== '/register' && this.currentUrl !== '/forgot-password' && this.currentUrl.indexOf('reset-password') === -1);
+          if(error.statusText === 'Unauthorized' && shouldNavigate) {
+            this.logout();
+          }
+        });
+  }
+
+  //method to logout the user
   logout() {
     this.commonService.deleteUserCookies();
     this.getUserInfo();

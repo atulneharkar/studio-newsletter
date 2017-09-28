@@ -5,3 +5,5 @@ export * from './file-upload.service';
 export * from './helper.service';
 export * from './project.service';
 export * from './event.service';
+export * from './meeting-room.service';
+export * from './validation.service';

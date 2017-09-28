@@ -15,19 +15,21 @@ export class InternalProjectComponent implements OnInit {
 
   public projectForm: FormGroup;
 	public submitted: boolean = false;
-  private project;
-  loading = false;
-  projectId: number;
-  projectInfo: Project;
+  private project: any;
+  public loading = false;
+  public projectId: number;
+  public projectInfo: Project;
   public technologies: any[] = ['Oracle', 'Node JS', 'Angular', 'React'];
   public contactPersons: any[] = ['Karan', 'Tanvi'];
   public projectTypes: any[] = ['FI', 'RFP', 'POC'];
   public domains: any[] = ['UX', 'VD', 'FE', 'BA'];
-  selectedDesignation: string = '';
-  selectedContactPersons: string = '';
-  selectedProjectTypes: string = '';
-  successMsg: boolean = false;
-  serverError: boolean = false;
+  public selectedDesignation: string = '';
+  public selectedContactPersons: string = '';
+  public selectedProjectTypes: string = '';
+  public successMsg: boolean = false;
+  public serverError: boolean = false;
+  public message: string = "";
+  public modalType: string = "success";
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
@@ -44,6 +46,7 @@ export class InternalProjectComponent implements OnInit {
     this.buildProjectForm();
   }
 
+  //method to fetch project id from url
   getParamId() {
     this.route.params.subscribe(
       (params : Params) => {
@@ -52,6 +55,7 @@ export class InternalProjectComponent implements OnInit {
     );
   }
 
+  //method to create project form - reactive way
   buildProjectForm(): void {
     //initialize our form 
     this.projectForm = this._fb.group({
@@ -86,6 +90,7 @@ export class InternalProjectComponent implements OnInit {
       projectType: ['', [Validators.required]]
     });
 
+    //pre fill the values for editing form
     if(this.projectId) {
       //prefill the form 
     //   this.selectedDesignation = userObj.designation;
@@ -96,6 +101,7 @@ export class InternalProjectComponent implements OnInit {
 
   }
 
+  //method to handle form submission
   onSubmit(isValid: boolean) {
     this.submitted = true;
     this.serverError = false;
@@ -104,36 +110,42 @@ export class InternalProjectComponent implements OnInit {
     if(isValid) {
       this.loading = true;
       if(!this.projectId) {
-        // this.projectService.create(this.project)
-        // .subscribe(
-        //   data => {
-        //     this.successMsg = true;
-        //     setTimeout(() => {
-        //       this.loading = false;
-        //       this.commonService.notifyHeader();
-        //       this.successMsg = false;
-        //       this.router.navigate(['/login']);
-        //     }, 3000);
-        //   },
-        //   error => {
-        //       this.loading = false;
-        //       this.serverError = true;
-        //   });
+        this.message = "Project added successfully";
+
+        //if project id not present then call to add project method
+      // this.projectService.create(this.project)
+      // .subscribe(
+      //   data => {
+      //     this.successMsg = true;
+      //     setTimeout(() => {
+      //       this.loading = false;
+      //       this.commonService.notifyHeader();
+      //       this.successMsg = false;
+      //       this.router.navigate(['/login']);
+      //     }, 3000);
+      //   },
+      //   error => {
+      //       this.loading = false;
+      //       this.serverError = true;
+      //   });
       } else {
-        // this.projectService.update(this.projectId, this.project)
-        // .subscribe(
-        //   data => {
-        //     this.successMsg = true;
-        //     setTimeout(() => {
-        //       this.commonService.notifyHeader();
-        //       this.successMsg = false;
-        //       this.router.navigate(['/home']);
-        //     }, 3000);
-        //   },
-        //   error => {
-        //       this.loading = false;
-        //       this.serverError = true;
-        //   });
+        this.message = "Project edited successfully";
+
+        //if project id present then call to edit project method
+      // this.projectService.update(this.projectId, this.project)
+      // .subscribe(
+      //   data => {
+      //     this.successMsg = true;
+      //     setTimeout(() => {
+      //       this.commonService.notifyHeader();
+      //       this.successMsg = false;
+      //       this.router.navigate(['/home']);
+      //     }, 3000);
+      //   },
+      //   error => {
+      //       this.loading = false;
+      //       this.serverError = true;
+      //   });
       }
     }
 

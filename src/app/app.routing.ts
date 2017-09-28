@@ -31,7 +31,7 @@ const routes: Routes = [
     component: ForgotPasswordComponent
   },
   {
-    path: 'reset-password',
+    path: 'reset-password/:otp/:userId',
     component: ResetPasswordComponent
   },
   {
@@ -60,6 +60,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'events/edit/:id',
+    component: EventComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'recognition',
     component: RecognitionListComponent,
     canActivate: [AuthGuard]
@@ -70,12 +75,27 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'meeting/create',
+    component: MeetingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'meeting/edit/:id',
+    component: MeetingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'internal-project',
     component: InternalProjectListComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'internal-project/create',
+    component: InternalProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'internal-project/edit/:id',
     component: InternalProjectComponent,
     canActivate: [AuthGuard]
   },

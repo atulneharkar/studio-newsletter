@@ -137,6 +137,7 @@
       <div class="form-group text-center">
         <button type="submit" class="btn btn-primary" *ngIf="!projectId">Save</button>
         <button type="submit" class="btn btn-primary" *ngIf="projectId">Update</button>
+        <a class="btn btn-primary" [routerLink]="['/internal-project']">cancel</a>
         <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
       </div>
 
@@ -144,15 +145,4 @@
   </div>
 </div>
 
-<!--modal code to show registration success message-->
-<div class="overlay"></div>
-
-<div class="success-modal" [hidden]="!successMsg">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        Registration successful!!
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!successMsg"></app-modal>

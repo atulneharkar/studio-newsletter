@@ -11,6 +11,12 @@ import { User } from '../../_interfaces';
 export class UserListComponent implements OnInit {
   currentUser: User;
   users: User[] = [];
+  message: string = "";
+  modalType: string = "confirm";
+  showModal: boolean = false;
+  isConfirmed: boolean = false;
+  private userObj: any;
+  private userId: number;
 
   constructor(
       private userService: UserService,
@@ -22,18 +28,30 @@ export class UserListComponent implements OnInit {
     this.getAllUsers();
   }
 
+  countChange(event) {
+    this.isConfirmed = event;
+    if(event) {
+      this.userService.update(this.userId, this.userObj, 'other').subscribe(() => { this.getAllUsers() });
+    }
+    this.showModal = false;
+  }
+
   changeStatus(id: number, status: string) {
-    let user = {
+    this.message = "Are you sure you want to change status?";
+    this.userObj = {
       status: status
     }
-    this.userService.update(id, user, 'other').subscribe(() => { this.getAllUsers() });
+    this.userId = id;
+    this.showModal = true;
   }
 
   changeRole(id: number, role: string) {
-    let user = {
+    this.message = "Are you sure you want to change role?";
+    this.userObj = {
       role: role
     }
-    this.userService.update(id, user, 'other').subscribe(() => { this.getAllUsers() });
+    this.userId = id;
+    this.showModal = true;
   }
 
   private getAllUsers() {

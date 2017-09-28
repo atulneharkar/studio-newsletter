@@ -1,3 +1,35 @@
-<p>
-  meeting-list works!
-</p>
+<h2 class="page-heading">Meetings</h2>
+<a class="btn btn-primary" [routerLink]="['create']">Book Room</a>
+<div class="meeting-list-wrapper">
+  <table class="table table-striped">
+    <thead> 
+      <tr>
+        <th>Title</th> 
+        <th>Description</th> 
+        <th>Location</th> 
+        <th>Date</th> 
+        <th>Time</th>
+        <th>Booked By</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr> 
+    </thead> 
+
+    <tbody> 
+      <tr *ngFor="let meeting of meetings">
+        <td>{{meeting.title}}</td> 
+        <td>{{meeting.description}}</td> 
+        <td>{{meeting.location}}</td>
+        <td><span>{{meeting.slots[0].fromDate}} </span><span *ngIf="meeting.slots[0].toDate"> - {{meeting.slots[0].toDate}}</span></td>
+        <td><span>{{meeting.slots[0].fromTime}} </span><span *ngIf="meeting.slots[0].toTime"> - {{meeting.slots[0].toTime}}</span></td>
+        <td>{{meeting.bookBy.name}}</td>
+        <td>
+          <a class="btn btn-primary" [routerLink]="['edit', meeting._id]">Edit</a>
+        </td>
+        <td>
+          <span class="btn btn-primary" (click)="deleteMeeting(meeting._id)" >Delete</span>
+        </td>
+      </tr>
+    </tbody> 
+  </table>
+</div>

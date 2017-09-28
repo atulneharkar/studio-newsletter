@@ -26,7 +26,7 @@ export class CommonService {
     }
   }
 
-  //method to set user cookies an jwt token
+  //method to set user cookies with jwt token
   setUserCookies(user, token) {
     if (user) {
       Cookie.set('userInfo', JSON.stringify(user.json()));

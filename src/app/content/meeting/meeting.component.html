@@ -36,7 +36,7 @@
             <label for="location">Location</label>
             <select class="form-control" id="designation" id="location" formControlName="location">
             <option [selected]="true">Select Room</option>
-            <option value="colaba">Colaba</option>
+            <option value="59858280d3362d782ea8ba06">Colaba</option>
           </select>
             <p *ngIf="submitted && meetingForm.get('location').hasError('required')" class="error-msg">
               Please select location.
@@ -93,6 +93,8 @@
       </div>
     </div>
 
+    <input type="hidden" [(ngModel)]="userId" formControlName="bookBy" />
+
     <!--phone unique error-->
     <p *ngIf="roomAlreadyBookedError" class="error-msg">
       Room already booked.
@@ -104,3 +106,5 @@
     </p>
   </form>
 </div>
+
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!successMsg"></app-modal>
