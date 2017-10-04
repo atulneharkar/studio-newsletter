@@ -24,8 +24,9 @@ export class InternalProjectComponent implements OnInit {
   public projectTypes: any[] = ['FI', 'RFP', 'POC'];
   public domains: any[] = ['UX', 'VD', 'FE', 'BA'];
   public selectedDesignation: string = '';
-  public selectedContactPersons: string = '';
-  public selectedProjectTypes: string = '';
+  public selectedContactPerson: string = '';
+  public selectedProjectType: string = '';
+  public selectedTechnology: string = '';
   public successMsg: boolean = false;
   public serverError: boolean = false;
   public message: string = "";

@@ -53,18 +53,18 @@
             <div class="col-sm-6 col-xs-12 form-group">
               <label for="startDate">From</label>
               <input type="date" class="form-control" id="startDate" formControlName="startDate" placeholder="Start Date">
-              <p *ngIf="submitted && meetingForm.get('date').get('startDate').hasError('required')" class="error-msg">
+              <p *ngIf="submitted && eventForm.get('date').get('startDate').hasError('required')" class="error-msg">
                 Please select start date.
               </p>
             </div>
             <div class="col-sm-6 col-xs-12 form-group">
               <label for="endDate">To</label>
               <input type="date" class="form-control" id="endDate" formControlName="endDate" placeholder="End Date">
-              <p *ngIf="submitted && meetingForm.get('date').get('endDate').hasError('required')" class="error-msg">
+              <p *ngIf="submitted && eventForm.get('date').get('endDate').hasError('required')" class="error-msg">
                 Please select end date.
              </p>
             </div>
-            <p class="error-msg" *ngIf="submitted && meetingForm.get('date').hasError('dateError')">
+            <p class="error-msg" *ngIf="submitted && eventForm.get('date').hasError('dateError')">
               End Date should not be less than Start Date.
             </p>
           </div>
@@ -79,18 +79,18 @@
             <div class="col-sm-6 col-xs-12 form-group">
               <label for="startTime">From</label>
               <input type="time" class="form-control" id="startTime" formControlName="startTime" placeholder="Start Time">
-              <p *ngIf="submitted && meetingForm.get('time').get('startTime').hasError('required')" class="error-msg">
+              <p *ngIf="submitted && eventForm.get('time').get('startTime').hasError('required')" class="error-msg">
                 Please select start time.
               </p>
             </div>
             <div class="col-sm-6 col-xs-12 form-group">
               <label for="endTime">To</label>
               <input type="time" class="form-control" id="endTime" formControlName="endTime" placeholder="End Time">
-              <p *ngIf="submitted && meetingForm.get('time').get('endTime').hasError('required')" class="error-msg">
+              <p *ngIf="submitted && eventForm.get('time').get('endTime').hasError('required')" class="error-msg">
                 Please select End Time.
               </p>
             </div>
-            <p class="error-msg" *ngIf="submitted && meetingForm.get('time').hasError('timeError')">
+            <p class="error-msg" *ngIf="submitted && eventForm.get('time').hasError('timeError')">
               End Time should not be less than Start Time.
             </p>
           </div>
