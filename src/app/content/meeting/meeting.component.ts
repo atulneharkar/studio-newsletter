@@ -15,23 +15,25 @@ export class MeetingComponent implements OnInit {
 
   public meetingForm: FormGroup;
 	public submitted: boolean = false;
-  private meeting;
+  private meeting: any;
   public loading = false;
   public meetingId: number;
   public meetingInfo: MeetingRoom;
   public locations: any[] = ['Colaba', 'Church gate'];
   public selectedLocation: string = '';
-  public setFromDate;
-  public setToDate;
-  public setFromTime;
-  public setToTime;
+  public setFromDate: string = '';
+  public setToDate: string = '';
+  public setFromTime: string = '';
+  public setToTime: string = '';
   public successMsg: boolean = false;
   public roomAlreadyBookedError: boolean = false;
   public serverError: boolean = false;
-  public userId;
+  public userId: number;
   public slotsArr: Array<{}> = [];
   public message: string = "";
   public modalType: string = "success";
+  public title: string = 'Book Meeting';
+  public buttonText: string = 'Save';
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
@@ -73,6 +75,10 @@ export class MeetingComponent implements OnInit {
     });
 
     //pre fill the values for editing form
+    //set page title and button text if user is editing meeting
+      // this.title = 'Edit Meeting';
+      // this.buttonText = 'Update';
+
     // if(this.meetingId) {
     //   //prefill the form 
     //   let userObj = this.formatUser(this.userInfo);

@@ -22,6 +22,8 @@ export class EventComponent implements OnInit {
   public serverError: boolean = false;
   public message: string = "";
   public modalType: string = "success";
+  public title: string = 'Add Event';
+  public buttonText: string = 'Save';
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
@@ -80,6 +82,10 @@ export class EventComponent implements OnInit {
 
     //pre fill the values for editing form
     if(this.eventId) {
+      //set page title and button text if user is editing event
+      // this.title = 'Edit Event';
+      // this.buttonText = 'Update';
+
       //prefill the form 
     //   this.selectedDesignation = userObj.designation;
 

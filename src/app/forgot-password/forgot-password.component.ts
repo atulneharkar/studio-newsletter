@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { CommonService, UserService } from '../_services';
+import { CommonService, UserService, ValidationService } from '../_services';
 
 @Component({
   selector: 'app-forgot-password',
@@ -24,7 +24,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(private _fb: FormBuilder,
         private router: Router,
         private userService: UserService,
-        private commonService: CommonService) { }
+        private commonService: CommonService,
+        private validationService: ValidationService) { }
 
   ngOnInit() {
   	this.buildForgotPasswordForm();
@@ -35,7 +36,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.forgotPasswordForm = this._fb.group({
       email: ['', [
           Validators.required,
-          Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+          Validators.pattern(this.validationService.getEmailPattern())
         ]
       ]
     });
@@ -66,7 +67,7 @@ export class ForgotPasswordComponent implements OnInit {
           },
           error => {
             this.loading = false;
-            if(error.status === 404) {
+            if(error.status === 400 || error.status === 404) {
               this.unauthorizedError = true;
             } else if(error.status === 500) {
               this.serverError = true;

@@ -1,7 +1,6 @@
 <div class="container">
   <div class="project-wrapper">
-    <h2 class="heading" *ngIf="!projectId">Add Project</h2>
-    <h2 class="heading" *ngIf="projectId">Edit Project</h2>
+    <h2 class="heading">{{title}}</h2>
     <form [formGroup]="projectForm" novalidate (ngSubmit)="onSubmit(projectForm.valid)">
 
       <!--project name-->
@@ -135,8 +134,7 @@
 
       <!--submit btn-->
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary" *ngIf="!projectId">Save</button>
-        <button type="submit" class="btn btn-primary" *ngIf="projectId">Update</button>
+        <button type="submit" class="btn btn-primary">{{buttonText}}</button>
         <a class="btn btn-primary" [routerLink]="['/internal-project']">cancel</a>
         <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
       </div>

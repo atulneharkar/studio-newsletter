@@ -3,7 +3,12 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@ang
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
 
-import { UserService, CommonService, FileUploadService, HelperService } from '../../_services';
+import { 
+  UserService, 
+  CommonService, 
+  FileUploadService, 
+  HelperService, 
+  ValidationService } from '../../_services';
 import { User } from '../../_interfaces';
 
 @Component({
@@ -15,7 +20,7 @@ export class UserComponent implements OnInit {
 
 	public userForm: FormGroup;
 	public submitted: boolean = false;
-  private user;
+  private user: any;
   public loading = false;
   public userId: number;
   public userInfo: User;
@@ -23,20 +28,22 @@ export class UserComponent implements OnInit {
   public domains: any[] = ['UX', 'VD', 'QA', 'FE'];
   public selectedDesignation: string = '';
   public selectedDomain: string = '';
-  private imageInfo;
+  private imageInfo: any;
   private fileSize: number = 0;
-  public setDobDate;
-  public setDojDate;
+  public setDobDate: string;
+  public setDojDate: string;
   public successMsg: boolean = false;
   public uniqueEmailError: boolean = false;
   public uniquePhoneError: boolean = false;
   public fileSizeError: boolean = false;
   public serverError: boolean = false;
-  public uploadedFiles = [];
-  public uploadError;
+  public uploadedFiles: Array<any> = [];
+  public uploadError: boolean = false;
   public uploadFieldName = 'avatar';
   public message: string = "";
   public modalType: string = "success";
+  public title: string = 'Register';
+  public buttonText: string = 'Save';
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
@@ -44,7 +51,8 @@ export class UserComponent implements OnInit {
         private userService: UserService,
         private commonService: CommonService,
         private _fileUpload: FileUploadService,
-        private helperService: HelperService) { }
+        private helperService: HelperService,
+        private validationService: ValidationService) { }
 
   ngOnInit() {
     this.getParamId();
@@ -81,12 +89,12 @@ export class UserComponent implements OnInit {
       name: ['', [
           Validators.required, 
           Validators.minLength(2),
-          //Validators.pattern(/^[a-zA-Z]*$/)
+          //Validators.pattern(this.validationService.getNamePattern())
         ]
       ],
       email: ['', [
           Validators.required,
-          Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+          Validators.pattern(this.validationService.getEmailPattern())
         ]
       ],
       credentials: this._fb.group({
@@ -95,7 +103,7 @@ export class UserComponent implements OnInit {
       }, { validator: this.helperService.pwdMatcher }),
       phone: ['', [
           Validators.required,
-          Validators.pattern(/^\d+$/)
+          //Validators.pattern(this.validationService.getPhonePattern())
         ]
       ],
       designation: ['', [Validators.required]],
@@ -105,7 +113,7 @@ export class UserComponent implements OnInit {
       doj: ['', [Validators.required]],
       previousExp: ['', [
           Validators.required,
-          //Validators.pattern(/^[a-zA-Z]*$/)
+          //Validators.pattern(this.validationService.getNumberAndDotPattern())
         ]
       ],
       domain: ['', [Validators.required]]
@@ -113,6 +121,10 @@ export class UserComponent implements OnInit {
 
     //pre fill the values for editing form
     if(this.userId) {
+      //set page title and button text if user is editing profile
+      this.title = 'Edit Profile';
+      this.buttonText = 'Update';
+      
       //prefill the form 
       let userObj = this.formatUser(this.userInfo);
       this.selectedDesignation = userObj.designation;
@@ -136,6 +148,7 @@ export class UserComponent implements OnInit {
     this.uniquePhoneError = false;
     this.fileSizeError = false;
     this.serverError = false;
+    this.uploadError = false;
 
     if(this.fileSize && this.fileSize > 3145728) {
       this.fileSizeError = true;
@@ -158,8 +171,8 @@ export class UserComponent implements OnInit {
               this.saveImage(this.imageInfo, token);
             } else {
               this.successMsg = true;
+              this.loading = false;
               setTimeout(() => {
-                this.loading = false;
                 this.commonService.notifyHeader();
                 this.successMsg = false;
                 this.router.navigate(['/login']);
@@ -181,6 +194,7 @@ export class UserComponent implements OnInit {
               this.saveImage(this.imageInfo);
             } else {
               this.successMsg = true;
+              this.loading = false;
               setTimeout(() => {
                 this.commonService.notifyHeader();
                 this.successMsg = false;
@@ -231,7 +245,7 @@ export class UserComponent implements OnInit {
           }
         }, 3000);
       }, err => {
-        this.uploadError = err;
+        this.uploadError = true;
       })
   }
 
@@ -250,6 +264,7 @@ export class UserComponent implements OnInit {
       role: user.role,
       dob: user.dob,
       doj: user.doj,
+      previousExp: user.previousExp,
       domain: user.domain
     };
   }

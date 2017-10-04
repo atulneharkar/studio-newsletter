@@ -11,7 +11,7 @@ import { User } from '../../_interfaces';
 export class UserListComponent implements OnInit {
   currentUser: User;
   users: User[] = [];
-  message: string = "";
+  message: string = '';
   modalType: string = "confirm";
   showModal: boolean = false;
   isConfirmed: boolean = false;

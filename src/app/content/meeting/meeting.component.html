@@ -2,10 +2,10 @@
   <form [formGroup]="meetingForm" novalidate (ngSubmit)="onSubmit(meetingForm.valid)">
     <div class="row booking-room-header">
       <div class="col-sm-9 col-xs-9">
-        <h2>Book a room</h2>
+        <h2>{{title}}</h2>
       </div>
       <div class="col-sm-3 col-xs-3">
-        <button class="btn btn-primary pull-right" type="submit">Book Room</button>
+        <button class="btn btn-primary pull-right" type="submit">{{buttonText}}</button>
       </div>
     </div>
 
@@ -39,7 +39,7 @@
             <option value="59858280d3362d782ea8ba06">Colaba</option>
           </select>
             <p *ngIf="submitted && meetingForm.get('location').hasError('required')" class="error-msg">
-              Please select location.
+              Location is required.
             </p>
         </div>
       </div>
@@ -51,18 +51,15 @@
               <label for="form-date">From</label>
               <input type="date" class="form-control" id="from-date" formControlName="fromDate" placeholder="From Date">
               <p *ngIf="submitted && meetingForm.get('slots').get('fromDate').hasError('required')" class="error-msg">
-                Please select fromDate.
+                From date is required.
               </p>
             </div>
             <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
               <label for="to-date">To</label>
               <input type="date" class="form-control" id="to-date" formControlName="toDate" placeholder="To Date">
-              <p *ngIf="submitted && meetingForm.get('slots').get('toDate').hasError('required')" class="error-msg">
-                Please select toDate.
-             </p>
             </div>
             <p class="error-msg" *ngIf="submitted && meetingForm.get('slots').hasError('dateError')">
-              FromDate should be less than ToDate.
+              From date should be less than To date.
             </p>
           </div>
         </div>
@@ -75,18 +72,18 @@
               <label for="from-time">From</label>
               <input type="time" class="form-control" id="from-time" formControlName="fromTime" placeholder="From Time">
               <p *ngIf="submitted && meetingForm.get('slots').get('fromTime').hasError('required')" class="error-msg">
-                Please select fromTime.
+                From time is required.
               </p>
             </div>
             <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
               <label for="to-time">To</label>
               <input type="time" class="form-control" id="to-time" formControlName="toTime" placeholder="To Time">
               <p *ngIf="submitted && meetingForm.get('slots').get('toTime').hasError('required')" class="error-msg">
-                Please select toTime.
+                To time is required.
               </p>
             </div>
             <p class="error-msg" *ngIf="submitted && meetingForm.get('slots').hasError('timeError')">
-              FromTime should be less than ToTime.
+              From time should be less than To time.
             </p>
           </div>
         </div>
@@ -97,7 +94,7 @@
 
     <!--phone unique error-->
     <p *ngIf="roomAlreadyBookedError" class="error-msg">
-      Room already booked.
+      Room already booked by Karan (11/12 - 13/12, 11.30 - 12.30).
     </p>
 
     <!--server connection error-->

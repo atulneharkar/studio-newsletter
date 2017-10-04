@@ -30,6 +30,8 @@ export class InternalProjectComponent implements OnInit {
   public serverError: boolean = false;
   public message: string = "";
   public modalType: string = "success";
+  public title: string = 'Add Project';
+  public buttonText: string = 'Save';
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
@@ -92,6 +94,10 @@ export class InternalProjectComponent implements OnInit {
 
     //pre fill the values for editing form
     if(this.projectId) {
+      //set page title and button text if user is editing project
+      // this.title = 'Edit Project';
+      // this.buttonText = 'Update';
+
       //prefill the form 
     //   this.selectedDesignation = userObj.designation;
 

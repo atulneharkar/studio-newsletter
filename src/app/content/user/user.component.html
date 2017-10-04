@@ -1,7 +1,6 @@
 <div class="container">
   <div class="register-wrapper">
-    <h2 class="heading" *ngIf="!userId">Register</h2>
-    <h2 class="heading" *ngIf="userId">My Profile</h2>
+    <h2 class="heading">{{title}}</h2>
     <form [formGroup]="userForm" enctype="multipart/form-data" novalidate (ngSubmit)="onSubmit(userForm.valid)">
 
       <!--first name-->
@@ -31,6 +30,10 @@
           </p>
           <p *ngIf="submitted && userForm.get('email').hasError('pattern')" class="error-msg">
             Please enter a valid email.
+          </p>
+          <!--email unique error-->
+          <p *ngIf="uniqueEmailError" class="error-msg">
+            Email already exists.
           </p>
         </div>
       </div>
@@ -68,6 +71,10 @@
           <p *ngIf="submitted && userForm.get('phone').hasError('pattern')" class="error-msg">
             Please enter a valid phone number.
           </p>
+          <!--phone unique error-->
+          <p *ngIf="uniquePhoneError" class="error-msg">
+            Phone number already exists.
+          </p>
         </div>
       </div>
 
@@ -76,7 +83,7 @@
         <label for="designation" class="col-sm-4 col-form-label">Designation</label>
         <div class="col-sm-8">
           <select class="form-control" id="designation" formControlName="designation">
-            <option [selected]="!selectedDesignation">Select Designation</option>
+            <option [selected]="!selectedDesignation" [hidden]="userId">Select Designation</option>
             <option *ngFor="let name of designations" [selected]="selectedDesignation === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && userForm.get('designation').hasError('required')" class="error-msg">
@@ -91,7 +98,7 @@
         <div class="col-sm-8">
           <input type="date" class="form-control" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
           <p *ngIf="submitted && userForm.get('dob').hasError('required')" class="error-msg">
-              This field is required.
+              Date of birth is required.
           </p>
         </div>
       </div>
@@ -102,21 +109,21 @@
         <div class="col-sm-8">
           <input type="date" class="form-control" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
           <p *ngIf="submitted && userForm.get('doj').hasError('required')" class="error-msg">
-              This field is required.
+              Date of joining is required.
           </p>
         </div>
       </div>
 
       <!--previous experience-->
       <div class="form-group row">
-        <label for="previousExp" class="col-sm-4 col-form-label">Previous experience</label>
+        <label for="previousExp" class="col-sm-4 col-form-label">Previous experience (eg 1.6)</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" id="previousExp" formControlName="previousExp" placeholder="Previous experience">
           <p *ngIf="submitted && userForm.get('previousExp').hasError('required')" class="error-msg">
-              Previous Exp is required.
+              Previous experience is required.
           </p>
           <p *ngIf="submitted && userForm.get('previousExp').hasError('pattern')" class="error-msg">
-            Only numbers are allowed.
+            Only numbers and dot is allowed.
           </p>
         </div>
       </div>
@@ -126,7 +133,7 @@
         <label for="domain" class="col-sm-4 col-form-label">Domain</label>
         <div class="col-sm-8">
           <select class="form-control" id="domain" formControlName="domain">
-            <option [selected]="!selectedDomain">Select Domain</option>
+            <option [selected]="!selectedDomain" [hidden]="userId">Select Domain</option>
             <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && userForm.get('domain').hasError('required')" class="error-msg">
@@ -144,18 +151,11 @@
           <p *ngIf="fileSizeError" class="error-msg">
             File size limit exceeds.
           </p>
+          <p *ngIf="uploadError" class="error-msg">
+            Cannot upload file. Please try again.
+          </p>
         </div>
   	  </div>
-
-      <!--email unique error-->
-      <p *ngIf="uniqueEmailError" class="error-msg">
-        Email already exists.
-      </p>
-
-      <!--phone unique error-->
-      <p *ngIf="uniquePhoneError" class="error-msg">
-        Phone number already exists.
-      </p>
 
       <!--server connection error-->
       <p *ngIf="serverError" class="error-msg">
@@ -164,8 +164,7 @@
 
       <!--submit btn-->
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary" *ngIf="!userId">Register</button>
-        <button type="submit" class="btn btn-primary" *ngIf="userId">Update</button>
+        <button type="submit" class="btn btn-primary">{{buttonText}}</button>
         <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
         <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
       </div>

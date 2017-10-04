@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AuthenticationService, CommonService } from '../_services';
+import { AuthenticationService, CommonService, ValidationService } from '../_services';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
   			private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private commonService: CommonService) { }
+        private commonService: CommonService,
+        private validationService: ValidationService) { }
 
   ngOnInit() {
     let userInfo = this.commonService.getUserCookies();
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this._fb.group({
       email: ['', [
           Validators.required,
-          Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+          Validators.pattern(this.validationService.getEmailPattern())
         ]
       ],
       password: ['', [Validators.required]]
@@ -71,7 +72,7 @@ export class LoginComponent implements OnInit {
           },
           error => {
             this.loading = false;
-            if(error.status === 400) {
+            if(error.status === 400 || error.status === 404) {
               this.unauthorizedError = true;
             } else if(error.status === 500) {
               this.serverError = true;

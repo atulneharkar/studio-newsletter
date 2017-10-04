@@ -1,7 +1,6 @@
 <div class="container">
   <div class="event-wrapper">
-    <h2 class="heading" *ngIf="!projectId">Add Event</h2>
-    <h2 class="heading" *ngIf="projectId">Edit Event</h2>
+    <h2 class="heading">{{title}}</h2>
     <form [formGroup]="eventForm" novalidate (ngSubmit)="onSubmit(eventForm.valid)">
 
       <!--title-->
@@ -105,8 +104,7 @@
 
       <!--submit btn-->
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary" *ngIf="!eventId">Save</button>
-        <button type="submit" class="btn btn-primary" *ngIf="eventId">Update</button>
+        <button type="submit" class="btn btn-primary">{{buttonText}}</button>
         <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
       </div>
 
