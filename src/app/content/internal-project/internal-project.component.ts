@@ -118,7 +118,7 @@ export class InternalProjectComponent implements OnInit {
       this.loading = true;
       if(!this.projectId) {
         this.message = "Project added successfully";
-
+        console.log(this.project);
         //if project id not present then call to add project method
       // this.projectService.create(this.project)
       // .subscribe(

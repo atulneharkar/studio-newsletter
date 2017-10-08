@@ -90,8 +90,7 @@
         <label for="technology" class="col-sm-4 col-form-label">Technology</label>
         <div class="col-sm-8">
           <select class="form-control" id="technology" formControlName="technology">
-            <option [selected]="!selectedTechnology">Select Technology</option>
-            <option *ngFor="let name of technologies" [selected]="selectedTechnology === name" [ngValue]="name">{{name}}</option>
+            <option *ngFor="let name of technologies" [selected]="selectedTechnology === name" [ngValue]="name" multiple>{{name}}</option>
           </select>
           <p *ngIf="submitted && projectForm.get('technology').hasError('required')" class="error-msg">
               Technology is required.

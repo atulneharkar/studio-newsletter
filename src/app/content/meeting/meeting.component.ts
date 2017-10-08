@@ -19,7 +19,6 @@ export class MeetingComponent implements OnInit {
   public loading = false;
   public meetingId: number;
   public meetingInfo: MeetingRoom;
-  public locations: any[] = ['Colaba', 'Church gate'];
   public selectedLocation: string = '';
   public setFromDate: string = '';
   public setToDate: string = '';
@@ -34,16 +33,21 @@ export class MeetingComponent implements OnInit {
   public modalType: string = "success";
   public title: string = 'Book Meeting';
   public buttonText: string = 'Save';
+  public source: string = "";
+  public roomList: Array<{}> = [];
+  public slotBookedDetails: Array<{}> = [];
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
         private commonService: CommonService,
         private helperService: HelperService,
-        private meetingRoomService: MeetingRoomService) { }
+        private meetingRoomService: MeetingRoomService) {
+  }
 
   ngOnInit() {
     this.getParamId();
+    this.getAllRoom();
     this.buildMeetingForm();
 
     this.userId = (this.commonService.getUserCookies())._id;
@@ -54,8 +58,35 @@ export class MeetingComponent implements OnInit {
     this.route.params.subscribe(
       (params : Params) => {
         this.meetingId = params["id"];
+        this.source = params["source"];
+        if(this.meetingId) {
+          this.getMeetingInfo(this.meetingId);
+        }
       }
     );
+  }
+
+  //get meeting information from database based on meeting id
+  getMeetingInfo(id: number) {
+    this.meetingRoomService.getById(id)
+      .subscribe(
+        data => {
+          this.meetingInfo = data;
+          this.buildMeetingForm();
+        },
+        error => {
+        });
+  }
+
+  //get meeting information from database based on meeting id
+  getAllRoom() {
+    this.meetingRoomService.getAllRoom()
+      .subscribe(
+        data => {
+          this.roomList = data;
+        },
+        error => {
+        });
   }
 
   //method to create meeting form - reactive way
@@ -75,23 +106,26 @@ export class MeetingComponent implements OnInit {
     });
 
     //pre fill the values for editing form
-    //set page title and button text if user is editing meeting
-      // this.title = 'Edit Meeting';
-      // this.buttonText = 'Update';
 
-    // if(this.meetingId) {
-    //   //prefill the form 
-    //   let userObj = this.formatUser(this.userInfo);
-    //   this.selectedDesignation = userObj.designation;
+    if(this.meetingInfo) {
+      //set page title and button text if user is editing meeting
+      this.title = 'Edit Meeting';
+      this.buttonText = 'Update';
 
-    //   let dob = new Date(userObj.dob);
-    //   let doj = new Date(userObj.doj);
-    //   this.setDobDate = dob.toISOString().substring(0, 10);
-    //   this.setDojDate = doj.toISOString().substring(0, 10);
+      //prefill the form 
+      let meetingObj = this.formatMeeting(this.meetingInfo[0]);
+      this.selectedLocation = meetingObj.location;
+      this.setFromDate = this.helperService.getFormattedDate(meetingObj.slots.fromDate);
+      if(meetingObj.slots.toDate) {
+        this.setToDate = this.helperService.getFormattedDate(meetingObj.slots.toDate);
+      }
 
-    //   (<FormGroup>this.userForm)
-    //         .setValue(userObj, { onlySelf: true });
-    // }
+      this.setFromTime = this.helperService.getFormattedTime(meetingObj.slots.fromTime);
+      this.setToTime = this.helperService.getFormattedTime(meetingObj.slots.toTime);
+
+      (<FormGroup>this.meetingForm)
+            .setValue(meetingObj, { onlySelf: true });
+    }
 
   }
 
@@ -101,6 +135,7 @@ export class MeetingComponent implements OnInit {
     this.roomAlreadyBookedError = false;
     this.serverError = false;
     this.meeting = this.meetingForm.value;
+    this.slotsArr = [];
 
     if(isValid) {
       this.slotsArr.push(this.meeting.slots);
@@ -116,9 +151,12 @@ export class MeetingComponent implements OnInit {
             this.successMsg = true;
             setTimeout(() => {
               this.loading = false;
-              this.commonService.notifyHeader();
               this.successMsg = false;
-              this.router.navigate(['/login']);
+              if(this.source === 'meeting') {
+                this.router.navigate(['/meeting']);
+              } else {
+                this.router.navigate(['/login']);
+              }
             }, 3000);
           },
           error => {
@@ -134,7 +172,6 @@ export class MeetingComponent implements OnInit {
           data => {
             this.successMsg = true;
             setTimeout(() => {
-              this.commonService.notifyHeader();
               this.successMsg = false;
               this.router.navigate(['/meeting']);
             }, 3000);
@@ -148,12 +185,28 @@ export class MeetingComponent implements OnInit {
 
   }
 
+  //format meeting object
+  formatMeeting(meeting) {
+    return {
+      title: meeting.title,
+      description: meeting.description,
+      location: meeting.location._id,
+      slots: {
+        fromDate: meeting.slots[0].fromDate,
+        toDate: meeting.slots[0].toDate,
+        fromTime: meeting.slots[0].fromTime,
+        toTime: meeting.slots[0].toTime
+      },
+      bookBy: meeting.bookBy._id
+    };
+  }
+
   //method to set error messages
   setError(error) {
-    if(error.status === 400) {
-      if(error._body.trim() === 'booked') { 
-        this.roomAlreadyBookedError = true;
-      }
+    const body = JSON.parse(error['_body']);
+    if(body && body.alreadyBookedSlots) {
+      this.roomAlreadyBookedError = true;
+      this.slotBookedDetails = body.alreadyBookedSlots;
     } else if(error.status === 500) {
       this.serverError = true;
     }

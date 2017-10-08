@@ -36,4 +36,28 @@ export class HelperService {
     return password.value === confirmPassword.value ? null : { timeError: true };
   };
 
+  //format date
+  getFormattedDate(date) {
+    let d = new Date(date);
+    let month = ((d.getMonth()+1) < 10) ? ("0"+(d.getMonth()+1)) : (d.getMonth()+1);
+    let day = (d.getDate() < 10) ? ("0"+d.getDate()) : d.getDate();
+    return d.getFullYear() + "-" + month + "-" + day;
+  }
+
+  //format time
+  getFormattedTime(date) {
+    let d = new Date(date);
+    let hr: any = d.getHours();
+    let min: any = d.getMinutes();
+
+    if (hr < 10) {
+        hr = "0" + hr;
+    }
+    if (min < 10) {
+        min = "0" + min;
+    }
+
+    return hr + ":" + min;
+  }
+
 }

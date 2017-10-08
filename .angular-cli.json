@@ -54,5 +54,10 @@
     "styleExt": "scss",
     "component": {
     }
-  }
+  },
+  "assets": [
+    "assets",
+    "favicon.ico",
+    "manifest.json"
+  ]
 }

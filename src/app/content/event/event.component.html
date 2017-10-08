@@ -1,115 +1,100 @@
-<div class="container">
-  <div class="event-wrapper">
-    <h2 class="heading">{{title}}</h2>
-    <form [formGroup]="eventForm" novalidate (ngSubmit)="onSubmit(eventForm.valid)">
+<div>
+  <form [formGroup]="eventForm" novalidate (ngSubmit)="onSubmit(eventForm.valid)">
+    <div class="row event-header">
+      <div class="col-sm-9 col-xs-9">
+        <h2>{{title}}</h2>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <button class="btn btn-primary pull-right" type="submit">{{buttonText}}</button>
+        <a [routerLink]="['/events']" class="btn btn-link">Cancel</a>
+      </div>
+    </div>
 
-      <!--title-->
+    <div class="event-content">
+
       <div class="form-group row">
-        <label for="title" class="col-sm-4 col-form-label">Title</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
-          <p *ngIf="submitted && eventForm.get('title').hasError('required')" class="error-msg">
+        <div class="col-sm-12 col-xs-12">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+            <p *ngIf="submitted && eventForm.get('title').hasError('required')" class="error-msg">
               Title is required.
-          </p>
-          <p *ngIf="submitted && eventForm.get('title').hasError('minlength')" class="error-msg">
-            Title must be at least 2 characters long.
-          </p>
-          <p *ngIf="submitted && eventForm.get('title').hasError('pattern')" class="error-msg">
-            Only alphabets are allowed.
-          </p>
+            </p>
         </div>
       </div>
 
-      <!--description-->
       <div class="form-group row">
-        <label for="description" class="col-sm-4 col-form-label">Description</label>
-        <div class="col-sm-8">
-          <textarea class="form-control" id="description" formControlName="description" placeholder="Description"></textarea>
-          <p *ngIf="submitted && eventForm.get('description').hasError('required')" class="error-msg">
+        <div class="col-sm-12 col-xs-12">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control" id="description" formControlName="description" placeholder="Description"></textarea>
+            <p *ngIf="submitted && eventForm.get('description').hasError('required')" class="error-msg">
               Description is required.
-          </p>
-          <p *ngIf="submitted && eventForm.get('description').hasError('pattern')" class="error-msg">
-            Please enter a valid description.
-          </p>
+            </p>
         </div>
       </div>
 
-      <!--location-->
       <div class="form-group row">
-        <label for="location" class="col-sm-4 col-form-label">Location</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="location" formControlName="location" placeholder="Location">
-          <p *ngIf="submitted && eventForm.get('location').hasError('required')" class="error-msg">
+        <div class="col-sm-12 col-xs-12">
+            <label for="location">Location</label>
+            <input class="form-control" id="designation" id="location" placeholder="Location" formControlName="location" />
+            <p *ngIf="submitted && eventForm.get('location').hasError('required')" class="error-msg">
               Location is required.
-          </p>
+            </p>
         </div>
       </div>
 
-      <!--date-->
-      <div class="form-group row date-row" formGroupName="date">
-      	<label class="col-sm-4 col-form-label">Date</label>
-        <div class="col-sm-8 col-xs-8">
+      <div class="form-group row date-row">
+        <div class="col-sm-12 col-xs-12">
           <div class="row form-inline">
-            <div class="col-sm-6 col-xs-12 form-group">
-              <label for="startDate">From</label>
-              <input type="date" class="form-control" id="startDate" formControlName="startDate" placeholder="Start Date">
-              <p *ngIf="submitted && eventForm.get('date').get('startDate').hasError('required')" class="error-msg">
-                Please select start date.
+            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
+              <label for="form-date">From</label>
+              <input type="date" class="form-control" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
+              <p *ngIf="submitted && eventForm.get('slots').get('fromDate').hasError('required')" class="error-msg">
+                From date is required.
               </p>
             </div>
-            <div class="col-sm-6 col-xs-12 form-group">
-              <label for="endDate">To</label>
-              <input type="date" class="form-control" id="endDate" formControlName="endDate" placeholder="End Date">
-              <p *ngIf="submitted && eventForm.get('date').get('endDate').hasError('required')" class="error-msg">
-                Please select end date.
-             </p>
+            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
+              <label for="to-date">To</label>
+              <input type="date" class="form-control" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
             </div>
-            <p class="error-msg" *ngIf="submitted && eventForm.get('date').hasError('dateError')">
-              End Date should not be less than Start Date.
+            <p class="error-msg" *ngIf="submitted && eventForm.get('slots').hasError('dateError')">
+              From date should be less than To date.
             </p>
           </div>
         </div>
       </div>
 
-      <!--time-->
-      <div class="form-group row time-row" formGroupName="time">
-      	<label class="col-sm-4 col-form-label">Time</label>
-        <div class="col-sm-8 col-xs-8">
+      <div class="form-group row time-row">
+        <div class="col-sm-12 col-xs-12">
           <div class="row form-inline">
-            <div class="col-sm-6 col-xs-12 form-group">
-              <label for="startTime">From</label>
-              <input type="time" class="form-control" id="startTime" formControlName="startTime" placeholder="Start Time">
-              <p *ngIf="submitted && eventForm.get('time').get('startTime').hasError('required')" class="error-msg">
-                Please select start time.
+            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
+              <label for="from-time">From</label>
+              <input type="time" class="form-control" id="from-time" formControlName="fromTime" [(ngModel)]="setFromTime" placeholder="From Time">
+              <p *ngIf="submitted && eventForm.get('slots').get('fromTime').hasError('required')" class="error-msg">
+                From time is required.
               </p>
             </div>
-            <div class="col-sm-6 col-xs-12 form-group">
-              <label for="endTime">To</label>
-              <input type="time" class="form-control" id="endTime" formControlName="endTime" placeholder="End Time">
-              <p *ngIf="submitted && eventForm.get('time').get('endTime').hasError('required')" class="error-msg">
-                Please select End Time.
+            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
+              <label for="to-time">To</label>
+              <input type="time" class="form-control" id="to-time" formControlName="toTime" [(ngModel)]="setToTime" placeholder="To Time">
+              <p *ngIf="submitted && eventForm.get('slots').get('toTime').hasError('required')" class="error-msg">
+                To time is required.
               </p>
             </div>
-            <p class="error-msg" *ngIf="submitted && eventForm.get('time').hasError('timeError')">
-              End Time should not be less than Start Time.
+            <p class="error-msg" *ngIf="submitted && eventForm.get('slots').hasError('timeError')">
+              From time should be less than To time.
             </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <!--server connection error-->
-      <p *ngIf="serverError" class="error-msg">
-        Could not connect to server. Please try again later.
-      </p>
+    <input type="hidden" [(ngModel)]="userId" formControlName="organiser" />
 
-      <!--submit btn-->
-      <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">{{buttonText}}</button>
-        <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
-      </div>
-
-    </form>
-  </div>
+    <!--server connection error-->
+    <p *ngIf="serverError" class="error-msg">
+      Could not connect to server. Please try again later.
+    </p>
+  </form>
 </div>
 
 <app-modal [message]="message" [modalType]="modalType" [hidden]="!successMsg"></app-modal>

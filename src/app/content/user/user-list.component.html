@@ -1,51 +1,71 @@
-<h2 class="page-heading">Studio Folks</h2>
-<div class="user-list-wrapper">
-  <table class="table table-striped">
-    <thead> 
-      <tr> 
-        <th></th>
-        <th>Name</th> 
-        <th>Designation</th> 
-        <th>Email</th> 
-        <th>Phone</th> 
-        <th>DOB</th>
-        <th>DOJ</th>
-        <th>Role</th>
-        <th *ngIf="currentUser.role === 'admin'">Status</th>
-        <th *ngIf="currentUser.role === 'admin'">Delete</th>
-      </tr> 
-    </thead> 
+<div [hidden]="showSnapshot">
+  <h2 class="page-heading">Studio Folks</h2>
+  <div class="user-list-wrapper">
+    <table class="table table-striped">
+      <thead> 
+        <tr> 
+          <th></th>
+          <th>Name</th> 
+          <th>Designation</th> 
+          <th>Email</th> 
+          <th>Phone</th> 
+          <th>DOB</th>
+          <th>DOJ</th>
+          <th>Domain</th>
+          <th>Total Exp (in yrs)</th>
+          <th>Role</th>
+          <th *ngIf="currentUser.role === 'admin'">Status</th>
+          <th *ngIf="currentUser.role === 'admin'">Delete</th>
+        </tr> 
+      </thead> 
 
-    <tbody> 
-      <tr *ngFor="let user of users"> 
-        <td>
-          <img src="{{user.avatar}}" width="50" *ngIf="user.avatar" />
-          <img src="assets/img/default_user_icon.png" width="50" *ngIf="!user.avatar" />
-        </td> 
-        <td>{{user.name}}</td> 
-        <td>{{user.designation}}</td> 
-        <td>{{user.email}}</td>
-        <td>{{user.phone}}</td>
-        <td>{{user.dob}}</td>
-        <td>{{user.doj}}</td>
-        <td>
-          <span *ngIf="currentUser.role === 'user'">{{user.role}}</span>
-          <div *ngIf="currentUser.role === 'admin'">
-            <button class="btn btn-primary" [disabled]="user._id === currentUser._id || user.status !== 'active'" (click)="changeRole(user._id, 'user')" *ngIf="user.role === 'admin'">Remove Admin</button>
-            <button class="btn btn-primary" [disabled]="user._id === currentUser._id || user.status !== 'active'" (click)="changeRole(user._id, 'admin')" *ngIf="user.role !== 'admin'">Make Admin</button>
-          </div>
-        </td>
-        <td *ngIf="currentUser.role === 'admin'">
-          <button class="btn btn-primary" [disabled]="user._id === currentUser._id" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'pending'">Approve</button>
-          <span *ngIf="user.status === 'active'">Active</span>
-          <button class="btn btn-primary" [disabled]="user._id === currentUser._id" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'inactive'">Activate</button>
-        </td>
-        <td *ngIf="currentUser.role === 'admin'">
-          <button class="btn btn-danger" [disabled]="user.status !== 'active' || user._id === currentUser._id" (click)="changeStatus(user._id, 'inactive')">X</button>
-        </td>
-      </tr>
-    </tbody> 
-  </table>
+      <tbody> 
+        <tr *ngFor="let user of users"> 
+          <td>
+            <img src="{{user.avatar}}" width="50" *ngIf="user.avatar" />
+            <img src="assets/img/default_user_icon.png" width="50" *ngIf="!user.avatar" />
+          </td> 
+          <td>{{user.name}}</td> 
+          <td>{{user.designation}}</td> 
+          <td>{{user.email}}</td>
+          <td>{{user.phone}}</td>
+          <td>{{user.dob | date: 'MM/dd/yyyy'}}</td>
+          <td>{{user.doj | date: 'MM/dd/yyyy'}}</td>
+          <td>{{user.domain}}</td>
+          <td>{{totalExp | calcExp : user.previousExp : user.doj}}</td>
+          <td>
+            <span *ngIf="currentUser.role === 'user'">{{user.role}}</span>
+            <div *ngIf="currentUser.role === 'admin'">
+              <button class="btn btn-primary" [disabled]="user._id === currentUser._id || user.status !== 'active'" (click)="changeRole(user._id, 'user')" *ngIf="user.role === 'admin'">Remove Admin</button>
+              <button class="btn btn-primary" [disabled]="user._id === currentUser._id || user.status !== 'active'" (click)="changeRole(user._id, 'admin')" *ngIf="user.role !== 'admin'">Make Admin</button>
+            </div>
+          </td>
+          <td *ngIf="currentUser.role === 'admin'">
+            <button class="btn btn-primary" [disabled]="user._id === currentUser._id" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'pending'">Approve</button>
+            <span *ngIf="user.status === 'active'">Active</span>
+            <button class="btn btn-primary" [disabled]="user._id === currentUser._id" (click)="changeStatus(user._id, 'active')" *ngIf="user.status === 'inactive'">Activate</button>
+          </td>
+          <td *ngIf="currentUser.role === 'admin'">
+            <button class="btn btn-danger" [disabled]="user.status !== 'active' || user._id === currentUser._id" (click)="changeStatus(user._id, 'inactive')">X</button>
+          </td>
+        </tr>
+      </tbody> 
+    </table>
+  </div>
 </div>
 
-<app-modal [message]="message" [modalType]="modalType" [hidden]="!showModal" (confirmed)="countChange($event)"></app-modal>
+<div [hidden]="!showSnapshot">
+  <div class="birthday-heading clearfix">
+    <h3>Birthday</h3>
+    <span class="pull-right" [routerLink]="['/users']">See all</span>
+  </div>
+
+  <div class="birthday-content" *ngFor="let user of users let i = index " [hidden]="i >= 4">
+    <div class="clearfix">
+      <span>{{user.name}}</span>
+      <span class="pull-right">{{user.dob | date: 'MM/dd/yyyy'}}</span>
+    </div>
+  </div>
+</div>
+
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!showModal" (confirmed)="confirmAction($event)"></app-modal>

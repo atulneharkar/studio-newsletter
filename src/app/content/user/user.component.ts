@@ -129,11 +129,8 @@ export class UserComponent implements OnInit {
       let userObj = this.formatUser(this.userInfo);
       this.selectedDesignation = userObj.designation;
       this.selectedDomain = userObj.domain;
-
-      let dob = new Date(userObj.dob);
-      let doj = new Date(userObj.doj);
-      this.setDobDate = dob.toISOString().substring(0, 10);
-      this.setDojDate = doj.toISOString().substring(0, 10);
+      this.setDobDate = this.helperService.getFormattedDate(userObj.dob);
+      this.setDojDate = this.helperService.getFormattedDate(userObj.doj);
 
       (<FormGroup>this.userForm)
             .setValue(userObj, { onlySelf: true });

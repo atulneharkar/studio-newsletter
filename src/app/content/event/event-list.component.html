@@ -1,61 +1,42 @@
-<div class="eventlist-section">
+<div class="eventlist-section" [hidden]="showSnapshot">
 
   <h2 class="page-heading">Events</h2>
+  <a class="btn btn-primary" [routerLink]="['create']">Create Event</a>
 
-  <div class="row">
+  <div class="row" *ngFor="let event of events">
     <div class="col-xs-12">
       <div class="event-desc card">
-        <h4>Event Name</h4>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        <p class="date-time">
-          <span>Date</span>
-          <span>Time</span>
-        </p>
-        <p>Location</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="event-desc card">
-        <h4>Event Name</h4>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        <p class="date-time">
-          <span>Date</span>
-          <span>Time</span>
-        </p>
-        <p>Location</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="event-desc card">
-        <h4>Event Name</h4>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        <p class="date-time">
-          <span>Date</span>
-          <span>Time</span>
-        </p>
-        <p>Location</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="event-desc card">
-        <h4>Event Name</h4>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        <p class="date-time">
-          <span>Date</span>
-          <span>Time</span>
-        </p>
-        <p>Location</p>
+        <h4>{{event.title}}</h4>
+        <p>{{event.description}}</p>
+        <div class="date-time">
+          <p>{{event.slots[0].fromDate | date: 'MM/dd/yyyy'}} <span *ngIf="event.slots[0].toDate"> - {{event.slots[0].toDate | date: 'MM/dd/yyyy'}}</span></p>
+          <p>{{event.slots[0].fromTime | date: 'hh:mm a'}} <span *ngIf="event.slots[0].toTime"> - {{event.slots[0].toTime | date: 'hh:mm a'}}</span></p>
+        </div>
+        <p>Location - {{event.location}}</p>
+        <a class="btn btn-primary" [routerLink]="['edit', event._id]">Edit</a>
+        <span class="btn btn-primary" (click)="deleteEvent(event._id)" >Delete</span>
       </div>
     </div>
   </div>
   
 </div>
+
+<div [hidden]="!showSnapshot">
+  <div class="event-snapshot-heading clearfix">
+    <h3>Upcoming Events</h3>
+    <span class="pull-right" [routerLink]="['/events']">See all</span>
+  </div>
+
+  <div class="row" *ngFor="let event of events let i = index " [hidden]="i >= 4">
+    <div class="col-xs-6">
+      <p>{{event.slots[0].fromDate | date: 'MM/dd/yyyy'}} <span *ngIf="event.slots[0].toDate"> - {{event.slots[0].toDate | date: 'MM/dd/yyyy'}}</span></p>
+      <p>{{event.slots[0].fromTime | date: 'hh:mm a'}} <span *ngIf="event.slots[0].toTime"> - {{event.slots[0].toTime | date: 'hh:mm a'}}</span></p>
+    </div>
+    <div class="col-xs-6 text-right">
+      <p>{{event.title}}</p>
+      <p>{{event.location}}</p>
+    </div>
+  </div>
+</div>
+
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!showModal" (confirmed)="confirmAction($event)"></app-modal>

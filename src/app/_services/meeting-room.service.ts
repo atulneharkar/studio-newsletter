@@ -23,14 +23,24 @@ export class MeetingRoomService {
     return this.http.get(`${this.commonService.getDomainUrl()}/book-room/all`, this.commonService.getJwt()).map((response: Response) => response.json());
   }
 
+  //method to get meeting by id
+  getById(id: number) {
+    return this.http.get(`${this.commonService.getDomainUrl()}/book-room/${id}`, this.commonService.getJwt()).map((response: Response) => response.json());
+  }
+
   //method to update meeting
   update(id: number, meeting: object) {
-    return this.http.put(`${this.commonService.getDomainUrl()}/book-room/` + id, meeting, this.commonService.getJwt()).map((response: Response) => response);
+    return this.http.put(`${this.commonService.getDomainUrl()}/book-room/${id}`, meeting, this.commonService.getJwt()).map((response: Response) => response);
   }
 
   //method to delete meeting
   delete(id: number) {
-    return this.http.delete(`${this.commonService.getDomainUrl()}/book-room/` + id, this.commonService.getJwt()).map((response: Response) => response);
+    return this.http.delete(`${this.commonService.getDomainUrl()}/book-room/${id}`, this.commonService.getJwt()).map((response: Response) => response);
+  }
+
+  //method to get list of all meeting rooms
+  getAllRoom() {
+    return this.http.get(`${this.commonService.getDomainUrl()}/room/all`, this.commonService.getJwt()).map((response: Response) => response.json());
   }
 
 }

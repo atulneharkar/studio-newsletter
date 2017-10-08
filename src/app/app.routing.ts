@@ -75,7 +75,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'meeting/create',
+    path: 'meeting/create/:source',
     component: MeetingComponent,
     canActivate: [AuthGuard]
   },

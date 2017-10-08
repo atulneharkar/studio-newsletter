@@ -1,35 +1,66 @@
-<h2 class="page-heading">Meetings</h2>
-<a class="btn btn-primary" [routerLink]="['create']">Book Room</a>
-<div class="meeting-list-wrapper">
-  <table class="table table-striped">
-    <thead> 
-      <tr>
-        <th>Title</th> 
-        <th>Description</th> 
-        <th>Location</th> 
-        <th>Date</th> 
-        <th>Time</th>
-        <th>Booked By</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr> 
-    </thead> 
+<div [hidden]="showSnapshot">
+  <h2 class="page-heading">Meetings</h2>
+  <a class="btn btn-primary" [routerLink]="['create', 'meeting']">Book Room</a>
+  <div class="meeting-list-wrapper">
+    <table class="table table-striped">
+      <thead> 
+        <tr>
+          <th>Title</th> 
+          <th>Description</th> 
+          <th>Location</th> 
+          <th>Date</th> 
+          <th>Time</th>
+          <th>Booked By</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr> 
+      </thead> 
 
-    <tbody> 
-      <tr *ngFor="let meeting of meetings">
-        <td>{{meeting.title}}</td> 
-        <td>{{meeting.description}}</td> 
-        <td>{{meeting.location}}</td>
-        <td><span>{{meeting.slots[0].fromDate}} </span><span *ngIf="meeting.slots[0].toDate"> - {{meeting.slots[0].toDate}}</span></td>
-        <td><span>{{meeting.slots[0].fromTime}} </span><span *ngIf="meeting.slots[0].toTime"> - {{meeting.slots[0].toTime}}</span></td>
-        <td>{{meeting.bookBy.name}}</td>
-        <td>
-          <a class="btn btn-primary" [routerLink]="['edit', meeting._id]">Edit</a>
-        </td>
-        <td>
-          <span class="btn btn-primary" (click)="deleteMeeting(meeting._id)" >Delete</span>
-        </td>
-      </tr>
-    </tbody> 
-  </table>
+      <tbody> 
+        <tr *ngFor="let meeting of meetings">
+          <td>{{meeting.title}}</td> 
+          <td>{{meeting.description}}</td> 
+          <td>{{meeting.location?.location}}</td>
+          <td><span>{{meeting.slots[0].fromDate | date: 'MM/dd/yyyy'}} </span><span *ngIf="meeting.slots[0].toDate"> - {{meeting.slots[0].toDate | date: 'MM/dd/yyyy'}}</span></td>
+          <td><span>{{meeting.slots[0].fromTime | date: 'hh:mm a'}} </span><span *ngIf="meeting.slots[0].toTime"> - {{meeting.slots[0].toTime | date: 'hh:mm a'}}</span></td>
+          <td>{{meeting.bookBy.name}}</td>
+          <td>
+            <a class="btn btn-primary" [routerLink]="['edit', meeting._id]">Edit</a>
+          </td>
+          <td>
+            <span class="btn btn-primary" (click)="deleteMeeting(meeting._id)" >Delete</span>
+          </td>
+        </tr>
+      </tbody> 
+    </table>
+  </div>
 </div>
+
+<div [hidden]="!showSnapshot">
+  <div class="heading">
+    <h3>Upcoming Meetings</h3>
+    <span class="pull-right" [routerLink]="['/meeting']">See all</span>
+  </div>
+
+  <div class="snapshot-content">
+    <div class="row" *ngFor="let meeting of meetings let i = index " [hidden]="i >= 4">
+      <div class="col-xs-4">
+        <span>{{meeting.location?.location}}</span>
+        <span>Booked by</span>
+        <span>{{meeting.bookBy.name}}</span>
+      </div>
+      <div class="col-xs-4">
+        <span>Date</span>
+        <span>{{meeting.slots[0].fromDate | date: 'MM/dd/yyyy'}} </span>
+        <span *ngIf="meeting.slots[0].toDate"> - {{meeting.slots[0].toDate | date: 'MM/dd/yyyy'}}</span>
+      </div>
+      <div class="col-xs-4">
+        <span>Time</span>
+        <span>{{meeting.slots[0].fromTime | date: 'hh:mm a'}} </span>
+        <span *ngIf="meeting.slots[0].toTime"> - {{meeting.slots[0].toTime | date: 'hh:mm a'}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!showModal" (confirmed)="confirmAction($event)"></app-modal>

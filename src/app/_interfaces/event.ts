@@ -1,14 +1,12 @@
 export interface Event {
-  _id: number,
-	title: string,
-	description: string,
-	date: {
-		startDate: string,
-	  endDate: string
-	},
-	time: {
-		startTime: string,
-	  endTime: string
-	},
-	location: string
+  title: string,
+  description: string,
+  location: string,
+  slots: Array <{
+    fromDate: string,
+    toDate: string,
+    fromTime: string,
+    toTime: string
+  }>,
+  organiser: string
 }

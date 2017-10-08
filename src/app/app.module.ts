@@ -36,10 +36,7 @@ import {
     MainCarouselComponent,
     MainNavigationComponent,
     FeedbackCarouselComponent,
-    BirthdayComponent,
-    HomeComponent,
-    EventsSnapshotComponent,
-    MeetingSnapshotComponent
+    HomeComponent
 } from './content/home';
 import { UserComponent, UserListComponent } from './content/user';
 import { ClientComponent, ClientListComponent } from './content/client';
@@ -48,6 +45,7 @@ import { MeetingComponent, MeetingListComponent } from './content/meeting';
 import { InternalProjectComponent, InternalProjectListComponent } from './content/internal-project';
 import { RecognitionComponent, RecognitionListComponent } from './content/recognition';
 import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-password';
+import { CalcExpPipe } from './_pipes';
 
 @NgModule({
   declarations: [
@@ -67,17 +65,15 @@ import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-passwo
     ClientListComponent,
     MeetingComponent,
     MeetingListComponent,
-    BirthdayComponent,
     InternalProjectComponent,
     RecognitionComponent,
     InternalProjectListComponent,
     RecognitionListComponent,
-    EventsSnapshotComponent,
-    MeetingSnapshotComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     HomeComponent,
-    ModalComponent
+    ModalComponent,
+    CalcExpPipe
   ],
   imports: [
     BrowserModule,

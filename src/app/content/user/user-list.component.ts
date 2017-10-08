@@ -9,14 +9,15 @@ import { User } from '../../_interfaces';
 })
 
 export class UserListComponent implements OnInit {
-  currentUser: User;
-  users: User[] = [];
-  message: string = '';
-  modalType: string = "confirm";
-  showModal: boolean = false;
-  isConfirmed: boolean = false;
+  public currentUser: User;
+  public users: User[] = [];
+  public message: string = '';
+  public modalType: string = "confirm";
+  public showModal: boolean = false;
+  public isConfirmed: boolean = false;
   private userObj: any;
   private userId: number;
+  public showSnapshot: boolean = true;
 
   constructor(
       private userService: UserService,
@@ -25,10 +26,17 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCurrentUrl();
     this.getAllUsers();
   }
 
-  countChange(event) {
+  //method to get current route from the url
+  getCurrentUrl() {
+    this.showSnapshot = (location.href.indexOf('users') !== -1) ? false : true;
+  }
+
+  //method to confirm users action (delete)
+  confirmAction(event) {
     this.isConfirmed = event;
     if(event) {
       this.userService.update(this.userId, this.userObj, 'other').subscribe(() => { this.getAllUsers() });
@@ -36,6 +44,7 @@ export class UserListComponent implements OnInit {
     this.showModal = false;
   }
 
+  //method to update users status
   changeStatus(id: number, status: string) {
     this.message = "Are you sure you want to change status?";
     this.userObj = {
@@ -45,6 +54,7 @@ export class UserListComponent implements OnInit {
     this.showModal = true;
   }
 
+  //method to update users role
   changeRole(id: number, role: string) {
     this.message = "Are you sure you want to change role?";
     this.userObj = {
@@ -54,6 +64,7 @@ export class UserListComponent implements OnInit {
     this.showModal = true;
   }
 
+  //method to get user list
   private getAllUsers() {
     this.userService.getAll()
       .subscribe(
