@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@ang
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
 
-import { ProjectService, CommonService, HelperService } from '../../_services';
-import { Project } from '../../_interfaces';
+import { ProjectService, CommonService, HelperService, UserService } from '../../_services';
+import { Project, User } from '../../_interfaces';
 
 @Component({
   selector: 'app-internal-project',
@@ -20,7 +20,6 @@ export class InternalProjectComponent implements OnInit {
   public projectId: number;
   public projectInfo: Project;
   public technologies: any[] = ['Oracle', 'Node JS', 'Angular', 'React'];
-  public contactPersons: any[] = ['Karan', 'Tanvi'];
   public projectTypes: any[] = ['FI', 'RFP', 'POC'];
   public domains: any[] = ['UX', 'VD', 'FE', 'BA'];
   public selectedDesignation: string = '';
@@ -33,18 +32,23 @@ export class InternalProjectComponent implements OnInit {
   public modalType: string = "success";
   public title: string = 'Add Project';
   public buttonText: string = 'Save';
+  public users: User[] = [];
+  public userId: number;
+  private vacancies: any[] = [];
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
-        private userService: ProjectService,
+        private userService: UserService,
+        private projectService: ProjectService,
         private commonService: CommonService,
         private helperService: HelperService) { }
 
   ngOnInit() {
     this.getParamId();
+    this.getAllUsers();
 
-    this.projectInfo = this.commonService.getUserCookies();
+    this.userId = (this.commonService.getUserCookies())._id;
 
     this.buildProjectForm();
   }
@@ -56,6 +60,15 @@ export class InternalProjectComponent implements OnInit {
         this.projectId = params["id"];
       }
     );
+  }
+
+  //method to get user list
+  getAllUsers() {
+    this.userService.getAll()
+      .subscribe(
+        users => { 
+          this.users = users;
+        });
   }
 
   //method to create project form - reactive way
@@ -79,16 +92,13 @@ export class InternalProjectComponent implements OnInit {
           //Validators.pattern(/^[a-zA-Z]*$/)
         ]
       ],
-      vacancies: this._fb.group({
-        domain: ['', [Validators.required]],
-        count: ['', [Validators.required]]
-      }),
+      vacancies: this._fb.array([ this.createVacancies() ]),
       members: ['', [
           Validators.required,
           //Validators.pattern(/^[a-zA-Z]*$/)
         ]
       ],
-      contactPerson: ['', [Validators.required]],
+      contactPerson: [''],
       technology: ['', [Validators.required]],
       projectType: ['', [Validators.required]]
     });
@@ -106,6 +116,23 @@ export class InternalProjectComponent implements OnInit {
     //         .setValue(userObj, { onlySelf: true });
      }
 
+  }
+
+  createVacancies(): FormGroup {
+    return this._fb.group({
+      domain: ['', [Validators.required]],
+        count: ['', [Validators.required]]
+    });
+  }
+
+  addVacancy() {
+    const control = <FormArray>this.projectForm.controls['vacancies'];
+    control.push(this.createVacancies());
+  }
+
+  removeVacancy(index: number) {
+    const control = <FormArray>this.projectForm.controls['vacancies'];
+    control.removeAt(index);
   }
 
   //method to handle form submission

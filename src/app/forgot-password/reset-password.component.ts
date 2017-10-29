@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 
-import { CommonService, UserService } from '../_services';
+import { CommonService, UserService, HelperService } from '../_services';
 
 @Component({
   selector: 'app-reset-password',
@@ -26,7 +26,8 @@ export class ResetPasswordComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private userService: UserService,
-        private commonService: CommonService) { }
+        private commonService: CommonService,
+        private helperService: HelperService) { }
 
   ngOnInit() {
     this.getParamId();
@@ -49,7 +50,7 @@ export class ResetPasswordComponent implements OnInit {
       credentials: this._fb.group({
         password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required]]
-      }, { validator: this.pwdMatcher })
+      }, { validator: this.helperService.pwdMatcher })
     });
   }
 
@@ -89,15 +90,5 @@ export class ResetPasswordComponent implements OnInit {
     }
 
   }
-
-  //private function to check if password and confirm password matches
-  private pwdMatcher = (control: AbstractControl): {[key: string]: boolean} => {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    if (!password || !confirmPassword) {
-      return null;
-    }
-    return password.value === confirmPassword.value ? null : { nomatch: true };
-  };
 
 }

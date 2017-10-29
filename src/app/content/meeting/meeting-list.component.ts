@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MeetingRoomService, CommonService } from '../../_services';
-import { MeetingRoom } from '../../_interfaces';
+import { MeetingRoom, User } from '../../_interfaces';
 
 @Component({
   selector: 'app-meeting-list',
@@ -16,6 +16,7 @@ export class MeetingListComponent implements OnInit {
   public isConfirmed: boolean = false;
   public meetingId: number;
   public showSnapshot: boolean = true;
+  public currentUser: User;
 
   constructor(
       private meetingRoomService: MeetingRoomService,
@@ -25,6 +26,8 @@ export class MeetingListComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUrl();
     this.getAllMeetings();
+
+    this.currentUser = this.commonService.getUserCookies();
   }
 
   //method to get current route from the url

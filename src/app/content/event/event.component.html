@@ -86,9 +86,16 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <input type="hidden" [(ngModel)]="userId" formControlName="organiser" />
+      <div class="form-group row">
+        <div class="col-sm-12 col-xs-12">
+          <label for="organiser">Organiser</label>
+          <select class="form-control" id="organiser" formControlName="organiser">
+            <option *ngFor="let user of users" [selected]="selectedOrganiser === user._id || user._id === userId" [ngValue]="user._id">{{user.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
     <!--server connection error-->
     <p *ngIf="serverError" class="error-msg">

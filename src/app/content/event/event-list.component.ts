@@ -16,6 +16,7 @@ export class EventListComponent implements OnInit {
   public isConfirmed: boolean = false;
   public eventId: number;
   public showSnapshot: boolean = false;
+  public currentUser: number;
 
   constructor(
       private eventService: EventService,
@@ -25,6 +26,8 @@ export class EventListComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUrl();
     this.getAllEvents();
+
+    this.currentUser = this.commonService.getUserCookies();
   }
 
   //method to get current route from the url

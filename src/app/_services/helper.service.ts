@@ -16,24 +16,25 @@ export class HelperService {
     return password.value === confirmPassword.value ? null : { nomatch: true };
   };
 
-  //method to check if fromDate is less than toDate
-  dateCompare = (control: AbstractControl): {[key: string]: boolean} => {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    if (!password || !confirmPassword) {
+  //method to check if fromDate is less than toDate and fromTime is less than toTime
+  dateTimeCompare = (control: AbstractControl): {[key: string]: boolean} => {
+    const fromDate = Date.parse(control.get('fromDate').value);
+    const toDate = Date.parse(control.get('toDate').value);
+    const fromTime = (new Date("November 13, 2013 " + (control.get('fromTime').value))).getTime();
+    const toTime = (new Date("November 13, 2013 " + (control.get('toTime').value))).getTime();
+    if (!fromDate || !toDate || !fromTime || !toTime) {
       return null;
     }
-    return password.value === confirmPassword.value ? null : { dateError: true };
-  };
 
-  //method to check if fromTime is less than toTime
-  timeCompare = (control: AbstractControl): {[key: string]: boolean} => {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    if (!password || !confirmPassword) {
-      return null;
+    if(fromDate > toDate) {
+      return { dateError: true };
     }
-    return password.value === confirmPassword.value ? null : { timeError: true };
+
+    if(fromDate === toDate) {
+      if(fromTime > toTime) {
+        return { timeError: true };
+      }
+    }
   };
 
   //format date

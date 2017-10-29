@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractCon
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
 
-import { CommonService, HelperService, EventService } from '../../_services';
-import { Event } from '../../_interfaces';
+import { CommonService, HelperService, EventService, UserService } from '../../_services';
+import { Event, User } from '../../_interfaces';
 
 @Component({
   selector: 'app-event',
@@ -19,6 +19,7 @@ export class EventComponent implements OnInit {
   public loading = false;
   public eventId: number;
   public eventInfo: Event;
+  public selectedOrganiser: string = '';
   public setFromDate: string = '';
   public setToDate: string = '';
   public setFromTime: string = '';
@@ -32,17 +33,20 @@ export class EventComponent implements OnInit {
   public title: string = 'Create Event';
   public buttonText: string = 'Save';
   public source: string = "";
+  public users: User[] = [];
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
         private commonService: CommonService,
         private helperService: HelperService,
-        private eventService: EventService) {
+        private eventService: EventService,
+        private userService: UserService) {
   }
 
   ngOnInit() {
     this.getParamId();
+    this.getAllUsers();
     this.buildEventForm();
 
     this.userId = (this.commonService.getUserCookies())._id;
@@ -72,6 +76,15 @@ export class EventComponent implements OnInit {
         });
   }
 
+  //method to get user list
+  getAllUsers() {
+    this.userService.getAll()
+      .subscribe(
+        users => { 
+          this.users = users;
+        });
+  }
+
   //method to create meeting form - reactive way
   buildEventForm(): void {
     //initialize our form 
@@ -84,7 +97,7 @@ export class EventComponent implements OnInit {
         toDate: ['', []],
         fromTime: ['', [Validators.required]],
         toTime: ['', [Validators.required]],
-      }, { validator: this.helperService.dateCompare }),
+      }, { validator: this.helperService.dateTimeCompare }),
       organiser: ['', []],
     });
 
@@ -97,6 +110,7 @@ export class EventComponent implements OnInit {
 
       //prefill the form 
       let eventObj = this.formatEvent(this.eventInfo[0]);
+      this.selectedOrganiser = eventObj.organiser;
       this.setFromDate = this.helperService.getFormattedDate(eventObj.slots.fromDate);
       if(eventObj.slots.toDate) {
         this.setToDate = this.helperService.getFormattedDate(eventObj.slots.toDate);

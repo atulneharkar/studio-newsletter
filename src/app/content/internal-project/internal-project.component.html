@@ -38,15 +38,15 @@
       <div class="form-group row">
         <label for="estimation" class="col-sm-4 col-form-label">Estimation</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="estimation" formControlName="estimation" placeholder="Estimation">
+          <input type="number" class="form-control" id="estimation" formControlName="estimation" placeholder="Estimation">
           <p *ngIf="submitted && projectForm.get('estimation').hasError('required')" class="error-msg">
-              Duration is required.
+              Estimation is required.
           </p>
         </div>
       </div>
 
       <!--vacancy-->
-      <div class="form-group row" formGroupName="vacancies">
+      <!-- <div class="form-group row" formGroupName="vacancies">
       	<label for="domain" class="col-sm-4 col-form-label">Vacancies</label>
       	<div>
 	        <div class="col-sm-8">
@@ -56,20 +56,50 @@
 		            <option [selected]="true">Select Domain</option>
 		            <option *ngFor="let name of domains" [ngValue]="name">{{name}}</option>
 		          </select>
-		          <!-- <p *ngIf="submitted && projectForm.get('duration').hasError('required')" class="error-msg">
-		              Duration is required.
-		          </p> -->
+		          <p *ngIf="submitted && projectForm.get('vacancies').get('domain').hasError('required')" class="error-msg">
+		              Domain is required.
+		          </p>
 	          </div>
 	          <div>
 		          <label for="count" class="col-form-label">Count</label>
 		          <input type="text" class="form-control" id="count" formControlName="count" placeholder="Count">
-		          <!-- <p *ngIf="submitted && projectForm.get('duration').hasError('required')" class="error-msg">
-		              Duration is required.
-		          </p> -->
+		          <p *ngIf="submitted && projectForm.get('vacancies').get('count').hasError('required')" class="error-msg">
+		              Count is required.
+		          </p>
 	          </div>
 	        </div>
         </div>
         <span>Add</span>
+      </div> -->
+
+      <!--vacancies-->
+      <div class="form-group row">
+        <label for="domain" class="col-sm-4 col-form-label">Vacancies</label>
+        <div formArrayName="vacancies" *ngFor="let vacancy of projectForm.get('vacancies').controls; let i = index; ">
+          <div [formGroupName]="i">
+            <span (click)="removeVacancy(i)" [hidden]="i === 0">Remove</span>
+            <div class="col-sm-8">
+              <div>
+                <label for="domain" class="col-form-label">Domain</label>
+                <select class="form-control" id="domain" formControlName="domain">
+                  <option [selected]="true">Select Domain</option>
+                  <option *ngFor="let name of domains" [ngValue]="name">{{name}}</option>
+                </select>
+                <p *ngIf="submitted && projectForm.get('vacancies').controls[i].get('domain').hasError('required')" class="error-msg">
+                    Domain is required.
+                </p>
+              </div>
+              <div>
+                <label for="count" class="col-form-label">Count</label>
+                <input type="number" class="form-control" id="count" formControlName="count" placeholder="Count">
+                <p *ngIf="submitted && projectForm.get('vacancies').controls[i].get('count').hasError('required')" class="error-msg">
+                    Count is required.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span (click)="addVacancy()">Add</span>
       </div>
 
       <!--members-->
@@ -77,11 +107,11 @@
       	<label for="members" class="col-sm-4 col-form-label">Members</label>
       	<div class="col-sm-8">
 	      	<select class="form-control" id="members" formControlName="members" multiple>
-	          <option *ngFor="let name of domains" [ngValue]="name">{{name}}</option>
+            <option *ngFor="let user of users" [ngValue]="user._id">{{user.name}}</option>
 	        </select>
-	        <!-- <p *ngIf="submitted && projectForm.get('duration').hasError('required')" class="error-msg">
-              Duration is required.
-          </p> -->
+	        <p *ngIf="submitted && projectForm.get('members').hasError('required')" class="error-msg">
+              Member is required.
+          </p>
         </div>
       </div>
 
@@ -89,8 +119,8 @@
       <div class="form-group row">
         <label for="technology" class="col-sm-4 col-form-label">Technology</label>
         <div class="col-sm-8">
-          <select class="form-control" id="technology" formControlName="technology">
-            <option *ngFor="let name of technologies" [selected]="selectedTechnology === name" [ngValue]="name" multiple>{{name}}</option>
+          <select class="form-control" id="technology" formControlName="technology" multiple>
+            <option *ngFor="let name of technologies" [selected]="selectedTechnology === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && projectForm.get('technology').hasError('required')" class="error-msg">
               Technology is required.
@@ -103,12 +133,8 @@
         <label for="contactPerson" class="col-sm-4 col-form-label">Contact Person</label>
         <div class="col-sm-8">
           <select class="form-control" id="contactPerson" formControlName="contactPerson">
-            <option [selected]="!selectedContactPerson">Select Contact Person</option>
-            <option *ngFor="let name of contactPersons" [selected]="selectedContactPerson === name" [ngValue]="name">{{name}}</option>
+            <option *ngFor="let user of users" [selected]="selectedContactPerson === user._id || user._id == userId" [ngValue]="user._id">{{user.name}}</option>
           </select>
-          <p *ngIf="submitted && projectForm.get('contactPerson').hasError('required')" class="error-msg">
-              Contact Person is required.
-          </p>
         </div>
       </div>
 

@@ -1,8 +1,12 @@
+<!-- shown in meeting detail page-->
 <div [hidden]="showSnapshot">
   <h2 class="page-heading">Meetings</h2>
-  <a class="btn btn-primary" [routerLink]="['create', 'meeting']">Book Room</a>
+  <a class="btn btn-primary" [routerLink]="['create']">Book Room</a>
   <div class="meeting-list-wrapper">
-    <table class="table table-striped">
+
+    <p [hidden]="meetings.length !== 0">No meetings available.</p>
+
+    <table class="table table-striped" [hidden]="meetings.length === 0">
       <thead> 
         <tr>
           <th>Title</th> 
@@ -25,10 +29,12 @@
           <td><span>{{meeting.slots[0].fromTime | date: 'hh:mm a'}} </span><span *ngIf="meeting.slots[0].toTime"> - {{meeting.slots[0].toTime | date: 'hh:mm a'}}</span></td>
           <td>{{meeting.bookBy.name}}</td>
           <td>
-            <a class="btn btn-primary" [routerLink]="['edit', meeting._id]">Edit</a>
+            <a class="btn btn-primary" [routerLink]="['edit', meeting._id]" *ngIf="(currentUser.role === 'admin') || (currentUser._id === meeting.bookBy._id)">Edit</a>
+            <button class="btn btn-primary" [disabled]="true" *ngIf="(currentUser.role !== 'admin') && (currentUser._id !== meeting.bookBy._id)">Edit</button>
           </td>
           <td>
-            <span class="btn btn-primary" (click)="deleteMeeting(meeting._id)" >Delete</span>
+            <span class="btn btn-primary" (click)="deleteMeeting(meeting._id)" *ngIf="(currentUser.role === 'admin') || (currentUser._id === meeting.bookBy._id)">Delete</span>
+            <button class="btn btn-primary" [disabled]="true" *ngIf="(currentUser.role !== 'admin') && (currentUser._id !== meeting.bookBy._id)">Delete</button>
           </td>
         </tr>
       </tbody> 
@@ -36,6 +42,7 @@
   </div>
 </div>
 
+<!-- shown in home page-->
 <div [hidden]="!showSnapshot">
   <div class="heading">
     <h3>Upcoming Meetings</h3>
@@ -43,6 +50,9 @@
   </div>
 
   <div class="snapshot-content">
+
+    <p [hidden]="meetings.length !== 0">No meetings available.</p>
+
     <div class="row" *ngFor="let meeting of meetings let i = index " [hidden]="i >= 4">
       <div class="col-xs-4">
         <span>{{meeting.location?.location}}</span>

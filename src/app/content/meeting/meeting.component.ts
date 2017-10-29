@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractCon
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
 
-import { CommonService, HelperService, MeetingRoomService } from '../../_services';
-import { MeetingRoom } from '../../_interfaces';
+import { CommonService, HelperService, MeetingRoomService, UserService } from '../../_services';
+import { MeetingRoom, User } from '../../_interfaces';
 
 @Component({
   selector: 'app-meeting',
@@ -20,6 +20,7 @@ export class MeetingComponent implements OnInit {
   public meetingId: number;
   public meetingInfo: MeetingRoom;
   public selectedLocation: string = '';
+  public selectedBookedBy: string = '';
   public setFromDate: string = '';
   public setToDate: string = '';
   public setFromTime: string = '';
@@ -36,19 +37,24 @@ export class MeetingComponent implements OnInit {
   public source: string = "";
   public roomList: Array<{}> = [];
   public slotBookedDetails: Array<{}> = [];
+  public users: User[] = [];
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
         private commonService: CommonService,
         private helperService: HelperService,
-        private meetingRoomService: MeetingRoomService) {
+        private meetingRoomService: MeetingRoomService,
+        private userService: UserService) {
   }
 
   ngOnInit() {
     this.getParamId();
     this.getAllRoom();
+    this.getAllUsers();
     this.buildMeetingForm();
+
+    this.source = (location.href.indexOf('meeting') !== -1) ? 'meeting' : '';
 
     this.userId = (this.commonService.getUserCookies())._id;
   }
@@ -58,7 +64,6 @@ export class MeetingComponent implements OnInit {
     this.route.params.subscribe(
       (params : Params) => {
         this.meetingId = params["id"];
-        this.source = params["source"];
         if(this.meetingId) {
           this.getMeetingInfo(this.meetingId);
         }
@@ -89,6 +94,15 @@ export class MeetingComponent implements OnInit {
         });
   }
 
+  //method to get user list
+  getAllUsers() {
+    this.userService.getAll()
+      .subscribe(
+        users => { 
+          this.users = users;
+        });
+  }
+
   //method to create meeting form - reactive way
   buildMeetingForm(): void {
     //initialize our form 
@@ -101,7 +115,7 @@ export class MeetingComponent implements OnInit {
         toDate: ['', []],
         fromTime: ['', [Validators.required]],
         toTime: ['', [Validators.required]],
-      }, { validator: this.helperService.dateCompare }),
+      }, { validator: this.helperService.dateTimeCompare }),
       bookBy: ['', []],
     });
 
@@ -115,6 +129,7 @@ export class MeetingComponent implements OnInit {
       //prefill the form 
       let meetingObj = this.formatMeeting(this.meetingInfo[0]);
       this.selectedLocation = meetingObj.location;
+      this.selectedBookedBy = meetingObj.bookBy;
       this.setFromDate = this.helperService.getFormattedDate(meetingObj.slots.fromDate);
       if(meetingObj.slots.toDate) {
         this.setToDate = this.helperService.getFormattedDate(meetingObj.slots.toDate);
@@ -203,10 +218,13 @@ export class MeetingComponent implements OnInit {
 
   //method to set error messages
   setError(error) {
-    const body = JSON.parse(error['_body']);
+    let body = null;
+    if(error['_body']) {
+      body = JSON.parse(error['_body']);
+    }
     if(body && body.alreadyBookedSlots) {
       this.roomAlreadyBookedError = true;
-      this.slotBookedDetails = body.alreadyBookedSlots;
+      this.slotBookedDetails = body.alreadyBookedSlots[0];
     } else if(error.status === 500) {
       this.serverError = true;
     }
