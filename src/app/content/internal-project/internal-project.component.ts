@@ -135,6 +135,16 @@ export class InternalProjectComponent implements OnInit {
     control.removeAt(index);
   }
 
+  generateMemberArray(memberDetails) {
+    let membersArr = [];
+    for(let i = 0; i < memberDetails.length; i++) {
+      membersArr.push({
+        member: memberDetails[i]
+      });
+    }
+    return membersArr;
+  }
+
   //method to handle form submission
   onSubmit(isValid: boolean) {
     this.submitted = true;
@@ -143,43 +153,42 @@ export class InternalProjectComponent implements OnInit {
     this.project = this.projectForm.value;
     if(isValid) {
       this.loading = true;
+      this.project.members = (this.project.members) ? this.generateMemberArray(this.project.members) : [];
+
       if(!this.projectId) {
         this.message = "Project added successfully";
-        console.log(this.project);
         //if project id not present then call to add project method
-      // this.projectService.create(this.project)
-      // .subscribe(
-      //   data => {
-      //     this.successMsg = true;
-      //     setTimeout(() => {
-      //       this.loading = false;
-      //       this.commonService.notifyHeader();
-      //       this.successMsg = false;
-      //       this.router.navigate(['/login']);
-      //     }, 3000);
-      //   },
-      //   error => {
-      //       this.loading = false;
-      //       this.serverError = true;
-      //   });
+        this.projectService.create(this.project)
+        .subscribe(
+          data => {
+            this.successMsg = true;
+            setTimeout(() => {
+              this.loading = false;
+              this.successMsg = false;
+              this.router.navigate(['/internal-project']);
+            }, 3000);
+          },
+          error => {
+              this.loading = false;
+              this.serverError = true;
+          });
       } else {
         this.message = "Project edited successfully";
-
         //if project id present then call to edit project method
-      // this.projectService.update(this.projectId, this.project)
-      // .subscribe(
-      //   data => {
-      //     this.successMsg = true;
-      //     setTimeout(() => {
-      //       this.commonService.notifyHeader();
-      //       this.successMsg = false;
-      //       this.router.navigate(['/home']);
-      //     }, 3000);
-      //   },
-      //   error => {
-      //       this.loading = false;
-      //       this.serverError = true;
-      //   });
+        this.projectService.update(this.projectId, this.project)
+        .subscribe(
+          data => {
+            this.successMsg = true;
+            setTimeout(() => {
+              this.loading = false;
+              this.successMsg = false;
+              this.router.navigate(['/internal-project']);
+            }, 3000);
+          },
+          error => {
+              this.loading = false;
+              this.serverError = true;
+          });
       }
     }
 

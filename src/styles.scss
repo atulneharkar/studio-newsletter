@@ -292,20 +292,24 @@ article.navigation-links p {
 /* ==========================================================================
    Event List Section
    ========================================================================== */
-.eventlist-section .event-desc {
+.eventlist-section .event-desc,
+.internal-projects-section .project-desc {
     padding: 15px;
 }
 
-.eventlist-section .row:last-child .event-desc {
+.eventlist-section .row:last-child .event-desc,
+.internal-projects-section .row:last-child .project-desc {
     margin-bottom: 0;
 }
 
-.eventlist-section .event-desc h4 {
+.eventlist-section .event-desc h4,
+.internal-projects-section .project-desc h4 {
     padding-bottom: 10px;
     border-bottom: 1px solid #cecece;
 }
 
-.eventlist-section .event-desc p {
+.eventlist-section .event-desc p,
+.internal-projects-section .project-desc p {
     margin: 10px 0;
 }
 
