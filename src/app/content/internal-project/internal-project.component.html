@@ -47,7 +47,7 @@
 
       <!--vacancies-->
       <div class="form-group row">
-        <label for="domain" class="col-sm-4 col-form-label">Vacancies</label>
+        <label class="col-sm-4 col-form-label">Vacancies</label>
         <div formArrayName="vacancies" *ngFor="let vacancy of projectForm.get('vacancies').controls; let i = index; ">
           <div [formGroupName]="i">
             <span (click)="removeVacancy(i)" [hidden]="i === 0">Remove</span>
@@ -55,7 +55,7 @@
               <div>
                 <label for="domain" class="col-form-label">Domain</label>
                 <select class="form-control" id="domain" formControlName="domain">
-                  <option [selected]="true">Select Domain</option>
+                  <option value="">Select Domain</option>
                   <option *ngFor="let name of domains" [ngValue]="name">{{name}}</option>
                 </select>
                 <p *ngIf="submitted && projectForm.get('vacancies').controls[i].get('domain').hasError('required')" class="error-msg">
@@ -73,32 +73,58 @@
           </div>
         </div>
         <span (click)="addVacancy()">Add</span>
+        <p class="error-msg" *ngIf="submitted && projectForm.get('vacancies').hasError('duplicate-createVacancies')">
+          Please select unique domains.
+        </p>
       </div>
 
       <!--members-->
       <div class="form-group row">
-      	<label for="members" class="col-sm-4 col-form-label">Members</label>
-      	<div class="col-sm-8">
-	      	<select class="form-control" id="members" formControlName="members" multiple>
-            <option *ngFor="let user of users" [ngValue]="user._id">{{user.name}}</option>
-	        </select>
-	        <p *ngIf="submitted && projectForm.get('members').hasError('required')" class="error-msg">
-              Member is required.
-          </p>
+        <label for="members" class="col-sm-4 col-form-label">Members</label>
+        <div formArrayName="members" *ngFor="let member of projectForm.get('members').controls; let i = index; ">
+          <div [formGroupName]="i">
+            <span (click)="removeMember(i)" [hidden]="i === 0">Remove</span>
+            <div class="col-sm-8">
+              <div>
+                <select class="form-control" id="members" formControlName="member">
+                  <option value="">Select Members</option>
+                  <option *ngFor="let user of users" [ngValue]="user._id">{{user.name}}</option>
+                </select>
+                <p *ngIf="submitted && projectForm.get('members').controls[i].get('member').hasError('required')" class="error-msg">
+                    Member is required.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+        <span (click)="addMember()">Add</span>
+        <p class="error-msg" *ngIf="submitted && projectForm.get('members').hasError('duplicate-createMembers')">
+          Please select unique members.
+        </p>
       </div>
 
-      <!--technology-->
       <div class="form-group row">
         <label for="technology" class="col-sm-4 col-form-label">Technology</label>
-        <div class="col-sm-8">
-          <select class="form-control" id="technology" formControlName="technology" multiple>
-            <option *ngFor="let name of technologies" [selected]="selectedTechnology === name" [ngValue]="name">{{name}}</option>
-          </select>
-          <p *ngIf="submitted && projectForm.get('technology').hasError('required')" class="error-msg">
-              Technology is required.
-          </p>
+        <div formArrayName="technologies" *ngFor="let technology of projectForm.get('technologies').controls; let i = index; ">
+          <div [formGroupName]="i">
+            <span (click)="removeTechnology(i)" [hidden]="i === 0">Remove</span>
+            <div class="col-sm-8">
+              <div>
+                <select class="form-control" id="technology" formControlName="technology">
+                  <option value="">Select Technology</option>
+                  <option *ngFor="let technology of technologies" [ngValue]="technology">{{technology}}</option>
+                </select>
+                <p *ngIf="submitted && projectForm.get('technologies').controls[i].get('technology').hasError('required')" class="error-msg">
+                    Technology is required.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+        <span (click)="addTechnology()">Add</span>
+        <p class="error-msg" *ngIf="submitted && projectForm.get('technologies').hasError('duplicate-createTechnology')">
+          Please select unique technology.
+        </p>
       </div>
 
       <!--contact person-->
@@ -106,8 +132,12 @@
         <label for="contactPerson" class="col-sm-4 col-form-label">Contact Person</label>
         <div class="col-sm-8">
           <select class="form-control" id="contactPerson" formControlName="contactPerson">
-            <option *ngFor="let user of users" [selected]="selectedContactPerson === user._id || user._id == userId" [ngValue]="user._id">{{user.name}}</option>
+            <option value="">Please Select</option>
+            <option *ngFor="let user of users" [selected]="selectedContactPerson === user._id" [ngValue]="user._id">{{user.name}}</option>
           </select>
+          <p *ngIf="submitted && projectForm.get('contactPerson').hasError('required')" class="error-msg">
+              Contact Person is required.
+          </p>
         </div>
       </div>
 
@@ -116,7 +146,7 @@
         <label for="projectType" class="col-sm-4 col-form-label">Project type</label>
         <div class="col-sm-8">
           <select class="form-control" id="projectType" formControlName="projectType">
-            <option [selected]="!selectedContactPerson">Select Project Type</option>
+            <option value="">Select Project Type</option>
             <option *ngFor="let name of projectTypes" [selected]="selectedProjectType === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && projectForm.get('projectType').hasError('required')" class="error-msg">

@@ -12,7 +12,7 @@
         <p>{{project.description}}</p>
         <p>Project Type - {{project.projectType}}</p>
         <p>Estimation - {{project.estimation}}</p>
-        <p>Contact Person - {{project.contactPerson.name}}</p>
+        <p>Contact Person - {{project.contactPerson?.name}}</p>
         <div>
           <!--technologies-->
         </div>
@@ -24,7 +24,7 @@
         </div>
         <div *ngIf="(currentUser.role === 'admin') || (currentUser._id === project.contactPerson._id)">
           <a class="btn btn-primary" [routerLink]="['edit', project._id]">Edit</a>
-          <span class="btn btn-primary" (click)="deleteProject(event._id)">Delete</span>
+          <span class="btn btn-primary" (click)="deleteProject(project._id)">Delete</span>
         </div>
         <div *ngIf="(currentUser.role !== 'admin') && (currentUser._id !== project.contactPerson._id)">
           <button class="btn btn-primary" [disabled]="true">Edit</button>

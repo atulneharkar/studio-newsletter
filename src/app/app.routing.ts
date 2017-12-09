@@ -5,8 +5,6 @@ import { LoginComponent } from './login';
 import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-password';
 import { UserComponent, UserListComponent } from './content/user';
 import { EventComponent, EventListComponent } from './content/event';
-import { ClientComponent, ClientListComponent } from './content/client';
-import { RecognitionComponent, RecognitionListComponent } from './content/recognition';
 import { MeetingComponent, MeetingListComponent } from './content/meeting';
 import { InternalProjectComponent, InternalProjectListComponent } from './content/internal-project';
 
@@ -45,11 +43,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'clients',
-    component: ClientListComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'events',
     component: EventListComponent,
     canActivate: [AuthGuard]
@@ -62,11 +55,6 @@ const routes: Routes = [
   {
     path: 'events/edit/:id',
     component: EventComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'recognition',
-    component: RecognitionListComponent,
     canActivate: [AuthGuard]
   },
   {

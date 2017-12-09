@@ -52,7 +52,7 @@ export class EventComponent implements OnInit {
     this.userId = (this.commonService.getUserCookies())._id;
   }
 
-  //method to fetch meeting id from url
+  //method to fetch event id from url
   getParamId() {
     this.route.params.subscribe(
       (params : Params) => {
@@ -64,7 +64,7 @@ export class EventComponent implements OnInit {
     );
   }
 
-  //get meeting information from database based on meeting id
+  //get event information from database based on event id
   getEventInfo(id: number) {
     this.eventService.getById(id)
       .subscribe(
@@ -85,7 +85,7 @@ export class EventComponent implements OnInit {
         });
   }
 
-  //method to create meeting form - reactive way
+  //method to create event form - reactive way
   buildEventForm(): void {
     //initialize our form 
     this.eventForm = this._fb.group({
@@ -98,13 +98,12 @@ export class EventComponent implements OnInit {
         fromTime: ['', [Validators.required]],
         toTime: ['', [Validators.required]],
       }, { validator: this.helperService.dateTimeCompare }),
-      organiser: ['', []],
+      organiser: ['', [Validators.required]],
     });
 
     //pre fill the values for editing form
-
     if(this.eventInfo) {
-      //set page title and button text if user is editing meeting
+      //set page title and button text if user is editing event
       this.title = 'Edit Event';
       this.buttonText = 'Update';
 
@@ -176,7 +175,7 @@ export class EventComponent implements OnInit {
 
   }
 
-  //format meeting object
+  //format event object
   formatEvent(event) {
     return {
       title: event.title,

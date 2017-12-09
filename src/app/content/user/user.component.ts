@@ -243,6 +243,15 @@ export class UserComponent implements OnInit {
         }, 3000);
       }, err => {
         this.uploadError = true;
+        setTimeout(() => {
+          this.commonService.notifyHeader();
+          this.successMsg = false;
+          if(userToken) {
+            this.router.navigate(['/login']);
+          } else {
+            this.router.navigate(['/home']);
+          }
+        }, 3000);
       })
   }
 

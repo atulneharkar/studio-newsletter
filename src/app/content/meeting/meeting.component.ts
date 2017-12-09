@@ -116,7 +116,7 @@ export class MeetingComponent implements OnInit {
         fromTime: ['', [Validators.required]],
         toTime: ['', [Validators.required]],
       }, { validator: this.helperService.dateTimeCompare }),
-      bookBy: ['', []],
+      bookBy: ['', [Validators.required]],
     });
 
     //pre fill the values for editing form

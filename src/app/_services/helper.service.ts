@@ -37,6 +37,27 @@ export class HelperService {
     }
   };
 
+  //method to check if duplicate value is present
+  checkDuplicate(fieldName) {
+    return (c: AbstractControl): {[key: string]: any} => {
+      let valueArr;
+      if(fieldName === 'createVacancies') {
+        valueArr = c.value.map(function(item){ return item.domain });
+      } else if(fieldName === 'createMembers') {
+        valueArr = c.value.map(function(item){ return item.member });
+      } else if(fieldName === 'createTechnology') {
+        valueArr = c.value.map(function(item){ return item.technology });
+      }
+      let isDuplicate = valueArr.some(function(item, idx){ 
+        return valueArr.indexOf(item) != idx 
+      });
+      if (isDuplicate)
+        return { ["duplicate-" + fieldName]: true };
+
+      return null;
+    }
+  }
+
   //format date
   getFormattedDate(date) {
     let d = new Date(date);

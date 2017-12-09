@@ -83,7 +83,7 @@
         <label for="designation" class="col-sm-4 col-form-label">Designation</label>
         <div class="col-sm-8">
           <select class="form-control" id="designation" formControlName="designation">
-            <option [selected]="!selectedDesignation" [hidden]="userId">Select Designation</option>
+            <option value="">Select Designation</option>
             <option *ngFor="let name of designations" [selected]="selectedDesignation === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && userForm.get('designation').hasError('required')" class="error-msg">
@@ -133,7 +133,7 @@
         <label for="domain" class="col-sm-4 col-form-label">Domain</label>
         <div class="col-sm-8">
           <select class="form-control" id="domain" formControlName="domain">
-            <option [selected]="!selectedDomain" [hidden]="userId">Select Domain</option>
+            <option value="">Select Domain</option>
             <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && userForm.get('domain').hasError('required')" class="error-msg">

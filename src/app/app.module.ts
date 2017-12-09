@@ -39,11 +39,9 @@ import {
     HomeComponent
 } from './content/home';
 import { UserComponent, UserListComponent } from './content/user';
-import { ClientComponent, ClientListComponent } from './content/client';
 import { EventComponent, EventListComponent } from './content/event';
 import { MeetingComponent, MeetingListComponent } from './content/meeting';
 import { InternalProjectComponent, InternalProjectListComponent } from './content/internal-project';
-import { RecognitionComponent, RecognitionListComponent } from './content/recognition';
 import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-password';
 import { CalcExpPipe } from './_pipes';
 
@@ -57,18 +55,14 @@ import { CalcExpPipe } from './_pipes';
     MainCarouselComponent,
     MainNavigationComponent,
     UserComponent,
-    ClientComponent,
     FeedbackCarouselComponent,
     EventComponent,
     UserListComponent,
     EventListComponent,
-    ClientListComponent,
     MeetingComponent,
     MeetingListComponent,
     InternalProjectComponent,
-    RecognitionComponent,
     InternalProjectListComponent,
-    RecognitionListComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     HomeComponent,

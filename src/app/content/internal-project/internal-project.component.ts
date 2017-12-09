@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
+import { AbstractControl } from '@angular/forms';
 
 import { ProjectService, CommonService, HelperService, UserService } from '../../_services';
 import { Project, User } from '../../_interfaces';
@@ -18,14 +19,12 @@ export class InternalProjectComponent implements OnInit {
   private project: any;
   public loading = false;
   public projectId: number;
-  public projectInfo: Project;
+  public projectInfo: Project = null;
   public technologies: any[] = ['Oracle', 'Node JS', 'Angular', 'React'];
   public projectTypes: any[] = ['FI', 'RFP', 'POC'];
   public domains: any[] = ['UX', 'VD', 'FE', 'BA'];
-  public selectedDesignation: string = '';
   public selectedContactPerson: string = '';
   public selectedProjectType: string = '';
-  public selectedTechnology: string = '';
   public successMsg: boolean = false;
   public serverError: boolean = false;
   public message: string = "";
@@ -34,7 +33,6 @@ export class InternalProjectComponent implements OnInit {
   public buttonText: string = 'Save';
   public users: User[] = [];
   public userId: number;
-  private vacancies: any[] = [];
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
@@ -58,8 +56,23 @@ export class InternalProjectComponent implements OnInit {
     this.route.params.subscribe(
       (params : Params) => {
         this.projectId = params["id"];
+        if(this.projectId) {
+          this.getProjectInfo(this.projectId);
+        }
       }
     );
+  }
+
+  //get project information from database based on project id
+  getProjectInfo(id: number) {
+    this.projectService.getById(id)
+      .subscribe(
+        data => {
+          this.projectInfo = data;
+          this.buildProjectForm();
+        },
+        error => {
+        });
   }
 
   //method to get user list
@@ -92,57 +105,32 @@ export class InternalProjectComponent implements OnInit {
           //Validators.pattern(/^[a-zA-Z]*$/)
         ]
       ],
-      vacancies: this._fb.array([ this.createVacancies() ]),
-      members: ['', [
-          Validators.required,
-          //Validators.pattern(/^[a-zA-Z]*$/)
-        ]
-      ],
-      contactPerson: [''],
-      technology: ['', [Validators.required]],
+      vacancies: this.getStructure('createVacancies'),
+      members: this.getStructure('createMembers'),
+      contactPerson: ['', [Validators.required]],
+      technologies: this.getStructure('createTechnology'),
       projectType: ['', [Validators.required]]
     });
 
     //pre fill the values for editing form
-    if(this.projectId) {
+    if(this.projectInfo) {
       //set page title and button text if user is editing project
-      // this.title = 'Edit Project';
-      // this.buttonText = 'Update';
+      this.title = 'Edit Project';
+      this.buttonText = 'Update';
 
       //prefill the form 
-    //   this.selectedDesignation = userObj.designation;
+      let projectObj = this.formatProject(this.projectInfo[0]);
+      this.selectedContactPerson = projectObj.contactPerson;
+      this.selectedProjectType = projectObj.projectType;
 
-    //   (<FormGroup>this.projectForm)
-    //         .setValue(userObj, { onlySelf: true });
+      this.patchValues(projectObj.vacancies, 'vacancies');
+      this.patchValues(projectObj.technologies, 'technologies');
+      this.patchValues(projectObj.members, 'members');
+
+      (<FormGroup>this.projectForm)
+            .setValue(projectObj, { onlySelf: true });
      }
 
-  }
-
-  createVacancies(): FormGroup {
-    return this._fb.group({
-      domain: ['', [Validators.required]],
-        count: ['', [Validators.required]]
-    });
-  }
-
-  addVacancy() {
-    const control = <FormArray>this.projectForm.controls['vacancies'];
-    control.push(this.createVacancies());
-  }
-
-  removeVacancy(index: number) {
-    const control = <FormArray>this.projectForm.controls['vacancies'];
-    control.removeAt(index);
-  }
-
-  generateMemberArray(memberDetails) {
-    let membersArr = [];
-    for(let i = 0; i < memberDetails.length; i++) {
-      membersArr.push({
-        member: memberDetails[i]
-      });
-    }
-    return membersArr;
   }
 
   //method to handle form submission
@@ -153,7 +141,6 @@ export class InternalProjectComponent implements OnInit {
     this.project = this.projectForm.value;
     if(isValid) {
       this.loading = true;
-      this.project.members = (this.project.members) ? this.generateMemberArray(this.project.members) : [];
 
       if(!this.projectId) {
         this.message = "Project added successfully";
@@ -170,7 +157,7 @@ export class InternalProjectComponent implements OnInit {
           },
           error => {
               this.loading = false;
-              this.serverError = true;
+              this.setError(error);
           });
       } else {
         this.message = "Project edited successfully";
@@ -187,11 +174,105 @@ export class InternalProjectComponent implements OnInit {
           },
           error => {
               this.loading = false;
-              this.serverError = true;
+              this.setError(error);
           });
       }
     }
 
   }
+
+  getStructure(fieldName) {
+    if(!this.projectId) {
+      return this._fb.array([ this[fieldName]() ], this.helperService.checkDuplicate(fieldName));
+    } else {
+      return this._fb.array([  ], this.helperService.checkDuplicate(fieldName));
+    }
+  }
+
+  patchValues(data, fieldName) {
+    const control = <FormArray>this.projectForm.controls[fieldName];
+    data.forEach(values => {
+      control.push(this.patchValue(values))
+    })
+  }
+
+  patchValue(values) {
+    let obj = {};
+    for (var key in values) {
+      obj[key] = values[key];
+    }
+    return this._fb.group(obj)    
+  }
+
+  createVacancies(): FormGroup {
+    return this._fb.group({
+      domain: ['', [Validators.required]],
+      count: ['', [Validators.required]]
+    });
+  }
+
+  addVacancy() {
+    const control = <FormArray>this.projectForm.controls['vacancies'];
+    control.push(this.createVacancies());
+  }
+
+  removeVacancy(index: number) {
+    const control = <FormArray>this.projectForm.controls['vacancies'];
+    control.removeAt(index);
+  }
+
+  createMembers(): FormGroup {
+    return this._fb.group({
+      member: ['', [Validators.required]]
+    });
+  }
+
+  addMember() {
+    const control = <FormArray>this.projectForm.controls['members'];
+    control.push(this.createMembers());
+  }
+
+  removeMember(index: number) {
+    const control = <FormArray>this.projectForm.controls['members'];
+    control.removeAt(index);
+  }
+
+  createTechnology(): FormGroup {
+    return this._fb.group({
+      technology: ['', [Validators.required]]
+    });
+  }
+
+  addTechnology() {
+    const control = <FormArray>this.projectForm.controls['technologies'];
+    control.push(this.createTechnology());
+  }
+
+  removeTechnology(index: number) {
+    const control = <FormArray>this.projectForm.controls['technologies'];
+    control.removeAt(index);
+  }
+
+  //format project object
+  formatProject(project) {
+    return {
+      name: project.name,
+      description: project.description,
+      estimation: project.estimation,
+      vacancies: project.vacancies,
+      members: project.members,
+      technologies: project.technologies,
+      projectType: project.projectType,
+      contactPerson: project.contactPerson._id
+    };
+  }
+
+  //method to set error messages
+  setError(error) {
+    if(error.status === 500) {
+      this.serverError = true;
+    }
+  }
+
 
 }

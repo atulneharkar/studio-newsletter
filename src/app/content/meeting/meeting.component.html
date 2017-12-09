@@ -36,7 +36,7 @@
         <div class="col-sm-12 col-xs-12">
             <label for="location">Location</label>
             <select class="form-control" id="location" formControlName="location">
-              <option [selected]="!selectedLocation" [hidden]="meetingId">Select Location</option>
+              <option value="">Select Location</option>
               <option *ngFor="let list of roomList" [selected]="selectedLocation === list.location" [ngValue]="list._id">{{list.location}}</option>
             </select>
             <p *ngIf="submitted && meetingForm.get('location').hasError('required')" class="error-msg">
@@ -59,7 +59,7 @@
               <label for="to-date">To</label>
               <input type="date" class="form-control" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
             </div>
-            <p class="error-msg" *ngIf="submitted && meetingForm.get('slots').hasError('dateError')">
+            <p class="error-msg" *ngIf="submitted && meetingForm.get('slots').hasError('duplicateMemberEntry')">
               From date should be less than To date.
             </p>
           </div>
@@ -94,15 +94,19 @@
         <div class="col-sm-12 col-xs-12">
           <label for="bookBy">Booked By</label>
           <select class="form-control" id="bookBy" formControlName="bookBy">
-            <option *ngFor="let user of users" [selected]="selectedBookedBy === user._id || user._id === userId" [ngValue]="user._id">{{user.name}}</option>
+            <option value="">Please Select</option>
+            <option *ngFor="let user of users" [selected]="selectedBookedBy === user._id" [ngValue]="user._id">{{user.name}}</option>
           </select>
+          <p class="error-msg" *ngIf="submitted && meetingForm.get('bookBy').hasError('required')">
+            Booked By is required.
+          </p>
         </div>
       </div>
     </div>
 
     <!--phone unique error-->
     <p *ngIf="roomAlreadyBookedError" class="error-msg">
-      This room is already booked by {{slotBookedDetails.bookedSlots._id}} (date: {{slotBookedDetails.bookedSlots.fromDate | date: 'MM/dd/yyyy'}} <span *ngIf="slotBookedDetails.bookedSlots.toDate"> - {{slotBookedDetails.bookedSlots.toDate | date: 'MM/dd/yyyy'}}</span>, time: {{slotBookedDetails.bookedSlots.fromTime | date: 'hh:mm a'}} <span *ngIf="slotBookedDetails.bookedSlots.toTime"> - {{slotBookedDetails.bookedSlots.toTime | date: 'hh:mm a'}}</span>).
+      This room is already booked by {{slotBookedDetails.bookedBy.name}} (date: {{slotBookedDetails.bookedSlots.fromDate | date: 'MM/dd/yyyy'}} <span *ngIf="slotBookedDetails.bookedSlots.toDate"> - {{slotBookedDetails.bookedSlots.toDate | date: 'MM/dd/yyyy'}}</span>, time: {{slotBookedDetails.bookedSlots.fromTime | date: 'hh:mm a'}} <span *ngIf="slotBookedDetails.bookedSlots.toTime"> - {{slotBookedDetails.bookedSlots.toTime | date: 'hh:mm a'}}</span>) on slotBookedDetails.bookedDate.
     </p>
 
     <!--server connection error-->

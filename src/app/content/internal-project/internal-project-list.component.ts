@@ -37,7 +37,7 @@ export class InternalProjectListComponent implements OnInit {
   }
 
   //method to delete meeting
-  deleteMeeting(id: number) {
+  deleteProject(id: number) {
     this.message = "Are you sure you want to delete meeting?";
     this.projectId = id;
     this.showModal = true;

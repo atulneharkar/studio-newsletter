@@ -13,11 +13,8 @@
       <ul class="nav navbar-nav" [hidden]="!userInfo">
         <li [routerLinkActive]="['active']"><a [routerLink]="['/internal-project']">Internal Projects</a></li>
         <li [routerLinkActive]="['active']"><a [routerLink]="['/users']">Studio Folks</a></li>
-        <!-- <li [routerLinkActive]="['active']"><a [routerLink]="['/rfp']">Project Archives</a></li> -->
-        <!-- <li [routerLinkActive]="['active']"><a [routerLink]="['/clients']">Clients</a></li> -->
         <li [routerLinkActive]="['active']"><a [routerLink]="['/meeting']">Meetings</a></li>
         <li [routerLinkActive]="['active']"><a [routerLink]="['/events']">Events</a></li>
-        <!-- <li [routerLinkActive]="['active']"><a [routerLink]="['/awards']">Recognitions</a></li> -->
         <li class="edit-profile-mb">
           <a *ngIf="userInfo" class="btn btn-primary" [routerLink]="['users/edit', userInfo['_id']]">Edit Profile</a>
           <a (click)="logout()" class="btn btn-danger">Logout</a>

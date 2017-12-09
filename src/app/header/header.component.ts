@@ -30,8 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription = this.commonService.notifyObservable$.subscribe(() => {
       this.getUserInfo();
     });
-
-    this.checkUserStatus();
   }
 
   //method to get current route from the url
@@ -47,21 +45,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   getUserInfo() {
     this.userInfo = this.commonService.getUserCookies();
     this.ref.detectChanges();
-  }
-
-  //method to check if user's status is active otherwise logout the user
-  checkUserStatus() {
-    this.userService.getMyDetails()
-      .subscribe(
-        data => {
-          
-        },
-        error => {
-          const shouldNavigate = (this.currentUrl !== '/register' && this.currentUrl !== '/forgot-password' && this.currentUrl.indexOf('reset-password') === -1);
-          if(error.statusText === 'Unauthorized' && shouldNavigate) {
-            this.logout();
-          }
-        });
   }
 
   //method to logout the user

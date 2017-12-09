@@ -20,12 +20,12 @@ export class ProjectService {
 
   //method to get list of all projects
   getAll() {
-    return this.http.get(`${this.commonService.getDomainUrl()}/work/all`, this.commonService.getJwt()).map((response: Response) => response.json());
+    return this.http.get(`${this.commonService.getDomainUrl()}/work/all/all`, this.commonService.getJwt()).map((response: Response) => response.json());
   }
 
   //method to get meeting by id
   getById(id: number) {
-    return this.http.get(`${this.commonService.getDomainUrl()}/work/${id}`, this.commonService.getJwt()).map((response: Response) => response.json());
+    return this.http.get(`${this.commonService.getDomainUrl()}/work/all/${id}`, this.commonService.getJwt()).map((response: Response) => response.json());
   }
 
   //method to update meeting
