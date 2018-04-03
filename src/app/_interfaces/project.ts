@@ -8,7 +8,7 @@ export interface Project {
   	count: number
   }>
 	members: Array <{ userId: string, hours: number }>;
-	technology: string;
+	technologies: string;
 	contactPerson: string;
 	projectType: string;
 }

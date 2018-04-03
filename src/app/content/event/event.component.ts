@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractCon
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
 
-import { CommonService, HelperService, EventService, UserService } from '../../_services';
+import { CommonService, HelperService, EventService, UserService, FileUploadService } from '../../_services';
 import { Event, User } from '../../_interfaces';
 
 @Component({
@@ -34,12 +34,21 @@ export class EventComponent implements OnInit {
   public buttonText: string = 'Save';
   public source: string = "";
   public users: User[] = [];
+  public domains: any[] = ['UX', 'VD', 'QA', 'FE'];
+  public selectedInvitees: string = '';
+  private imageInfo: any;
+  private fileSize: number = 0;
+  public fileSizeError: boolean = false;
+  public uploadedFiles: Array<any> = [];
+  public uploadError: boolean = false;
+  public uploadFieldName = 'eventImage';
 
   constructor(private _fb: FormBuilder, 
         private router: Router,
         private route: ActivatedRoute,
         private commonService: CommonService,
         private helperService: HelperService,
+        private _fileUpload: FileUploadService,
         private eventService: EventService,
         private userService: UserService) {
   }
@@ -99,6 +108,9 @@ export class EventComponent implements OnInit {
         toTime: ['', [Validators.required]],
       }, { validator: this.helperService.dateTimeCompare }),
       organiser: ['', [Validators.required]],
+      notes: ['', [Validators.required]],
+      invitees: ['', [Validators.required]],
+      eventImage: ['', ''],
     });
 
     //pre fill the values for editing form
@@ -110,6 +122,7 @@ export class EventComponent implements OnInit {
       //prefill the form 
       let eventObj = this.formatEvent(this.eventInfo[0]);
       this.selectedOrganiser = eventObj.organiser;
+      this.selectedInvitees = eventObj.invitees;
       this.setFromDate = this.helperService.getFormattedDate(eventObj.slots.fromDate);
       if(eventObj.slots.toDate) {
         this.setToDate = this.helperService.getFormattedDate(eventObj.slots.toDate);
@@ -142,12 +155,16 @@ export class EventComponent implements OnInit {
         this.eventService.create(this.event)
         .subscribe(
           data => {
-            this.successMsg = true;
-            setTimeout(() => {
-              this.loading = false;
-              this.successMsg = false;
-              this.router.navigate(['/events']);
-            }, 3000);
+            if(this.imageInfo) {
+              this.saveImage(this.imageInfo);
+            } else {
+              this.successMsg = true;
+              setTimeout(() => {
+                this.loading = false;
+                this.successMsg = false;
+                this.router.navigate(['/events']);
+              }, 3000);
+            }
           },
           error => {
             this.loading = false;
@@ -160,11 +177,15 @@ export class EventComponent implements OnInit {
         this.eventService.update(this.eventId, this.event)
         .subscribe(
           data => {
-            this.successMsg = true;
-            setTimeout(() => {
-              this.successMsg = false;
-              this.router.navigate(['/events']);
-            }, 3000);
+            if(this.imageInfo) {
+              this.saveImage(this.imageInfo);
+            } else {
+              this.successMsg = true;
+              setTimeout(() => {
+                this.successMsg = false;
+                this.router.navigate(['/events']);
+              }, 3000);
+            }
           },
           error => {
             this.loading = false;
@@ -173,6 +194,43 @@ export class EventComponent implements OnInit {
       }
     }
 
+  }
+
+  //capture uploaded file (profile pic)
+  profilePicChange(fieldName: string, fileList: FileList) {
+    this.fileSizeError = false;
+    // handle file changes
+    this.imageInfo = new FormData();
+    this.fileSize = fileList[0].size;
+
+    if (!fileList.length) return;
+
+    // append the files to FormData
+    Array
+      .from(Array(fileList.length).keys())
+      .map(x => {
+        this.imageInfo.append(fieldName, fileList[x], fileList[x].name);
+      });
+  }
+
+  //save uploaded file (profile pic)
+  saveImage(data, userToken = null) {
+    this._fileUpload.upload(data, userToken)
+      .take(1)
+      .subscribe(x => {
+        this.successMsg = true;
+        this.loading = false;
+        setTimeout(() => {
+          this.successMsg = false;
+          this.router.navigate(['/events']);
+        }, 3000);
+      }, err => {
+        this.uploadError = true;
+        setTimeout(() => {
+          this.successMsg = false;
+          this.router.navigate(['/events']);
+        }, 3000);
+      })
   }
 
   //format event object
@@ -187,7 +245,10 @@ export class EventComponent implements OnInit {
         fromTime: event.slots[0].fromTime,
         toTime: event.slots[0].toTime
       },
-      organiser: event.organiser._id
+      organiser: event.organiser._id,
+      invitees: event.invitees,
+      notes: event.notes,
+      eventImage: event.eventImage
     };
   }
 

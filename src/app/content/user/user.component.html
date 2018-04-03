@@ -3,19 +3,16 @@
     <h2 class="heading">{{title}}</h2>
     <form [formGroup]="userForm" enctype="multipart/form-data" novalidate (ngSubmit)="onSubmit(userForm.valid)">
 
-      <!--first name-->
+      <!--name-->
       <div class="form-group row">
         <label for="name" class="col-sm-4 col-form-label">Name</label>
         <div class="col-sm-8">
           <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
           <p *ngIf="submitted && userForm.get('name').hasError('required')" class="error-msg">
-              First name is required.
+            Name is required.
           </p>
           <p *ngIf="submitted && userForm.get('name').hasError('minlength')" class="error-msg">
             First name must be at least 2 characters long.
-          </p>
-          <p *ngIf="submitted && userForm.get('name').hasError('pattern')" class="error-msg">
-            Only alphabets are allowed.
           </p>
         </div>
       </div>
@@ -92,6 +89,20 @@
         </div>
       </div>
 
+      <!--domain-->
+      <div class="form-group row">
+        <label for="domain" class="col-sm-4 col-form-label">Domain</label>
+        <div class="col-sm-8">
+          <select class="form-control" id="domain" formControlName="domain">
+            <option value="">Select Domain</option>
+            <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
+          </select>
+          <p *ngIf="submitted && userForm.get('domain').hasError('required')" class="error-msg">
+              Domain is required.
+          </p>
+        </div>
+      </div>
+
       <!--date of birth-->
       <div class="form-group row">
         <label for="dob" class="col-sm-4 col-form-label">Date of Birth</label>
@@ -114,31 +125,30 @@
         </div>
       </div>
 
-      <!--previous experience-->
+      <!--skills-->
       <div class="form-group row">
-        <label for="previousExp" class="col-sm-4 col-form-label">Previous experience (eg 1.6)</label>
+        <label for="skills" class="col-sm-4 col-form-label">Skills</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="previousExp" formControlName="previousExp" placeholder="Previous experience">
-          <p *ngIf="submitted && userForm.get('previousExp').hasError('required')" class="error-msg">
-              Previous experience is required.
-          </p>
-          <p *ngIf="submitted && userForm.get('previousExp').hasError('pattern')" class="error-msg">
-            Only numbers and dot is allowed.
+          <input type="text" class="form-control" id="skills" formControlName="skills" placeholder="Skills">
+          <p *ngIf="submitted && userForm.get('skills').hasError('required')" class="error-msg">
+              skills is required.
           </p>
         </div>
       </div>
 
-      <!--domain-->
+      <!--visa-->
       <div class="form-group row">
-        <label for="domain" class="col-sm-4 col-form-label">Domain</label>
+        <label for="visa" class="col-sm-4 col-form-label">Visa (if any)</label>
         <div class="col-sm-8">
-          <select class="form-control" id="domain" formControlName="domain">
-            <option value="">Select Domain</option>
-            <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
-          </select>
-          <p *ngIf="submitted && userForm.get('domain').hasError('required')" class="error-msg">
-              Domain is required.
-          </p>
+          <input type="text" class="form-control" id="visa" formControlName="visa" placeholder="Visa">
+        </div>
+      </div>
+
+      <!--about-->
+      <div class="form-group row">
+        <label for="about" class="col-sm-4 col-form-label">About me</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="about" formControlName="about" placeholder="About me">
         </div>
       </div>
 

@@ -8,11 +8,13 @@ export interface User {
 	};
 	phone: string;
 	designation: string;
-	avatar: string;
-	role: string;
+	domain: string;
 	dob: string;
 	doj: string;
-	previousExp: string;
-	domain: string;
+	skills: string;
+	visa: string;
+	about: string;
+	avatar: string;
+	role: string;
 	status: string;
 }

@@ -9,4 +9,7 @@ export interface Event {
     toTime: string
   }>;
   organiser: string;
+  invitees: string;
+  image: string;
+  notes: string;
 }

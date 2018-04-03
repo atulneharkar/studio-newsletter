@@ -88,8 +88,7 @@ export class UserComponent implements OnInit {
     this.userForm = this._fb.group({
       name: ['', [
           Validators.required, 
-          Validators.minLength(2),
-          //Validators.pattern(this.validationService.getNamePattern())
+          Validators.minLength(2)
         ]
       ],
       email: ['', [
@@ -103,20 +102,18 @@ export class UserComponent implements OnInit {
       }, { validator: this.helperService.pwdMatcher }),
       phone: ['', [
           Validators.required,
-          //Validators.pattern(this.validationService.getPhonePattern())
+          Validators.pattern(this.validationService.getPhonePattern())
         ]
       ],
       designation: ['', [Validators.required]],
-      avatar: ['', ''],
-      role: ['user', ''],
+      domain: ['', [Validators.required]],
       dob: ['', [Validators.required]],
       doj: ['', [Validators.required]],
-      previousExp: ['', [
-          Validators.required,
-          //Validators.pattern(this.validationService.getNumberAndDotPattern())
-        ]
-      ],
-      domain: ['', [Validators.required]]
+      skills: ['', [Validators.required]],
+      visa: ['', [Validators.required]],
+      about: ['', [Validators.required]],
+      avatar: ['', ''],
+      role: ['user', '']
     });
 
     //pre fill the values for editing form
@@ -266,12 +263,14 @@ export class UserComponent implements OnInit {
       },
       phone: user.phone,
       designation: user.designation,
-      avatar: user.avatar || '',
-      role: user.role,
+      domain: user.domain,
       dob: user.dob,
       doj: user.doj,
-      previousExp: user.previousExp,
-      domain: user.domain
+      skills: user.skills,
+      visa: user.visa,
+      about: user.about,
+      avatar: user.avatar || '',
+      role: user.role
     };
   }
 
