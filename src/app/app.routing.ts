@@ -41,57 +41,57 @@ const routes: Routes = [
   {
     path: "users/edit/:id",
     component: UserComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: "users",
     component: UserListComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: "events",
     component: EventListComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: "events/create",
     component: EventComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: "events/edit/:id",
     component: EventComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: "meeting",
     component: MeetingListComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: "meeting/create",
     component: MeetingComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: "meeting/edit/:id",
     component: MeetingComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: "internal-project",
     component: InternalProjectListComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: "internal-project/create",
     component: InternalProjectComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: "internal-project/edit/:id",
     component: InternalProjectComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
 
   // otherwise redirect to content
