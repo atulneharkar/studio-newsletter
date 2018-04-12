@@ -1,5 +1,5 @@
 <!-- shown in event detail page-->
-<div class="eventlist-section" [hidden]="showSnapshot">
+<!-- <div class="eventlist-section" [hidden]="showSnapshot">
 
   <h2 class="page-heading">Events</h2>
   <a class="btn btn-primary" [routerLink]="['create']">Create Event</a>
@@ -29,10 +29,10 @@
     </div>
   </div>
   
-</div>
+</div> -->
 
 <!-- shown in home page-->
-<div [hidden]="!showSnapshot">
+<!-- <div [hidden]="!showSnapshot">
   <div class="event-snapshot-heading clearfix">
     <h3>Upcoming Events</h3>
     <span class="pull-right" [routerLink]="['/events']">See all</span>
@@ -52,4 +52,110 @@
   </div>
 </div>
 
-<app-modal [message]="message" [modalType]="modalType" [hidden]="!showModal" (confirmed)="confirmAction($event)"></app-modal>
+<app-modal [message]="message" [modalType]="modalType" [hidden]="!showModal" (confirmed)="confirmAction($event)"></app-modal> -->
+
+<div class="timeline">
+  <div class="col-xs-4 arrow-left">
+     <img src="../../assets/icons/back_arrow-white.png"/>
+    <!-- <span class="glyphicon glyphicon-arrow-left"></span> -->
+  </div>
+  <div class="col-xs-4 page-heading">
+    <h2>Timeline</h2>
+  </div>
+  <div class="col-xs-4 icon-head">
+    <div class="filter-icon">
+      <img src="../../assets/icons/filter.png"/>
+    </div>
+    <div class="search-icon">
+      <img src="../../assets/icons/search-icon.png"/>
+    </div>
+  </div>
+</div>
+<div class="search-bar">
+  <input type="text">
+</div>
+<!--Start thre accordion here-->
+
+<div class="content-accordian">
+
+    
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <span class="dot"></span>
+                <span class="head">iPitch</span>
+                <span class="date">11/02/2017, Sat</span>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <div class="venue">
+              <span class="venue-lbl">VENUE</span>
+              <span class="venue-name">Bombay Cocktail Bar, Off New Link Road,
+                Andheri West, Mumbai</span>
+            </div>
+            <div class="time">
+              <span class="time-lbl">TIME</span>
+              <span class="time-name">9 PM ONWARDS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <span class="dot"></span>
+                <span class="head1">Studio Party</span>
+                <span class="date">11/02/2017, Sat</span>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <div class="venue">
+              <span class="venue-lbl">VENUE</span>
+              <span class="venue-name">MTV Flyp, Off New Link Road,
+                Andheri West, Mumbai</span>
+            </div>
+            <div class="time">
+              <span class="time-lbl">TIME</span>
+              <span class="time-name">7 PM ONWARDS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+              <span class="dot"></span>
+                <span class="head">Vodafone Hackathon</span>
+                <span class="date">11/02/2017, Sat</span>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <div class="venue">
+              <span class="venue-lbl">VENUE</span>
+              <span class="venue-name">Deloitte Mumbai Studio 1st Floor</span>
+            </div>
+            <div class="time">
+              <span class="time-lbl">TIME</span>
+              <span class="time-name">7 PM ONWARDS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- panel-group -->
+    
+    
+</div>
