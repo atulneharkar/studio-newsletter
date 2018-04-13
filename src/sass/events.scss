@@ -37,8 +37,13 @@
 	background: #3c4960;
 	input{
 		width: 100%;
-		border-radius: 20px;
+		border-radius: 4px;
 		border:1px solid #fff;
+		height: 30px;
+		color: #3c4960;
+		font-family: 'proxima_nova_altbold';
+		font-size: 17px;
+		padding: 5px;
 	}
 }
 
@@ -129,14 +134,6 @@
         			padding-left: 15px;
         		}
         		.head{
-        			font-family: 'Museo Sans W01_500';
-        			color: #fff;
-        			font-size: 21px;
-        			line-height: 24px;
-        			letter-spacing: -0.1px;
-        			font-weight: bold;
-        		}
-        		.head1{
         			font-family: 'proxima_nova_altbold';
         			color: #fff;
         			font-size: 21px;
