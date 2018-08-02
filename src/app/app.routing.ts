@@ -8,6 +8,9 @@ import {
 } from "./forgot-password";
 import { UserComponent, UserListComponent } from "./content/user";
 import { EventComponent, EventListComponent } from "./content/event";
+//import { TestComponent } from "./content/event/test/test.component";
+import { StudioFolksComponent } from "./content/studio-folks/studio-folks.component";
+import { StudioFolksProfileComponent } from "./content/studio-folks/studio-folks-profile.component";
 import { MeetingComponent, MeetingListComponent } from "./content/meeting";
 import {
   InternalProjectComponent,
@@ -46,6 +49,16 @@ const routes: Routes = [
   {
     path: "users",
     component: UserListComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: "studio-folks",
+    component: StudioFolksComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: "studio-folks-profile",
+    component: StudioFolksProfileComponent,
     //canActivate: [AuthGuard]
   },
   {

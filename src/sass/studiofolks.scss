@@ -1,0 +1,221 @@
+.folk-types{
+	background: #3c4960;
+	display: flex;
+	overflow-x: auto;
+	overflow-y: hidden;
+	.item{
+		display: inline-block;
+		padding-top: 13px;
+		padding-bottom: 17px;
+		color: #a8aeb9;
+		font-family: 'proxima_nova_thin';
+		font-size: 15px;
+		padding-left:15px;
+		padding-right: 15px;
+		&.active{
+			color:#fff;
+			font-family: 'Proxima Nova';
+		}
+	}
+	li{
+		a{
+			color:#a8aeb9;
+			font-family:ProximaNova-Light;
+			font-size:15px;
+		}
+		a:hover{
+			background-color:transparent;
+			border:none;
+		}
+	}
+	li.active{
+		a{
+			background-color:transparent !important;
+			color:#ffffff !important;
+			border:none !important;
+		}
+	}
+}
+.folks-head{
+	.title{
+		p{
+			height:24px;
+			border-radius: 0px;
+			border: 1px solid #414f68;
+			background:#414f68;
+			padding:3px 0 0 17px;
+			color:#a8aeb9;
+			font-family: ProximaNova;
+			font-size: 11px;
+			margin:0
+		}
+	}
+	.list-head{
+		.item{
+			padding:15px 0 0 15px;
+		}
+		.item:last-child{
+			padding-bottom:15px;
+		}
+		background-color:#3c4960;
+		.profile-photo{
+			width:40px;
+			height:40px;
+			display:inline-block;
+		}
+		.detail{
+			display:inline-block;
+			vertical-align:middle;
+			padding-left:15px;
+			.name{
+				font-family: ProximaNova;
+  				font-size: 17px;
+  				line-height: normal;
+  				letter-spacing: normal;
+  				color: #ffffff;
+  				margin:0;
+			}
+			.title{
+				font-family: ProximaNova;
+  				font-size: 11px;
+  				line-height: normal;
+  				letter-spacing: 0.3px;
+  				color: #a8aeb9;
+  				margin:0;
+  				padding-top:4px;
+			}
+		}
+	}
+}
+.directory-head{
+	background: #414f68;
+	padding:5px 0 6px 17px;
+	font-family: 'Proxima Nova';
+	font-size: 11px;
+	color: #a8aeb9;
+}
+.user-data{
+	background: #3c4960;
+	padding: 14px 20px 15px 15px;
+	.row-data{
+		padding: 15px 0;
+		img{
+			width: 40px;
+			height: 40px;
+		}
+		.info{
+			display: inline-block;
+			vertical-align: bottom;
+			padding-left: 15px;
+			.name{
+				font-family: 'proxima_nova_thin';
+				font-size: 17px;
+				color: #fff;
+			}
+			.work-designation{
+				font-family: 'Proxima Nova';
+				font-size: 11px;
+				color: #a8aeb9;
+				letter-spacing: 0.3px;
+			}
+		}
+	}
+}
+
+.profile-body{
+	background: #3c4960;
+	.profile-head{
+		padding: 15px;
+		border-bottom: 2px solid #53627b;
+		.profile-photo{
+			width: 106px;
+			height: 106px;
+		}
+		.name-head{
+			display: inline-block;
+			vertical-align: bottom;
+			.name{
+				font-family: 'proxima_nova_altbold';
+				font-size: 24px;
+				line-height: 28px;
+				color: #fff;
+				letter-spacing: -0.1px;
+				font-weight: bold;
+				margin-bottom: 2px;
+			}
+			.designation{
+				font-family: 'Proxima Nova';
+				font-size: 11px;
+				line-height: normal;
+				color: #a8aeb9;
+				letter-spacing: 0.3px;
+				font-weight: bold;
+				margin: 0;
+			}
+		}
+	}
+	.title-head{
+		font-family: 'Proxima Nova';
+		font-size: 10px;
+		color: #a8aeb9;
+		letter-spacing: 0.3px;
+		padding-bottom: 7px;
+		text-transform: uppercase;
+	}
+	.value{
+		font-family: 'Proxima Nova';
+		font-size: 15px;
+		color: #fff;
+		padding-bottom: 26px;
+	}
+	.details-area{
+		background: #3c4960;
+		padding: 15px 19px 16px 18px;
+		border-bottom: 2px solid #53627b;
+		.left,.right{
+			width: 50%;
+			display: inline-block;
+		}
+		.right{
+			float: right;
+		}
+		.about{
+			.value{
+				margin-bottom: -26px;
+			}
+		}
+	}
+	.shoutouts-title{
+		background: #3c4960;
+		padding: 15px 18px 20px 18px;
+		.value{
+			padding-bottom: 9px;
+		}
+		.manager-name{
+			font-family: 'Proxima Nova';
+			font-size: 11px;
+			color: #a8aeb9;
+			letter-spacing: 0.3px;
+		}
+		.shout-message{
+			padding-top: 16px;
+			input{
+				width: calc(100% - 45px);
+			    border-radius: 15px;
+			    border: 1px solid #fff;
+			    height: 30px;
+			    color: #3c4960;
+			    font-family: 'proxima_nova_altbold';
+			    font-size: 11px;
+			    padding: 9px 12px 8px 12px;
+			    letter-spacing: 0.3px;
+			    margin-right: 10px;
+			}
+			.thumb-icon{
+				width: 30px;
+				height: 30px;
+			}
+		}
+	}
+	
+}

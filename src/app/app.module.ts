@@ -41,6 +41,7 @@ import {
 import { UserComponent, UserListComponent } from './content/user';
 import { EventComponent, EventListComponent } from './content/event';
 import { MeetingComponent, MeetingListComponent } from './content/meeting';
+import { StudioFolksComponent,StudioFolksProfileComponent} from './content/studio-folks';
 import { InternalProjectComponent, InternalProjectListComponent } from './content/internal-project';
 import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-password';
 import { CalcExpPipe } from './_pipes';
@@ -61,6 +62,8 @@ import { CalcExpPipe } from './_pipes';
     EventListComponent,
     MeetingComponent,
     MeetingListComponent,
+    StudioFolksComponent,
+    StudioFolksProfileComponent,
     InternalProjectComponent,
     InternalProjectListComponent,
     ForgotPasswordComponent,
