@@ -50,7 +50,7 @@ export class CommonService {
 
   //method to get the domain url
   getDomainUrl() {
-    return 'http://localhost:3000';
+    return 'https://newsletter-be.herokuapp.com';
     //return 'http://10.12.168.10:3000';
   }
 

@@ -107,7 +107,7 @@ export class EventComponent implements OnInit {
         fromTime: ['', [Validators.required]],
         toTime: ['', [Validators.required]],
       }, { validator: this.helperService.dateTimeCompare }),
-      organiser: ['', [Validators.required]],
+      organiser: ['', []],
       notes: ['', [Validators.required]],
       invitees: ['', [Validators.required]],
       eventImage: ['', ''],
