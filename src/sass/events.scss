@@ -180,3 +180,66 @@
         border:none;
         padding-top: 0px;
     }
+    .event-content{
+    	background: #3c4960;
+    	.form-control{
+    		background: #3c4960;
+    		border:none;
+    		box-shadow:none;
+    		color:#fff;
+    		height:auto;
+    	}
+    	.title{
+    		font-weight:bold;
+    		font-family: 'ProximaNova';
+    		font-size:24px;
+    		letter-spacing:-0.1px;
+    		line-height:1.17;
+    		padding:20px 0 6px 15px;
+    	}
+    	.description{
+    		font-family: 'ProximaNova';
+    		font-size:14px;
+    		line-height:normal;
+    		padding:4px 0 23px 15px;
+    		height:44px;
+    	}
+    	.lower-seperate{
+			border-bottom:1px solid #354155;
+		}
+    	.form-group{
+    		margin-bottom:0;
+    		.title-heading p{
+    			height: 25px;
+			    background: rgba(43, 52, 68, 0.4);
+			    padding: 6px 0px 6px 15px;
+			    color: #a8aeb9;
+			    font-family: ProximaNova;
+			    font-size: 11px;
+			    margin: 0;
+    		}
+    		.title{
+    			font-size:24px;
+    			color:#fff;
+    		}
+    		.txt-label{
+    			color: #fff;
+			    font-family: ProximaNova;
+			    font-size: 11px;
+			    letter-spacing:0.4px;
+			    font-weight:normal;
+			    margin:0;
+			    line-height:17px;
+			    padding:14px 15px;
+			    display:inline-block;
+    		}
+    		.go-arrow{
+    			width:17px;
+    			height:17px;
+    			margin-left:-15px;
+    		}
+    		.img-upload-area{
+    			display:none;
+    		}
+    	}
+    }
