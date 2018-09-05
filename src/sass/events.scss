@@ -22,6 +22,10 @@
 		}	
 		.search-icon{
 			display: inline-block;
+            .btn-event-submit{
+                background:transparent !important;
+                border:none;
+            }
 			img{
 				padding-top: 10px;
 			}
@@ -204,10 +208,44 @@
     		padding:4px 0 23px 15px;
     		height:44px;
     	}
-    	.lower-seperate{
+        .location{
+            letter-spacing:0.4px;
+            padding:14px 0 14px 15px;
+            margin:0;
+        }
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-indent: 1px;
+            background-image: url(/assets/icons/arrow-down.svg) !important;
+            background-repeat:no-repeat !important;
+            background-position: right !important;
+            text-align:right;
+            padding: 14px 35px 14px 15px;
+            width:50%;
+            margin: 0 0 0 auto;
+        }
+        option{
+            text-align:right;
+        }
+        .upload-img-icon{
+            padding: 14px 15px 14px 15px;
+            margin: 0;
+        }
+        .from-dates{
+            text-align:right;
+        }
+        input[type=date]::-webkit-inner-spin-button,
+        input[type=date]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+        }
+        .lower-seperate{
 			border-bottom:1px solid #354155;
 		}
-    	.form-group{
+        .last-row-space{
+            padding-bottom:97px;
+        }
+        .form-group{
     		margin-bottom:0;
     		.title-heading p{
     			height: 25px;
