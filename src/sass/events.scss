@@ -1,3 +1,12 @@
+.no-padding{
+    padding:0 !important;
+}
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+}
 .timeline{
 	background-color: #2b3444;
 	height: 44px;
@@ -199,18 +208,18 @@
     		font-size:24px;
     		letter-spacing:-0.1px;
     		line-height:1.17;
-    		padding:20px 0 6px 15px;
+    		padding:20px 0 6px 0px;
     	}
     	.description{
     		font-family: 'ProximaNova';
     		font-size:14px;
     		line-height:normal;
-    		padding:4px 0 23px 15px;
+    		padding:4px 0 23px 0px;
     		height:44px;
     	}
         .location{
             letter-spacing:0.4px;
-            padding:14px 0 14px 15px;
+            padding:14px 0 14px 0px;
             margin:0;
         }
         select {
@@ -234,10 +243,9 @@
         }
         .from-dates{
             text-align:right;
-        }
-        input[type=date]::-webkit-inner-spin-button,
-        input[type=date]::-webkit-outer-spin-button {
-          -webkit-appearance: none;
+            background-image: url(/assets/icons/arrow-down.svg) !important;
+            background-repeat: no-repeat !important;
+            background-position: right !important;
         }
         .lower-seperate{
 			border-bottom:1px solid #354155;
