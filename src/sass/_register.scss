@@ -1,0 +1,101 @@
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-inner-spin-button{
+    opacity:0;
+}
+.register-container{
+	background:#3c4960;
+	.heading{
+		text-align:center;
+		margin:30px 0 22px 0;
+		font-family: ProximaNova;
+	    font-size: 17px;
+	    font-weight: normal;
+	    font-style: normal;
+	    font-stretch: normal;
+	    line-height: normal;
+	    letter-spacing: 0px;
+	    color:#fff;
+	}
+	.user-image{
+		text-align:center;
+		padding-bottom:30px;
+		.profile-img{
+			width:80px;
+			height:80px;
+			border-radius:50%;	
+		}
+		.edit-img-icon{
+			width:20px;
+			height:20px;
+			vertical-align:top;
+		}
+	}
+	.lbl-txt{
+		font-family: ProximaNova;
+	    font-size: 10px;
+	    font-weight: normal;
+	    font-style: normal;
+	    font-stretch: normal;
+	    line-height: normal;
+	    letter-spacing: 0.3px;
+	    color:#a8aeb9;
+	    text-transform:uppercase;
+	    margin-bottom:10px;
+	}
+	.lbl-val{
+		font-family: ProximaNova;
+	    font-size: 15px;
+	    font-weight: normal;
+	    font-style: normal;
+	    font-stretch: normal;
+	    line-height: normal;
+	    letter-spacing: normal;
+	    color:#fff;
+	    margin-bottom:10px;
+	    border:none;
+	    border-bottom:1px solid #53627b;
+	    border-radius:0;
+	    box-shadow:none;
+	    background:#3c4960;
+	    padding: 0 0 10px 0;
+	    margin-bottom:0;
+	}
+	.lbl-select-val{
+		-webkit-appearance: none;
+	    -moz-appearance: none;
+	    text-indent: 1px;
+	    background-image: url(/assets/icons/arrow-down.svg) !important;
+	    background-repeat: no-repeat !important;
+	    background-position: right !important;
+	    margin: 0 0 0 auto;
+	    background: transparent;
+	    border: none;
+	    border-bottom: 1px solid #53627b;
+	    border-radius: 0;
+	    font-family: ProximaNova;
+	    font-size: 15px;
+	    font-weight: normal;
+	    font-style: normal;
+	    font-stretch: normal;
+	    line-height: normal;
+	    letter-spacing: normal;
+	    color:#fff;
+	    padding: 0;
+	    box-shadow:none;
+	    option{
+	    	background:#3c4960;
+	    }
+	}
+	.lbl-desc{
+		text-align:right;
+		padding-top:11px;
+		font-family: ProximaNova;
+	    font-size: 11px;
+	    font-weight: normal;
+	    font-style: normal;
+	    font-stretch: normal;
+	    line-height: normal;
+	    letter-spacing: normal;
+	    color:#96a5a7;
+	}
+}

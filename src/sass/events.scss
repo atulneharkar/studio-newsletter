@@ -1,3 +1,12 @@
+.no-padding{
+    padding:0 !important;
+}
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+}
 .timeline{
 	background-color: #2b3444;
 	height: 44px;
@@ -22,6 +31,10 @@
 		}	
 		.search-icon{
 			display: inline-block;
+            .btn-event-submit{
+                background:transparent !important;
+                border:none;
+            }
 			img{
 				padding-top: 10px;
 			}
@@ -179,4 +192,100 @@
     .panel-default > .panel-heading + .panel-collapse > .panel-body {
         border:none;
         padding-top: 0px;
+    }
+    .event-content{
+    	background: #3c4960;
+    	.form-control{
+    		background: #3c4960;
+    		border:none;
+    		box-shadow:none;
+    		color:#fff;
+    		height:auto;
+    	}
+    	.title{
+    		font-weight:bold;
+    		font-family: 'ProximaNova';
+    		font-size:24px;
+    		letter-spacing:-0.1px;
+    		line-height:1.17;
+    		padding:20px 0 6px 0px;
+    	}
+    	.description{
+    		font-family: 'ProximaNova';
+    		font-size:14px;
+    		line-height:normal;
+    		padding:4px 0 23px 0px;
+    		height:44px;
+    	}
+        .location{
+            letter-spacing:0.4px;
+            padding:14px 0 14px 0px;
+            margin:0;
+        }
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-indent: 1px;
+            background-image: url(/assets/icons/arrow-down.svg) !important;
+            background-repeat:no-repeat !important;
+            background-position: right !important;
+            text-align:right;
+            padding: 14px 35px 14px 15px;
+            width:50%;
+            margin: 0 0 0 auto;
+        }
+        option{
+            text-align:right;
+        }
+        .upload-img-icon{
+            padding: 14px 15px 14px 15px;
+            margin: 0;
+        }
+        .from-dates{
+            text-align:right;
+            background-image: url(/assets/icons/arrow-down.svg) !important;
+            background-repeat: no-repeat !important;
+            background-position: right !important;
+        }
+        .lower-seperate{
+			border-bottom:1px solid #354155;
+		}
+        .last-row-space{
+            padding-bottom:97px;
+        }
+        .form-group{
+    		margin-bottom:0;
+    		.title-heading p{
+    			height: 25px;
+			    background: rgba(43, 52, 68, 0.4);
+			    padding: 6px 0px 6px 15px;
+			    color: #a8aeb9;
+			    font-family: ProximaNova;
+			    font-size: 11px;
+			    margin: 0;
+    		}
+    		.title{
+    			font-size:24px;
+    			color:#fff;
+    		}
+    		.txt-label{
+    			color: #fff;
+			    font-family: ProximaNova;
+			    font-size: 11px;
+			    letter-spacing:0.4px;
+			    font-weight:normal;
+			    margin:0;
+			    line-height:17px;
+			    padding:14px 15px;
+			    display:inline-block;
+    		}
+    		.go-arrow{
+    			width:17px;
+    			height:17px;
+    			margin-left:-15px;
+    		}
+    		.img-upload-area{
+    			display:none;
+    		}
+    	}
     }
