@@ -66,9 +66,9 @@
         <div class="col-sm-6 col-xs-6 text-right">
           <!-- <p class="txt-label">Colaba</p>
           <img src="../../assets/icons/Arrow-Right.svg" class="go-arrow"/> -->
-          <select dir="rtl" class="form-control" id="invitees" formControlName="invitees">
+          <select dir="rtl" class="form-control" id="invitees" formControlName="location">
             <option value="">Colaba</option>
-            <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
+            <option *ngFor="let name of locations" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
           <p class="error-msg" *ngIf="submitted && eventForm.get('invitees').hasError('required')">
             Invitees is required.
