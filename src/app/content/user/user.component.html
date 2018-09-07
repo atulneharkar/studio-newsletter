@@ -136,7 +136,7 @@
       <div class="form-group row">
         <label for="skills" class="col-xs-12 col-form-label lbl-txt">Skills</label>
         <div class="col-xs-12">
-          <input type="text" class="form-control lbl-select-val" id="skills" formControlName="skills" placeholder="Skills">
+          <input type="text" class="form-control lbl-val" id="skills" formControlName="skills" placeholder="Skills">
           <p *ngIf="submitted && userForm.get('skills').hasError('required')" class="error-msg">
               skills is required.
           </p>
