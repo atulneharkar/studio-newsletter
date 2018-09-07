@@ -1,5 +1,5 @@
 <!-- shown in user detail page-->
-<div [hidden]="showSnapshot">
+<!-- <div [hidden]="showSnapshot">
   <h2 class="page-heading">Studio Folks</h2>
   <div class="user-list-wrapper">
     <table class="table table-striped">
@@ -53,22 +53,7 @@
       </tbody> 
     </table>
   </div>
-</div>
-
-<!-- shown in home page-->
-<div [hidden]="!showSnapshot">
-  <div class="birthday-heading clearfix">
-    <h3>Birthday</h3>
-    <span class="pull-right" [routerLink]="['/users']">See all</span>
-  </div>
-
-  <div class="birthday-content" *ngFor="let user of users let i = index " [hidden]="i >= 4">
-    <div class="clearfix">
-      <span>{{user.name}}</span>
-      <span class="pull-right">{{user.dob | date: 'MM/dd/yyyy'}}</span>
-    </div>
-  </div>
-</div>
+</div> -->
 
 <app-modal [message]="message" [modalType]="modalType" [hidden]="!showModal" (confirmed)="confirmAction($event)"></app-modal>
 
@@ -102,32 +87,11 @@
         <p>New Joinees</p>
       </div>
       <div class="list-head">
-          <div class="item">
+          <div class="item" *ngFor="let user of users">
             <img src="../../assets/img/skill-building.png" class="profile-photo" />
             <div class="detail">
-              <p class="name">Isaiah Russel</p>
-              <p class="title">Visual Designer</p>
-            </div>
-          </div>
-          <div class="item">
-            <img src="../../assets/img/skill-building.png" class="profile-photo" />
-            <div class="detail">
-              <p class="name">Isaiah Russel</p>
-              <p class="title">Developer</p>
-            </div>
-          </div>
-          <div class="item">
-            <img src="../../assets/img/skill-building.png" class="profile-photo" />
-            <div class="detail">
-              <p class="name">Isaiah Russel</p>
-              <p class="title">Tester</p>
-            </div>
-          </div>
-          <div class="item">
-            <img src="../../assets/img/skill-building.png" class="profile-photo" />
-            <div class="detail">
-              <p class="name">Isaiah Russel</p>
-              <p class="title">Visual Designer</p>
+              <p class="name">{{user.name}}</p>
+              <p class="title">{{user.designation}}</p>
             </div>
           </div>
       </div>
