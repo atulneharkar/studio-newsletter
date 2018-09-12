@@ -30,12 +30,27 @@ header {
     margin-left: 0px;
     margin-right: 15px;
     text-align: center;
+    position:relative;
     //line-height: 75px;
 
     img {
       width: 75px;
       border-radius: 4px;
       background-color: rgba(60, 73, 96, 0.41);
+    }
+    span{
+      font-family: ProximaNova;
+      font-size:11px;
+      font-weight:600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: -0.3px;
+      color:#fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

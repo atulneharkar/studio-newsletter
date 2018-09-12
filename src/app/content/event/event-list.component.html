@@ -81,9 +81,9 @@
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
       <div class="panel panel-default" *ngFor="let event of events let i = index ">
-        <div class="panel-heading" role="tab" [id]="index">
+        <div class="panel-heading" role="tab">
           <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" [href]="index" aria-expanded="true">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" [href]="'#'+i" aria-expanded="true" aria-controls="i">
               <span class="dot"></span>
                 <span class="head">{{event.title}}</span>
                 <p class="date">
@@ -92,7 +92,7 @@
             </a>
           </h4>
         </div>
-        <div [id]="index" class="panel-collapse collapse" role="tabpanel">
+        <div [id]="i" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
             <div class="venue">
               <span class="venue-lbl">VENUE</span>
@@ -106,12 +106,12 @@
         </div>
       </div>
       
-      <!-- <div class="panel panel-default">
+       <!-- <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingTwo">
           <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
               <span class="dot"></span>
-                <span class="head">Studio Party</span>
+                <span class="head">hARPREET'S Studio Party</span>
                 <span class="date">11/02/2017, Sat</span>
             </a>
           </h4>
@@ -129,7 +129,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>  -->
       
       <!-- <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingThree">
