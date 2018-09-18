@@ -233,6 +233,9 @@ input[type=number]::-webkit-outer-spin-button{
             padding: 14px 35px 14px 15px;
             width:50%;
             margin: 0 0 0 auto;
+            @media only screen and (min-width: 320px) and (max-width: 450px) {
+                width:75%;
+            }
         }
         option{
             text-align:right;

@@ -2,7 +2,7 @@ input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="date"]::-webkit-inner-spin-button{
     opacity:0;
 }
-.register-container{
+.register-container, .forgot-password-wrapper, .meeting-container, .booking-room-content{
 	background:#3c4960;
 	.heading{
 		text-align:center;
@@ -97,5 +97,10 @@ input[type="date"]::-webkit-inner-spin-button{
 	    line-height: normal;
 	    letter-spacing: normal;
 	    color:#96a5a7;
+	}
+}
+.booking-room-content{
+	.title{
+		padding-top:30px;
 	}
 }

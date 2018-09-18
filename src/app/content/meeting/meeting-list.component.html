@@ -1,11 +1,10 @@
 <!-- shown in meeting detail page-->
-<div [hidden]="showSnapshot">
-  <h2 class="page-heading">Meetings</h2>
-  <a class="btn btn-primary" [routerLink]="['create']">Book Room</a>
+<div [hidden]="showSnapshot" class="login-container meeting-container">
+  <div class="container-fluid">
+  <h2 class="page-heading heading">Meetings</h2>
+  <a class="btn btn-primary btn-login" [routerLink]="['create']">Book Room</a>
   <div class="meeting-list-wrapper">
-
     <p [hidden]="meetings.length !== 0">No meetings available.</p>
-
     <table class="table table-striped" [hidden]="meetings.length === 0">
       <thead> 
         <tr>
@@ -19,7 +18,6 @@
           <th>Delete</th>
         </tr> 
       </thead> 
-
       <tbody> 
         <tr *ngFor="let meeting of meetings">
           <td>{{meeting.title}}</td> 
@@ -40,6 +38,7 @@
       </tbody> 
     </table>
   </div>
+</div>
 </div>
 
 <!-- shown in home page-->
