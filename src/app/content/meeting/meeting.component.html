@@ -1,21 +1,32 @@
-<div>
+<div class="login-container container-fluid">
   <form [formGroup]="meetingForm" novalidate (ngSubmit)="onSubmit(meetingForm.valid)">
-    <div class="row booking-room-header">
-      <div class="col-sm-9 col-xs-9">
+
+    <div class="row timeline">
+      <div class="col-xs-4 arrow-left">
+         <img onclick="window.history.go(-1); return false;" src="../../assets/icons/arrow.svg">
+         
+      </div>
+      <div class="col-xs-4 page-heading">
         <h2>{{title}}</h2>
       </div>
-      <div class="col-sm-3 col-xs-3">
-        <button class="btn btn-primary pull-right" type="submit">{{buttonText}}</button>
-        <span *ngIf="source" [routerLink]="['/meeting']" class="btn btn-link">Cancel</span>
+      <div class="col-xs-4 icon-head">
+        <div class="search-icon">
+          
+          <button class="btn-event-submit" type="submit">
+            <img src="../../assets/icons/Check.svg">
+          </button>
+        </div>
       </div>
     </div>
+
+    
 
     <div class="booking-room-content">
 
       <div class="form-group row">
-        <div class="col-sm-12 col-xs-12">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+        <div class="col-sm-12 col-xs-12 title">
+            <!-- <label for="title">Title</label> -->
+            <input type="text" class="form-control lbl-val" id="title" formControlName="title" placeholder="Title">
             <p *ngIf="submitted && meetingForm.get('title').hasError('required')" class="error-msg">
               Title is required.
             </p>
@@ -24,8 +35,8 @@
 
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12">
-            <label for="description">Description</label>
-            <textarea type="text" class="form-control" id="description" formControlName="description" placeholder="Description"></textarea>
+            <!-- <label for="description">Description</label> -->
+            <textarea type="text" class="form-control lbl-val" id="description" formControlName="description" placeholder="Description"></textarea>
             <p *ngIf="submitted && meetingForm.get('description').hasError('required')" class="error-msg">
               Description is required.
             </p>
@@ -34,7 +45,7 @@
 
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12">
-            <label for="location">Location</label>
+            <!-- <label for="location">Location</label> -->
             <select class="form-control" id="location" formControlName="location">
               <option value="">Select Location</option>
               <option *ngFor="let list of roomList" [selected]="selectedLocation === list.location" [ngValue]="list._id">{{list.location}}</option>
@@ -101,6 +112,15 @@
             Booked By is required.
           </p>
         </div>
+      </div>
+    </div>
+    <div class="row booking-room-header">
+      <!-- <div class="col-sm-9 col-xs-9">
+        <h2>{{title}}</h2>
+      </div> -->
+      <div class="col-xs-12">
+        <button class="btn btn-login btn-primary" type="submit">{{buttonText}}</button>
+        <span *ngIf="source" [routerLink]="['/meeting']" class="btn btn-link btn-cancel">Cancel</span>
       </div>
     </div>
 

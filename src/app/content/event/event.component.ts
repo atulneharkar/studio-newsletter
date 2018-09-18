@@ -35,6 +35,7 @@ export class EventComponent implements OnInit {
   public source: string = "";
   public users: User[] = [];
   public domains: any[] = ['UX', 'VD', 'QA', 'FE'];
+  public locations: any[] = ['Colaba', 'Studio', 'Churchgate'];
   public selectedInvitees: string = '';
   private imageInfo: any;
   private fileSize: number = 0;
@@ -100,16 +101,16 @@ export class EventComponent implements OnInit {
     this.eventForm = this._fb.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      location: ['', [Validators.required]],
+      location: ['', []],
       slots: this._fb.group({
-        fromDate: ['', [Validators.required]],
+        fromDate: ['', []],
         toDate: ['', []],
-        fromTime: ['', [Validators.required]],
-        toTime: ['', [Validators.required]],
+        fromTime: ['', []],
+        toTime: ['', []],
       }, { validator: this.helperService.dateTimeCompare }),
       organiser: ['', []],
-      notes: ['', [Validators.required]],
-      invitees: ['', [Validators.required]],
+      notes: ['', []],
+      invitees: ['', []],
       eventImage: ['', ''],
     });
 

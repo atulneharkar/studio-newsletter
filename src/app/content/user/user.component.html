@@ -1,13 +1,20 @@
-<div class="container">
+<div class="container-fluid register-container">
   <div class="register-wrapper">
     <h2 class="heading">{{title}}</h2>
     <form [formGroup]="userForm" enctype="multipart/form-data" novalidate (ngSubmit)="onSubmit(userForm.valid)">
+      <!--image upload-->
+      <div class="user-image">
+        <img src="../../assets/img/main-slider/img4.jpg" class="profile-img"/>
+        <img src="../../assets/icons/edit.svg" class="edit-img-icon"/>
+      </div>
+
+
 
       <!--name-->
       <div class="form-group row">
-        <label for="name" class="col-sm-4 col-form-label">Name</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
+        <label for="name" class="col-xs-12 col-form-label lbl-txt">Name</label>
+        <div class="col-xs-12">
+          <input type="text" class="form-control lbl-val" id="name" formControlName="name" placeholder="Name">
           <p *ngIf="submitted && userForm.get('name').hasError('required')" class="error-msg">
             Name is required.
           </p>
@@ -19,9 +26,9 @@
 
       <!--email-->
       <div class="form-group row">
-        <label for="email" class="col-sm-4 col-form-label">Email</label>
-        <div class="col-sm-8">
-          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+        <label for="email" class="col-xs-12 col-form-label lbl-txt">Email</label>
+        <div class="col-xs-12">
+          <input type="email" class="form-control lbl-val" id="email" formControlName="email" placeholder="Email">
           <p *ngIf="submitted && userForm.get('email').hasError('required')" class="error-msg">
               Email is required.
           </p>
@@ -37,9 +44,9 @@
 
       <!--password-->
       <div class="form-group row" formGroupName="credentials">
-        <label for="password" class="col-sm-4 col-form-label">Password</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+        <label for="password" class="col-xs-12 col-form-label lbl-txt">Password</label>
+        <div class="col-xs-12">
+          <input type="password" class="form-control lbl-val" id="password" formControlName="password" placeholder="Password">
           <p *ngIf="submitted && userForm.get('credentials').get('password').hasError('required')" class="error-msg">
               Password is required.
           </p>
@@ -48,9 +55,9 @@
 
       <!--confirm password-->
       <div class="form-group row" formGroupName="credentials">
-        <label for="confirm-password" class="col-sm-4 col-form-label">Confirm Password</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" id="confirm-password" formControlName="confirmPassword" placeholder="Confirm Password">
+        <label for="confirm-password" class="col-xs-12 col-form-label lbl-txt">Confirm Password</label>
+        <div class="col-xs-12">
+          <input type="password" class="form-control lbl-val" id="confirm-password" formControlName="confirmPassword" placeholder="Confirm Password">
           <p class="error-msg" *ngIf="submitted && userForm.get('credentials').hasError('nomatch')">
             Entered password does not match.
           </p>
@@ -59,9 +66,9 @@
 
       <!--phone-->
       <div class="form-group row">
-        <label for="phone" class="col-sm-4 col-form-label">Phone</label>
-        <div class="col-sm-8">
-          <input type="number" class="form-control" id="phone" formControlName="phone" placeholder="Phone">
+        <label for="phone" class="col-xs-12 col-form-label lbl-txt">Phone</label>
+        <div class="col-xs-12">
+          <input type="number" class="form-control lbl-val" id="phone" formControlName="phone" placeholder="Phone">
           <p *ngIf="submitted && userForm.get('phone').hasError('required')" class="error-msg">
               Phone number is required.
           </p>
@@ -77,9 +84,9 @@
 
       <!--designation-->
       <div class="form-group row">
-        <label for="designation" class="col-sm-4 col-form-label">Designation</label>
-        <div class="col-sm-8">
-          <select class="form-control" id="designation" formControlName="designation">
+        <label for="designation" class="col-xs-12 col-form-label lbl-txt">Designation</label>
+        <div class="col-xs-12">
+          <select class="form-control lbl-select-val" id="designation" formControlName="designation">
             <option value="">Select Designation</option>
             <option *ngFor="let name of designations" [selected]="selectedDesignation === name" [ngValue]="name">{{name}}</option>
           </select>
@@ -91,9 +98,9 @@
 
       <!--domain-->
       <div class="form-group row">
-        <label for="domain" class="col-sm-4 col-form-label">Domain</label>
-        <div class="col-sm-8">
-          <select class="form-control" id="domain" formControlName="domain">
+        <label for="domain" class="col-xs-12 col-form-label lbl-txt">Domain</label>
+        <div class="col-xs-12">
+          <select class="form-control lbl-select-val" id="domain" formControlName="domain">
             <option value="">Select Domain</option>
             <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
@@ -105,9 +112,9 @@
 
       <!--date of birth-->
       <div class="form-group row">
-        <label for="dob" class="col-sm-4 col-form-label">Date of Birth</label>
-        <div class="col-sm-8">
-          <input type="date" class="form-control" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
+        <label for="dob" class="col-xs-12 col-form-label lbl-txt">Date of Birth</label>
+        <div class="col-xs-12">
+          <input type="date" class="form-control lbl-select-val" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
           <p *ngIf="submitted && userForm.get('dob').hasError('required')" class="error-msg">
               Date of birth is required.
           </p>
@@ -116,9 +123,9 @@
 
       <!--date of joining-->
       <div class="form-group row">
-        <label for="doj" class="col-sm-4 col-form-label">Date of Joining</label>
-        <div class="col-sm-8">
-          <input type="date" class="form-control" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
+        <label for="doj" class="col-xs-12 col-form-label lbl-txt">Date of Joining</label>
+        <div class="col-xs-12">
+          <input type="date" class="form-control lbl-select-val" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
           <p *ngIf="submitted && userForm.get('doj').hasError('required')" class="error-msg">
               Date of joining is required.
           </p>
@@ -127,9 +134,9 @@
 
       <!--skills-->
       <div class="form-group row">
-        <label for="skills" class="col-sm-4 col-form-label">Skills</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="skills" formControlName="skills" placeholder="Skills">
+        <label for="skills" class="col-xs-12 col-form-label lbl-txt">Skills</label>
+        <div class="col-xs-12">
+          <input type="text" class="form-control lbl-val" id="skills" formControlName="skills" placeholder="Skills">
           <p *ngIf="submitted && userForm.get('skills').hasError('required')" class="error-msg">
               skills is required.
           </p>
@@ -138,26 +145,29 @@
 
       <!--visa-->
       <div class="form-group row">
-        <label for="visa" class="col-sm-4 col-form-label">Visa (if any)</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="visa" formControlName="visa" placeholder="Visa">
+        <label for="visa" class="col-xs-12 col-form-label lbl-txt">Visa (if any)</label>
+        <div class="col-xs-12">
+          <input type="text" class="form-control lbl-val" id="visa" formControlName="visa" placeholder="Visa">
         </div>
       </div>
 
       <!--about-->
       <div class="form-group row">
-        <label for="about" class="col-sm-4 col-form-label">About me</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="about" formControlName="about" placeholder="About me">
+        <label for="about" class="col-xs-12 col-form-label lbl-txt">About me</label>
+        <div class="col-xs-12">
+          <input type="text" class="form-control lbl-val" id="about" formControlName="about" placeholder="About me">
+        </div>
+        <div class="col-xs-12">
+          <p class="lbl-desc">Character Limit 40</p>
         </div>
       </div>
 
       <!--profile img-->
       <div class="form-group row">
-  	    <label for="profile-img" class="col-sm-4 col-form-label">Profile Image</label>
-        <div class="col-sm-8">
+  	    <label for="profile-img" class="col-xs-12 col-form-label lbl-txt">Profile Image</label>
+        <div class="col-xs-12">
     	    <input type="file" id="profile-img" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
-    	    <p class="help-block">Upload file size limit 3 MB.</p>
+          <!-- <p class="help-block">Upload file size limit 3 MB.</p> -->
           <p *ngIf="fileSizeError" class="error-msg">
             File size limit exceeds.
           </p>
@@ -174,8 +184,10 @@
 
       <!--submit btn-->
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">{{buttonText}}</button>
-        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+        <div class="col-xs-12 no-padding">
+          <button type="submit" class="btn btn-primary btn-login">{{buttonText}}</button>
+        </div>
+        <a [routerLink]="['/login']" class="btn btn-link btn-cancel">Cancel</a>
         <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
       </div>
 

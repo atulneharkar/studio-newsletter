@@ -56,7 +56,7 @@
 
 <div class="timeline">
   <div class="col-xs-4 arrow-left">
-     <img src="../../assets/icons/arrow.svg"/>
+     <img src="../../assets/icons/arrow.svg" onclick="window.history.go(-1); return false;"/>
   </div>
   <div class="col-xs-4 page-heading">
     <h2>Timeline</h2>
@@ -80,22 +80,23 @@
     
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-      <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingOne">
+      <div class="panel panel-default" *ngFor="let event of events let i = index ">
+        <div class="panel-heading" role="tab">
           <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" [href]="'#'+i" aria-expanded="true" aria-controls="i">
               <span class="dot"></span>
-                <span class="head">iPitch</span>
-                <span class="date">11/02/2017, Sat</span>
+                <span class="head">{{event.title}}</span>
+                <p class="date">
+                  {{event.slots[0].fromDate | date: 'MM/dd/yyyy'}} <span *ngIf="event.slots[0].toDate"> - {{event.slots[0].toDate | date: 'MM/dd/yyyy'}}</span>
+                </p>
             </a>
           </h4>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div [id]="i" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
             <div class="venue">
               <span class="venue-lbl">VENUE</span>
-              <span class="venue-name">Bombay Cocktail Bar, Off New Link Road,
-                Andheri West, Mumbai</span>
+              <span class="venue-name">{{event.location}}</span>
             </div>
             <div class="time">
               <span class="time-lbl">TIME</span>
@@ -105,12 +106,12 @@
         </div>
       </div>
       
-      <div class="panel panel-default">
+       <!-- <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingTwo">
           <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
               <span class="dot"></span>
-                <span class="head">Studio Party</span>
+                <span class="head">hARPREET'S Studio Party</span>
                 <span class="date">11/02/2017, Sat</span>
             </a>
           </h4>
@@ -128,9 +129,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>  -->
       
-      <div class="panel panel-default">
+      <!-- <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingThree">
           <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -152,7 +153,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
     </div><!-- panel-group -->
     
