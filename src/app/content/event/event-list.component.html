@@ -65,12 +65,12 @@
     <div class="filter-icon">
       <img src="../../assets/icons/filter.svg"/>
     </div>
-    <div class="search-icon">
+    <div class="search-icon" (click)="show=!show">
       <img src="../../assets/icons/Search.svg"/>
     </div>
   </div>
 </div>
-<div class="search-bar">
+<div class="search-bar" *ngIf="show">
   <input type="text">
 </div>
 <!--Start thre accordion here-->

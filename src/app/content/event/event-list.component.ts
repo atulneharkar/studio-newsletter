@@ -16,6 +16,7 @@ export class EventListComponent implements OnInit {
   public isConfirmed: boolean = false;
   public eventId: number;
   public showSnapshot: boolean = false;
+  public showHide: boolean = false;
   public currentUser: number;
 
   constructor(

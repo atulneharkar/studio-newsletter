@@ -2,14 +2,14 @@
   <form [formGroup]="meetingForm" novalidate (ngSubmit)="onSubmit(meetingForm.valid)">
 
     <div class="row timeline">
-      <div class="col-xs-4 arrow-left">
+      <div class="col-xs-3 arrow-left">
          <img onclick="window.history.go(-1); return false;" src="../../assets/icons/arrow.svg">
          
       </div>
-      <div class="col-xs-4 page-heading">
+      <div class="col-xs-6 page-heading">
         <h2>{{title}}</h2>
       </div>
-      <div class="col-xs-4 icon-head">
+      <div class="col-xs-3 icon-head">
         <div class="search-icon">
           
           <button class="btn-event-submit" type="submit">
