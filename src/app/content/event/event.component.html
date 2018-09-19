@@ -67,7 +67,7 @@
           <!-- <p class="txt-label">Colaba</p>
           <img src="../../assets/icons/Arrow-Right.svg" class="go-arrow"/> -->
           <select dir="rtl" class="form-control" id="invitees" formControlName="location">
-            <option value="">Colaba</option>
+            <option value="">Select</option>
             <option *ngFor="let name of locations" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
           <p class="error-msg" *ngIf="submitted && eventForm.get('invitees').hasError('required')">
@@ -171,7 +171,7 @@
             </div>
             <div class="col-xs-6">
               <select class="form-control" id="invitees" dir="rtl" formControlName="invitees">
-                <option value="">All</option>
+                <option value="">Select</option>
                 <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
               </select>
               <p class="error-msg" *ngIf="submitted && eventForm.get('invitees').hasError('required')">
