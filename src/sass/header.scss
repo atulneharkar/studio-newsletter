@@ -39,7 +39,7 @@ header {
       background-color: rgba(60, 73, 96, 0.41);
     }
     span{
-      font-family: ProximaNova;
+      font-family: 'Barlow';
       font-size:11px;
       font-weight:600;
       font-style: normal;
@@ -64,7 +64,7 @@ header {
     .content-heading {
       margin-top: 130px;
       margin-left: 20px;
-      font-family: ProximaNova;
+      font-family: 'Barlow';
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
@@ -72,7 +72,7 @@ header {
       color:#fff;
       .lbl-head{
         font-size: 30px;
-        font-weight: bold;  
+        font-weight: bold;
       }
       .lbl-date{
         font-size: 14px;
@@ -98,7 +98,7 @@ header {
   justify-content: space-between;
   border-radius: 0 0 4px 4px;
   background-color: #ffffff;
-  font-family: ProximaNova;
+  font-family: 'Barlow';
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -116,7 +116,7 @@ header {
   div {
     width: 126px;
     /* height: 39px; */
-    font-family: ProximaNova;
+    font-family: 'Barlow';
     font-size: 11px;
     font-weight: normal;
     font-style: normal;
@@ -140,7 +140,7 @@ header {
     border-radius: 4px;
     background-color: #ffffff;
     padding: 24px 27px 0 22px;
-    font-family: ProximaNova;
+    font-family: 'Barlow';
     font-style: normal;
     font-stretch: normal;
     text-align: left;
@@ -159,6 +159,6 @@ header {
       letter-spacing:0.4px;
       padding-bottom:82px;
     }
-  }  
+  }
 }
 
