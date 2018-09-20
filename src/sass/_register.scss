@@ -86,6 +86,9 @@ input[type="date"]::-webkit-inner-spin-button{
 	    	background:#3c4960;
 	    }
 	}
+	.date-icon{
+		background-image: url(/assets/icons/calendar.svg) !important;
+	}	
 	.lbl-desc{
 		text-align:right;
 		padding-top:11px;

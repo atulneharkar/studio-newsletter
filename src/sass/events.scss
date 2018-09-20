@@ -1,3 +1,4 @@
+textarea {resize: none}
 .no-padding{
     padding:0 !important;
 }
@@ -39,6 +40,9 @@ input[type=number]::-webkit-outer-spin-button{
 				padding-top: 10px;
 			}
 		}
+        & :focus{
+            outline:none;
+        }
 	}
 	
 	.arrow-left{
@@ -241,7 +245,7 @@ input[type=number]::-webkit-outer-spin-button{
             text-align:right;
         }
         .upload-img-icon{
-            padding: 14px 15px 14px 15px;
+            padding: 14px 0px 14px 15px;
             margin: 0;
         }
         .from-dates{
@@ -249,6 +253,9 @@ input[type=number]::-webkit-outer-spin-button{
             background-image: url(/assets/icons/arrow-down.svg) !important;
             background-repeat: no-repeat !important;
             background-position: right !important;
+        }
+        .date-icon{
+            background-image: url(/assets/icons/calendar.svg) !important;
         }
         .lower-seperate{
 			border-bottom:1px solid #354155;

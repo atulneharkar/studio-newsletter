@@ -1,3 +1,11 @@
+input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0px 9999px white;
+    background: #3c4960;
+    -webkit-text-fill-color: #fff;
+	border-bottom: 1px solid #53627b;
+	transition: background-color 5000s ease-in-out 0s;
+	box-shadow: none;
+}
 .btn-login{
 	background-image: linear-gradient(284deg, #25646d, #50e3c2);
 	font-family: ProximaNova;
@@ -73,6 +81,10 @@
 	    line-height: normal;
 	    letter-spacing: normal;
 	    color: #fff;
+	}
+	&:focus{
+		text-decoration:none;
+		outline:none;
 	}
 	.login-label-val:focus{
 		box-shadow:none;
