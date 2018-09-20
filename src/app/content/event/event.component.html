@@ -82,8 +82,15 @@
           <p class="form-control description location">Upload Image</p>
         </div>
         <div class="col-xs-6 col-sm-6 text-right">
-          <input class="txt-label img-upload-area" type="file" id="profile-img" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
-          <label for="profile-img" class="upload-img-icon">
+          <input class="txt-label img-upload-area" type="file" formControlName="eventImage" id="eventImage" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
+          <!-- <p class="help-block">Upload file size limit 3 MB.</p> -->
+          <p *ngIf="fileSizeError" class="error-msg">
+            File size limit exceeds.
+          </p>
+          <p *ngIf="uploadError" class="error-msg">
+            Cannot upload file. Please try again.
+          </p>
+          <label for="eventImage" class="upload-img-icon">
             <img src="../../assets/icons/Documents.svg" class="upload-img"/>
           </label>
           <!-- <p class="help-block">Upload file size limit 3 MB.</p> -->
