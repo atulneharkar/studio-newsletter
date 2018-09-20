@@ -59,8 +59,10 @@ header {
   .ipitch-content {
     background-image: url(/assets/img/skill-building.png);
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
+    background-position: 50% 50%;
     height: 290px;
+
     .content-heading {
       margin-top: 130px;
       margin-left: 20px;
