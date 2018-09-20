@@ -7,7 +7,7 @@ input[type="date"]::-webkit-inner-spin-button{
 	.heading{
 		text-align:center;
 		margin:30px 0 22px 0;
-		font-family: ProximaNova;
+		font-family: Barlow;
 	    font-size: 17px;
 	    font-weight: normal;
 	    font-style: normal;
@@ -22,7 +22,7 @@ input[type="date"]::-webkit-inner-spin-button{
 		.profile-img{
 			width:80px;
 			height:80px;
-			border-radius:50%;	
+			border-radius:50%;
 		}
 		.edit-img-icon{
 			width:20px;
@@ -31,7 +31,7 @@ input[type="date"]::-webkit-inner-spin-button{
 		}
 	}
 	.lbl-txt{
-		font-family: ProximaNova;
+		font-family: Barlow;
 	    font-size: 10px;
 	    font-weight: normal;
 	    font-style: normal;
@@ -43,7 +43,7 @@ input[type="date"]::-webkit-inner-spin-button{
 	    margin-bottom:10px;
 	}
 	.lbl-val{
-		font-family: ProximaNova;
+		font-family: Barlow;
 	    font-size: 15px;
 	    font-weight: normal;
 	    font-style: normal;
@@ -72,7 +72,7 @@ input[type="date"]::-webkit-inner-spin-button{
 	    border: none;
 	    border-bottom: 1px solid #53627b;
 	    border-radius: 0;
-	    font-family: ProximaNova;
+	    font-family: Barlow;
 	    font-size: 15px;
 	    font-weight: normal;
 	    font-style: normal;
@@ -86,10 +86,13 @@ input[type="date"]::-webkit-inner-spin-button{
 	    	background:#3c4960;
 	    }
 	}
+	.date-icon{
+		background-image: url(/assets/icons/calendar.svg) !important;
+	}
 	.lbl-desc{
 		text-align:right;
 		padding-top:11px;
-		font-family: ProximaNova;
+		font-family: Barlow;
 	    font-size: 11px;
 	    font-weight: normal;
 	    font-style: normal;

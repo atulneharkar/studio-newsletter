@@ -33,7 +33,7 @@
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12">
             <!-- <label for="title">Title</label> -->
-            <input type="text" class="form-control title" id="title" formControlName="title" placeholder="Title">
+            <input type="text" [(ngModel)]="titleRet" class="form-control title" id="title" formControlName="title" placeholder="Title">
             <p *ngIf="submitted && eventForm.get('title').hasError('required')" class="error-msg">
               Title is required.
             </p>
@@ -43,7 +43,7 @@
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12">
             <!-- <label for="description">Description</label> -->
-            <textarea type="text" class="form-control description" id="description" formControlName="description" placeholder="Description"></textarea>
+            <textarea type="text" class="form-control description" id="description" [(ngModel)]="descRet" formControlName="description" placeholder="Description"></textarea>
             <p *ngIf="submitted && eventForm.get('description').hasError('required')" class="error-msg">
               Description is required.
             </p>
@@ -82,8 +82,15 @@
           <p class="form-control description location">Upload Image</p>
         </div>
         <div class="col-xs-6 col-sm-6 text-right">
-          <input class="txt-label img-upload-area" type="file" id="profile-img" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
-          <label for="profile-img" class="upload-img-icon">
+          <input class="txt-label img-upload-area" type="file" formControlName="eventImage" id="eventImage" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
+          <!-- <p class="help-block">Upload file size limit 3 MB.</p> -->
+          <p *ngIf="fileSizeError" class="error-msg">
+            File size limit exceeds.
+          </p>
+          <p *ngIf="uploadError" class="error-msg">
+            Cannot upload file. Please try again.
+          </p>
+          <label for="eventImage" class="upload-img-icon">
             <img src="../../assets/icons/Documents.svg" class="upload-img"/>
           </label>
           <!-- <p class="help-block">Upload file size limit 3 MB.</p> -->
@@ -105,7 +112,7 @@
                   <label for="form-date" class="form-control description location">Starts</label>
                 </div>
                 <div class="col-xs-6">
-                  <input type="date" class="form-control from-dates" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
+                  <input type="date" class="form-control from-dates date-icon" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
                   <p *ngIf="submitted && eventForm.get('slots').get('fromDate').hasError('required')" class="error-msg">
                     From date is required.
                   </p>
@@ -118,7 +125,7 @@
                   <label for="to-date" class="form-control description location">Ends</label>
                 </div>
                 <div class="col-xs-6">
-                  <input type="date" class="form-control from-dates" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
+                  <input type="date" class="form-control from-dates date-icon" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
                 </div>
               </div>
             </div>
@@ -188,7 +195,7 @@
       </div>
       <div class="form-group row last-row-space">
         <div class="col-sm-12 col-xs-12 no-padding">
-            <textarea type="text" class="form-control" id="notes" formControlName="notes" placeholder="Notes"></textarea>
+            <textarea type="text" [(ngModel)]="notesRet" class="form-control" id="notes" formControlName="notes" placeholder="Notes"></textarea>
         </div>
       </div>
 

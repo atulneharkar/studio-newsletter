@@ -21,6 +21,9 @@ export class EventComponent implements OnInit {
   public eventInfo: Event;
   public selectedOrganiser: string = '';
   public setFromDate: string = '';
+  public titleRet: string = '';
+  public descRet: string = '';
+  public notesRet: string = '';
   public setToDate: string = '';
   public setFromTime: string = '';
   public setToTime: string = '';
@@ -124,10 +127,15 @@ export class EventComponent implements OnInit {
       let eventObj = this.formatEvent(this.eventInfo[0]);
       this.selectedOrganiser = eventObj.organiser;
       this.selectedInvitees = eventObj.invitees;
+      this.titleRet = eventObj.title;
+      this.descRet = eventObj.description;
+      this.notesRet = eventObj.notes;
       this.setFromDate = this.helperService.getFormattedDate(eventObj.slots.fromDate);
+      console.log("this.setFromDate",this.setFromDate);
       if(eventObj.slots.toDate) {
         this.setToDate = this.helperService.getFormattedDate(eventObj.slots.toDate);
       }
+      console.log("this.setToDate",this.setToDate);
 
       this.setFromTime = this.helperService.getFormattedTime(eventObj.slots.fromTime);
       this.setToTime = this.helperService.getFormattedTime(eventObj.slots.toTime);

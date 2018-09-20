@@ -4,7 +4,7 @@
     <form [formGroup]="userForm" enctype="multipart/form-data" novalidate (ngSubmit)="onSubmit(userForm.valid)">
       <!--image upload-->
       <div class="user-image">
-        <img src="../../assets/img/main-slider/img4.jpg" class="profile-img"/>
+        <img src="../../assets/img/person-profile-photo.jpg" class="profile-img"/>
         <img src="../../assets/icons/edit.svg" class="edit-img-icon"/>
       </div>
 
@@ -114,7 +114,7 @@
       <div class="form-group row">
         <label for="dob" class="col-xs-12 col-form-label lbl-txt">Date of Birth</label>
         <div class="col-xs-12">
-          <input type="date" class="form-control lbl-select-val" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
+          <input type="date" class="form-control lbl-select-val date-icon" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
           <p *ngIf="submitted && userForm.get('dob').hasError('required')" class="error-msg">
               Date of birth is required.
           </p>
@@ -125,7 +125,7 @@
       <div class="form-group row">
         <label for="doj" class="col-xs-12 col-form-label lbl-txt">Date of Joining</label>
         <div class="col-xs-12">
-          <input type="date" class="form-control lbl-select-val" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
+          <input type="date" class="form-control lbl-select-val date-icon" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
           <p *ngIf="submitted && userForm.get('doj').hasError('required')" class="error-msg">
               Date of joining is required.
           </p>

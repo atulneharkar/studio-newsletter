@@ -1,9 +1,10 @@
+textarea {resize: none}
 .no-padding{
     padding:0 !important;
 }
 input[type=date]::-webkit-inner-spin-button,
 input[type=date]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button{
   -webkit-appearance: none;
 }
@@ -14,7 +15,7 @@ input[type=number]::-webkit-outer-spin-button{
 		text-align: center;
 		h2{
 			color: #fff;
-			font-family: 'ProximaNova';
+			font-family: 'Barlow';
 			font-size: 17px;
 			margin: 0;
     		padding-top: 12px;
@@ -28,7 +29,7 @@ input[type=number]::-webkit-outer-spin-button{
 				padding-right: 18px;
 				padding-top: 10px;
 			}
-		}	
+		}
 		.search-icon{
 			display: inline-block;
             .btn-event-submit{
@@ -39,8 +40,11 @@ input[type=number]::-webkit-outer-spin-button{
 				padding-top: 10px;
 			}
 		}
+        & :focus{
+            outline:none;
+        }
 	}
-	
+
 	.arrow-left{
 		padding-top: 10px;
 		cursor: pointer;
@@ -54,7 +58,8 @@ input[type=number]::-webkit-outer-spin-button{
 		border:1px solid #fff;
 		height: 30px;
 		color: #3c4960;
-		font-family: 'proxima_nova_altbold';
+		font-family: 'Barlow-Bold';
+		font-weight: 700;
 		font-size: 17px;
 		padding: 5px;
 	}
@@ -85,7 +90,7 @@ input[type=number]::-webkit-outer-spin-button{
 			text-align: left;
 			padding-left: 8px;
 			.venue-lbl{
-				font-family: 'ProximaNova';
+				font-family: 'Barlow';
     			color: #a8aeb9;
     			font-size: 10px;
     			line-height: normal;
@@ -94,7 +99,7 @@ input[type=number]::-webkit-outer-spin-button{
     		}
 			.venue-name{
 				display: block;
-				font-family: 'ProximaNova';
+				font-family: 'Barlow';
     			color: #ffffff;
     			font-size: 11px;
     			line-height: normal;
@@ -109,7 +114,7 @@ input[type=number]::-webkit-outer-spin-button{
 			padding-right: 10px;
 			vertical-align: top;
 			.time-lbl{
-				font-family: 'ProximaNova';
+				font-family: 'Barlow';
     			color: #a8aeb9;
     			font-size: 10px;
     			line-height: normal;
@@ -118,7 +123,7 @@ input[type=number]::-webkit-outer-spin-button{
 			}
 			.time-name{
 				display: block;
-				font-family: 'ProximaNova';
+				font-family: 'Barlow';
     			color: #ffffff;
     			font-size: 10px;
     			line-height: normal;
@@ -147,15 +152,15 @@ input[type=number]::-webkit-outer-spin-button{
         			padding-left: 15px;
         		}
         		.head{
-        			font-family: 'proxima_nova_altbold';
+					font-family: 'Barlow-Bold';
+					font-weight: 700;
         			color: #fff;
         			font-size: 21px;
         			line-height: 24px;
         			letter-spacing: -0.1px;
-        			font-weight: bold;
         		}
         		.date{
-        			font-family: 'ProximaNova';
+        			font-family: 'Barlow';
         			color: #a8aeb9;
         			font-size: 14px;
         			line-height: normal;
@@ -176,7 +181,7 @@ input[type=number]::-webkit-outer-spin-button{
         border-color: #3c4960;
     }
 
-    
+
 
     .panel-title > a {
         display: block;
@@ -204,14 +209,14 @@ input[type=number]::-webkit-outer-spin-button{
     	}
     	.title{
     		font-weight:bold;
-    		font-family: 'ProximaNova';
+    		font-family: 'Barlow';
     		font-size:24px;
     		letter-spacing:-0.1px;
     		line-height:1.17;
     		padding:20px 0 6px 0px;
     	}
     	.description{
-    		font-family: 'ProximaNova';
+    		font-family: 'Barlow';
     		font-size:14px;
     		line-height:normal;
     		padding:4px 0 23px 0px;
@@ -241,7 +246,7 @@ input[type=number]::-webkit-outer-spin-button{
             text-align:right;
         }
         .upload-img-icon{
-            padding: 14px 15px 14px 15px;
+            padding: 14px 0px 14px 15px;
             margin: 0;
         }
         .from-dates{
@@ -249,6 +254,9 @@ input[type=number]::-webkit-outer-spin-button{
             background-image: url(/assets/icons/arrow-down.svg) !important;
             background-repeat: no-repeat !important;
             background-position: right !important;
+        }
+        .date-icon{
+            background-image: url(/assets/icons/calendar.svg) !important;
         }
         .lower-seperate{
 			border-bottom:1px solid #354155;
@@ -263,7 +271,7 @@ input[type=number]::-webkit-outer-spin-button{
 			    background: rgba(43, 52, 68, 0.4);
 			    padding: 6px 0px 6px 15px;
 			    color: #a8aeb9;
-			    font-family: ProximaNova;
+			    font-family: 'Barlow';
 			    font-size: 11px;
 			    margin: 0;
     		}
@@ -273,7 +281,7 @@ input[type=number]::-webkit-outer-spin-button{
     		}
     		.txt-label{
     			color: #fff;
-			    font-family: ProximaNova;
+			    font-family: 'Barlow';
 			    font-size: 11px;
 			    letter-spacing:0.4px;
 			    font-weight:normal;
