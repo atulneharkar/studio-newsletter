@@ -58,6 +58,7 @@ export class EventListComponent implements OnInit {
       .subscribe(
         events => { 
           this.events = events;
+          this.events = this.events.reverse();
         });
   }
 
