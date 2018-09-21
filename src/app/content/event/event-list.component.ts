@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { EventService, CommonService } from '../../_services';
 import { Event } from '../../_interfaces';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-event-list',
@@ -21,6 +22,7 @@ export class EventListComponent implements OnInit {
 
   constructor(
       private eventService: EventService,
+      private router: Router,
       private commonService: CommonService) {
   }
 
@@ -29,6 +31,9 @@ export class EventListComponent implements OnInit {
     this.getAllEvents();
 
     this.currentUser = this.commonService.getUserCookies();
+    if(!this.currentUser){
+      this.router.navigate(['/login']);
+    }
   }
 
   //method to get current route from the url
@@ -58,6 +63,7 @@ export class EventListComponent implements OnInit {
       .subscribe(
         events => { 
           this.events = events;
+          this.events = this.events.reverse();
         });
   }
 

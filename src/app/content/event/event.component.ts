@@ -30,6 +30,7 @@ export class EventComponent implements OnInit {
   public successMsg: boolean = false;
   public serverError: boolean = false;
   public userId: number;
+  public currentUser: number;
   public slotsArr: Array<{}> = [];
   public message: string = "";
   public modalType: string = "success";
@@ -62,7 +63,10 @@ export class EventComponent implements OnInit {
     this.getAllUsers();
     this.buildEventForm();
 
-    this.userId = (this.commonService.getUserCookies())._id;
+    this.currentUser = this.commonService.getUserCookies();
+    if(!this.commonService.getUserCookies()){
+      this.router.navigate(['/login']);
+    }
   }
 
   //method to fetch event id from url
@@ -106,8 +110,8 @@ export class EventComponent implements OnInit {
       description: ['', [Validators.required]],
       location: ['', []],
       slots: this._fb.group({
-        fromDate: ['', []],
-        toDate: ['', []],
+        fromDate: ['', [Validators.required]],
+        toDate: ['', [Validators.required]],
         fromTime: ['', []],
         toTime: ['', []],
       }, { validator: this.helperService.dateTimeCompare }),

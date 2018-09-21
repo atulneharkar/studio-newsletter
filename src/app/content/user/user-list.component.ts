@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService, CommonService } from '../../_services';
 import { User } from '../../_interfaces';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-list',
@@ -21,8 +22,12 @@ export class UserListComponent implements OnInit {
 
   constructor(
       private userService: UserService,
+      private router: Router,
       private commonService: CommonService) {
     this.currentUser = this.commonService.getUserCookies();
+    if(!this.currentUser){
+      this.router.navigate(['/login']);
+    }
   }
 
   ngOnInit() {
@@ -70,7 +75,12 @@ export class UserListComponent implements OnInit {
       .subscribe(
         users => { 
           this.users = users;
+          console.log("users are",this.users);
         });
   }
+  private sendUserId(id) {
+    console.log("id is ",id);
+  }
+  
 
 }
