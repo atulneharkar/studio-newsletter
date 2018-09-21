@@ -28,12 +28,13 @@
       <div class="form-group row">
         <label for="email" class="col-xs-12 col-form-label lbl-txt">Email</label>
         <div class="col-xs-12">
-          <input type="email" class="form-control lbl-val" id="email" formControlName="email" placeholder="Email">
+          <input type="email" class="form-control lbl-val" id="email" formControlName="email" placeholder="Email" 
+          pattern="[\w.+\-]+@deloitte\.com">
           <p *ngIf="submitted && userForm.get('email').hasError('required')" class="error-msg">
               Email is required.
           </p>
           <p *ngIf="submitted && userForm.get('email').hasError('pattern')" class="error-msg">
-            Please enter a valid email.
+            Please enter a valid email with deloitte domain.
           </p>
           <!--email unique error-->
           <p *ngIf="uniqueEmailError" class="error-msg">
