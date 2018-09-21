@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-xs-6">
                   <input type="date" class="form-control from-dates date-icon" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
-                  <p *ngIf="submitted && eventForm.get('slots').get('fromDate').hasError('required')" class="error-msg">
+                  <p *ngIf="submitted && eventForm.get('slots').get('fromDate').hasError('required')" class="error-msg text-right">
                     From date is required.
                   </p>
                 </div>
@@ -126,12 +126,16 @@
                 </div>
                 <div class="col-xs-6">
                   <input type="date" class="form-control from-dates date-icon" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
+                  <p *ngIf="submitted && eventForm.get('slots').get('toDate').hasError('required')" class="error-msg text-right">
+                    To date is required.
+                  </p>
+                  <p *ngIf="submitted && eventForm.get('slots').hasError('dateError')" class="error-msg text-right">
+                    From date should be less than To date.
+                  </p>
                 </div>
               </div>
             </div>
-            <p class="error-msg" *ngIf="submitted && eventForm.get('slots').hasError('dateError')">
-              From date should be less than To date.
-            </p>
+            
       </div>
       <!-- <div class="form-group row time-row lower-seperate">
         <div class="col-sm-12 col-xs-12">
