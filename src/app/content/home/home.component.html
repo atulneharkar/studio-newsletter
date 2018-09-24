@@ -90,23 +90,23 @@
       </a>
     </div>
   </div>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+
+  <!--start repeater here-->
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding" *ngFor="let event of events let i = index">
     <div class="i-pitch-container">
       <div class="ipitch-content">
         <span>-</span>
         <div class="content-heading">
-          <div class="lbl-head">iPitch</div>
-          <div class="lbl-date">2017, Fri</div>
+          <div class="lbl-head">{{event.title}}</div>
+          <div class="lbl-date">{{event.slots[0].fromDate}}</div>
           <div><input type="button" value="I'm interested" /></div>
         </div>
-
-
       </div>
     </div>
     <div class="i-pitch-details">
       <div>
         <div class="lbl-txt">Venue</div>
-        <div class="lbl-val">Bombay Cocktail Bar, Off New Link Road, Andheri West, Mumbai</div>
+        <div class="lbl-val">{{events.location}}</div>
       </div>
       <div>
         <div class="lbl-txt">Time</div>
@@ -114,7 +114,8 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+
+  <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
     <div class="i-pitch-container">
       <div class="ipitch-content">
         <span>-</span>
@@ -137,12 +138,15 @@
       </div>
     </div>
   </div>
+
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding component-3-head">
     <div class="component-3">
       <div class="lbl-txt">Vodafone Hackathon</div>
       <div class="lbl-val">If you had 10 Cr to invest, in which company would you invest?</div>
     </div>
-  </div>
+  </div> -->
+
+  <!--End repeater here-->
 </div>
 
 <!-- Studio Folks -->
