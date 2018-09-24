@@ -47,6 +47,11 @@ const routes: Routes = [
     //canActivate: [AuthGuard]
   },
   {
+    path: "users/view/:id",
+    component: StudioFolksProfileComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
     path: "users",
     component: UserListComponent,
     //canActivate: [AuthGuard]

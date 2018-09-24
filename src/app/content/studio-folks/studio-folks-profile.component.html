@@ -3,7 +3,7 @@
      <img src="../../assets/icons/arrow.svg" onclick="window.history.go(-1); return false;"/>
   </div>
   <div class="col-xs-6 page-heading">
-    <h2>Studio Folks</h2>
+    <h2>Studio Folks Profile</h2>
   </div>
   <div class="col-xs-3 icon-head">
     <div class="search-icon">
@@ -15,8 +15,8 @@
   <div class="profile-head">
     <img src="../../assets/img/skill-building.png" class="profile-photo" />
     <div class="name-head">
-      <p class="name">Lily Tate</p>
-      <p class="designation">Consultant, Visual Designer</p>
+      <p class="name">{{users.name}}</p>
+      <p class="designation">{{users.designation}}, {{users.domain}}</p>
     </div>
   </div>
   <div class="details-area">
@@ -25,21 +25,21 @@
         EMAIL
       </div>
       <div class="value">
-        lillytate@deloitte.com
+        {{users.email}}
       </div>
 
       <div class="title-head">
         Date of birth
       </div>
       <div class="value">
-        23-Jan-1995
+        {{users.dob}}
       </div>
 
       <div class="title-head">
         Visa Holding
       </div>
       <div class="value">
-        US H1 Visa
+        {{users.visa}}
       </div>
 
     </div>
@@ -48,20 +48,20 @@
         PHONE NUMBER
       </div>
       <div class="value">
-        +91 65784 37475
+        {{users.phone}}
       </div>
       <div class="title-head">
         Deloitte
       </div>
       <div class="value">
-        3 years
+        {{users.previousExp}}
       </div>
 
       <div class="title-head">
-        SKills
+        Skills
       </div>
       <div class="value">
-        Lorem Ipsum
+        {{users.skills}}
       </div>
     </div>
     <div class="about">
@@ -69,7 +69,7 @@
           About me
         </div>
         <div class="value">
-          Basketball, Riding Bike, Hiking
+          {{users.phone}}
         </div>
     </div>
   </div>
@@ -78,7 +78,7 @@
           Shoutouts
         </div>
         <div class="value">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+          This person has to be given a shoutout
         </div>
         <div class="manager-name">
           - Karan Ingle, Manager

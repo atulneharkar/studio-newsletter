@@ -87,7 +87,7 @@
         <p>New Joinees</p>
       </div>
       <div class="list-head">
-          <div class="item" *ngFor="let user of users">
+          <div class="item" *ngFor="let user of users" (click)="sendUserId(user._id)">
             <img src="../../assets/img/skill-building.png" class="profile-photo" />
             <div class="detail">
               <p class="name">{{user.name}}</p>

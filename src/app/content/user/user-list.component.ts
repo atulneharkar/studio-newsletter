@@ -79,7 +79,8 @@ export class UserListComponent implements OnInit {
         });
   }
   private sendUserId(id) {
-    console.log("id is ",id);
+    console.log("user id is ",id);
+    this.router.navigate(['users/view', id]);
   }
   
 
