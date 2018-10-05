@@ -58,7 +58,7 @@
           <img src="../../assets/img/profile-photo.png" alt="logo" data-toggle="dropdown"/>
           <ul class="dropdown-menu">
             <li *ngFor="let menuItem of menuList">
-              <a href="{{menuItem.link}}" (click)="clearLogin($event.currentTarget.innerText)">{{menuItem.text}}</a>
+              <a [routerLink]="[menuItem.link]" (click)="clearLogin($event.currentTarget.innerText)">{{menuItem.text}}</a>
             </li>
           </ul>
         </div>
@@ -67,25 +67,25 @@
   </div>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
     <div class="studio-events-container">
-      <a href="/users">
+      <a [routerLink]="['/users']">
         <div>
           <img src="../../assets/img/studio-folks.png" />
           <span>Studio Folks</span>
         </div>
       </a>
-      <a href="/events">
+      <a [routerLink]="['/events']">
         <div>
           <img src="../../assets/img/book_a_room@3x.png" />
           <span>Timeline</span>
         </div>
       </a>
-      <a href="/events/create">
+      <a [routerLink]="['/events/create']">
         <div>
           <img src="../../assets/img/create_poll@3x.png" />
           <span>Create event</span>
         </div>
       </a>
-      <a href="/register" class="hide">
+      <a [routerLink]="['/register']" class="hide">
         <div>
           <img src="../../assets/img/timeline@3x.png" />
           <span>Register</span>
