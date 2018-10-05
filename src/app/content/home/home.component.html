@@ -54,10 +54,13 @@
         <div class="logo">
           <img src="../../assets/img/studiofy.svg" alt="logo" />
         </div>
-        <div class="header-icon">
-          <a href="/login">
-            <img src="../../assets/img/profile-photo.png" alt="logo" />
-          </a>
+        <div class="header-icon dropdown">
+          <img src="../../assets/img/profile-photo.png" alt="logo" data-toggle="dropdown"/>
+          <ul class="dropdown-menu">
+            <li *ngFor="let menuItem of menuList">
+              <a href="{{menuItem.link}}" (click)="clearLogin($event.currentTarget.innerText)">{{menuItem.text}}</a>
+            </li>
+          </ul>
         </div>
       </div>
     </header>
@@ -92,7 +95,7 @@
   </div>
 
   <!--start repeater here-->
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding" *ngFor="let event of events let i = index">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding" *ngFor="let event of events |slice:0:show let i = index">
     <div class="i-pitch-container">
       <div class="ipitch-content">
         <span>-</span>
@@ -106,7 +109,7 @@
     <div class="i-pitch-details">
       <div>
         <div class="lbl-txt">Venue</div>
-        <div class="lbl-val">{{events.location}}</div>
+        <div class="lbl-val">{{event.location}}</div>
       </div>
       <div>
         <div class="lbl-txt">Time</div>
@@ -147,6 +150,14 @@
   </div> -->
 
   <!--End repeater here-->
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding text-center">
+    <div class="i-pitch-container">
+      <input type="button" value="Show More" class="btn-show-more" *ngIf="i==4 && show == 5" (click)="show = events.length"/> 
+    </div>
+    <!-- <input type="button" class="show-more" (click)="getData()" [disabled]="counter>=content.length">
+      Show more
+    </input> -->
+  </div>
 </div>
 
 <!-- Studio Folks -->

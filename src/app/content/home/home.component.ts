@@ -7,12 +7,24 @@ import { EventService, CommonService } from '../../_services';
 })
 export class HomeComponent implements OnInit {
   public events: Event[] = [];
+  public userInfo: String;
+  menuList = [];
 
   constructor(private eventService: EventService,
       private commonService: CommonService) { }
 
   ngOnInit() {
   	this.getAllEvents();
+    this.userInfo = this.commonService.getUserCookies();
+    if(!!this.userInfo){
+      console.log("user logged in");
+      this.menuList = [{"link":"","text":"Logout"}];
+    }
+    else{
+      this.menuList = [{"link":"login","text":"Login"},{"link":"register","text":"Register"}];
+    }
+  	let elem:Element = document.getElementById("myDropdown");
+  	//elem.hide();
   }
 
   //method to get event list
@@ -26,5 +38,11 @@ export class HomeComponent implements OnInit {
           console.log("this.events",this.events);
         });
   }
+  clearLogin(event) {
+    if(event == 'Logout'){
+      this.commonService.deleteUserCookies();
+    }
+  }
+  
 
 }

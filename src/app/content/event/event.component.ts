@@ -108,7 +108,7 @@ export class EventComponent implements OnInit {
     this.eventForm = this._fb.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      location: ['', []],
+      location: ['', [Validators.required]],
       slots: this._fb.group({
         fromDate: ['', [Validators.required]],
         toDate: ['', [Validators.required]],
@@ -117,7 +117,7 @@ export class EventComponent implements OnInit {
       }, { validator: this.helperService.dateTimeCompare }),
       organiser: ['', []],
       notes: ['', []],
-      invitees: ['', []],
+      invitees: ['', [Validators.required]],
       eventImage: ['', ''],
     });
 
