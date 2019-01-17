@@ -15,4 +15,11 @@ export class FileUploadService {
     return this.http.post(url, formData, this.commonService.getJwt(token)).map((response: Response) => 
     	(token) ? '' : this.commonService.setUserCookies(response, ''));
   }
+
+  //method to upload event image (avatar)
+  uploadEventImage(formData, token) {
+    const url = `${this.commonService.getDomainUrl()}/event/pic/id`;
+    return this.http.post(url, formData, this.commonService.getJwt(token)).map((response: Response) => 
+    	(token) ? '' : this.commonService.setUserCookies(response, ''));
+  }
 }

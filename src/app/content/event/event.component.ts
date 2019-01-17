@@ -46,7 +46,7 @@ export class EventComponent implements OnInit {
   public fileSizeError: boolean = false;
   public uploadedFiles: Array<any> = [];
   public uploadError: boolean = false;
-  public uploadFieldName = 'eventImage';
+  public uploadFieldName = 'eventPic';
 
   constructor(private _fb: FormBuilder,
         private router: Router,
@@ -118,7 +118,7 @@ export class EventComponent implements OnInit {
       organiser: ['', []],
       notes: ['', []],
       invitees: ['', [Validators.required]],
-      eventImage: ['', []],
+      eventPic: ['', []],
     });
 
     //pre fill the values for editing form
@@ -169,7 +169,9 @@ export class EventComponent implements OnInit {
         .subscribe(
           data => {
             if(this.imageInfo) {
-              this.saveImage(this.imageInfo);
+              let headers: Headers;              
+              let token = data.headers.get('x-auth');
+              this.saveImage(this.imageInfo,token);
             } else {
               this.successMsg = true;
               setTimeout(() => {
@@ -228,7 +230,7 @@ export class EventComponent implements OnInit {
 
   //save uploaded file (profile pic)
   saveImage(data, userToken = null) {
-    this._fileUpload.upload(data, userToken)
+    this._fileUpload.uploadEventImage(data, userToken)
       .take(1)
       .subscribe(x => {
         this.successMsg = true;
@@ -261,7 +263,7 @@ export class EventComponent implements OnInit {
       organiser: event.organiser._id,
       invitees: event.invitees,
       notes: event.notes,
-      eventImage: event.eventImage
+      eventPic: event.eventPic
     };
   }
 
