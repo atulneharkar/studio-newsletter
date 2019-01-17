@@ -48,7 +48,7 @@ export class EventComponent implements OnInit {
   public uploadError: boolean = false;
   public uploadFieldName = 'eventImage';
 
-  constructor(private _fb: FormBuilder, 
+  constructor(private _fb: FormBuilder,
         private router: Router,
         private route: ActivatedRoute,
         private commonService: CommonService,
@@ -97,14 +97,14 @@ export class EventComponent implements OnInit {
   getAllUsers() {
     this.userService.getAll()
       .subscribe(
-        users => { 
+        users => {
           this.users = users;
         });
   }
 
   //method to create event form - reactive way
   buildEventForm(): void {
-    //initialize our form 
+    //initialize our form
     this.eventForm = this._fb.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -118,7 +118,7 @@ export class EventComponent implements OnInit {
       organiser: ['', []],
       notes: ['', []],
       invitees: ['', [Validators.required]],
-      eventImage: ['', ''],
+      eventImage: ['', []],
     });
 
     //pre fill the values for editing form
@@ -127,7 +127,7 @@ export class EventComponent implements OnInit {
       this.title = 'Edit Event';
       this.buttonText = 'Update';
 
-      //prefill the form 
+      //prefill the form
       let eventObj = this.formatEvent(this.eventInfo[0]);
       this.selectedOrganiser = eventObj.organiser;
       this.selectedInvitees = eventObj.invitees;

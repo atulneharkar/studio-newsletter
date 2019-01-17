@@ -97,7 +97,8 @@
   <!--start repeater here-->
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding" *ngFor="let event of events |slice:0:show let i = index">
     <div class="i-pitch-container">
-      <div class="ipitch-content">
+      <div class="ipitch-content"
+          [style.backgroundImage]="event.image || gradientArray[event.gradient]">
         <span>-</span>
         <div class="content-heading">
           <div class="lbl-head">{{event.title}}</div>
@@ -152,7 +153,7 @@
   <!--End repeater here-->
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding text-center">
     <div class="i-pitch-container">
-      <input type="button" value="Show More" class="btn-show-more" *ngIf="i==4 && show == 5" (click)="show = events.length"/> 
+      <input type="button" value="Show More" class="btn-show-more" *ngIf="i==4 && show == 5" (click)="show = events.length"/>
     </div>
     <!-- <input type="button" class="show-more" (click)="getData()" [disabled]="counter>=content.length">
       Show more

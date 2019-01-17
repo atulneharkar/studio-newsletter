@@ -12,4 +12,5 @@ export interface Event {
   invitees: string;
   image: string;
   notes: string;
+  gradient: number;
 }
