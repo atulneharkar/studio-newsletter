@@ -111,6 +111,14 @@ const routes: Routes = [
     component: InternalProjectComponent,
     //canActivate: [AuthGuard]
   },
+  {
+    path: "book-a-room",
+    component: InternalProjectComponent,
+  },
+  {
+    path: "create-poll",
+    component: InternalProjectComponent,
+  },
 
   // otherwise redirect to content
   {
