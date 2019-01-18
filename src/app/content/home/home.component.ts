@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
   clearLogin(event) {
     if(event == 'Logout'){
       this.commonService.deleteUserCookies();
+      window.location.reload();
     }
   }
 
