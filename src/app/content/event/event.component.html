@@ -66,8 +66,8 @@
         <div class="col-sm-6 col-xs-6 text-right">
           <!-- <p class="txt-label">Colaba</p>
           <img src="../../assets/icons/Arrow-Right.svg" class="go-arrow"/> -->
-          <select dir="rtl" class="form-control" id="location" formControlName="location">
-            <option value="">Select</option>
+          <select required dir="rtl" class="form-control event-sel" id="location" formControlName="location">
+            <option selected disabled hidden value="">Select</option>
             <option *ngFor="let name of locations" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
           <p class="error-msg" *ngIf="submitted && eventForm.get('location').hasError('required')">
@@ -112,7 +112,7 @@
                   <label for="form-date" class="form-control description location">Starts</label>
                 </div>
                 <div class="col-xs-6">
-                  <input type="date" class="form-control from-dates date-icon" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
+                  <input required type="date" class="form-control event-sel from-dates date-icon" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
                   <p *ngIf="submitted && eventForm.get('slots').get('fromDate').hasError('required')" class="error-msg text-right">
                     From date is required.
                   </p>
@@ -125,7 +125,7 @@
                   <label for="to-date" class="form-control description location">Ends</label>
                 </div>
                 <div class="col-xs-6">
-                  <input type="date" class="form-control from-dates date-icon" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
+                  <input type="date" required class="form-control from-dates date-icon event-sel" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
                   <p *ngIf="submitted && eventForm.get('slots').get('toDate').hasError('required')" class="error-msg text-right">
                     To date is required.
                   </p>
@@ -181,8 +181,8 @@
               <label for="invitees" class="form-control description location">Invitees</label>
             </div>
             <div class="col-xs-6">
-              <select class="form-control" id="invitees" dir="rtl" formControlName="invitees">
-                <option value="">Select</option>
+              <select required class="form-control event-sel" id="invitees" dir="rtl" formControlName="invitees">
+                <option selected disabled hidden value="">Select</option>
                 <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
               </select>
               <p class="error-msg text-right" *ngIf="submitted && eventForm.get('invitees').hasError('required')">

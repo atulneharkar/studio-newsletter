@@ -207,6 +207,13 @@ input[type=number]::-webkit-outer-spin-button{
     		color:#fff;
     		height:auto;
     	}
+        .event-sel option{
+            color:#fff;
+        }
+        .event-sel:invalid,
+        .event-sel option[value=""]{
+            color:#53627b;
+        }
     	.title{
     		font-weight:bold;
     		font-family: 'Barlow';
