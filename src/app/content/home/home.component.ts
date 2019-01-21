@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService, CommonService } from '../../_services';
 import { Event } from '../../_interfaces';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
   menuList = [];
 
   constructor(private eventService: EventService,
-      private commonService: CommonService) { }
+      private commonService: CommonService,
+      private router: Router) { }
 
   ngOnInit() {
     this.gradientArray = [
@@ -56,6 +58,7 @@ export class HomeComponent implements OnInit {
   clearLogin(event) {
     if(event == 'Logout'){
       this.commonService.deleteUserCookies();
+      this.router.navigate(['/login']);
     }
   }
 

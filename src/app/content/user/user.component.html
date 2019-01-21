@@ -11,7 +11,7 @@
 
 
       <!--name-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="name" class="col-xs-12 col-form-label lbl-txt">Name</label>
         <div class="col-xs-12">
           <input type="text" class="form-control lbl-val" id="name" formControlName="name" placeholder="Name">
@@ -25,7 +25,7 @@
       </div>
 
       <!--email-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="email" class="col-xs-12 col-form-label lbl-txt">Email</label>
         <div class="col-xs-12">
           <input type="email" class="form-control lbl-val" id="email" formControlName="email" placeholder="Email" 
@@ -44,7 +44,7 @@
       </div>
 
       <!--password-->
-      <div class="form-group row" formGroupName="credentials">
+      <div class="form-group row space-btm" formGroupName="credentials">
         <label for="password" class="col-xs-12 col-form-label lbl-txt">Password</label>
         <div class="col-xs-12">
           <input type="password" class="form-control lbl-val" id="password" formControlName="password" placeholder="Password">
@@ -55,7 +55,7 @@
       </div>
 
       <!--confirm password-->
-      <div class="form-group row" formGroupName="credentials">
+      <div class="form-group row space-btm" formGroupName="credentials">
         <label for="confirm-password" class="col-xs-12 col-form-label lbl-txt">Confirm Password</label>
         <div class="col-xs-12">
           <input type="password" class="form-control lbl-val" id="confirm-password" formControlName="confirmPassword" placeholder="Confirm Password">
@@ -66,7 +66,7 @@
       </div>
 
       <!--phone-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="phone" class="col-xs-12 col-form-label lbl-txt">Phone</label>
         <div class="col-xs-12">
           <input type="number" class="form-control lbl-val" id="phone" formControlName="phone" placeholder="Phone">
@@ -84,7 +84,7 @@
       </div>
 
       <!--designation-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="designation" class="col-xs-12 col-form-label lbl-txt">Designation</label>
         <div class="col-xs-12">
           <select class="form-control lbl-select-val" id="designation" formControlName="designation">
@@ -98,7 +98,7 @@
       </div>
 
       <!--domain-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="domain" class="col-xs-12 col-form-label lbl-txt">Domain</label>
         <div class="col-xs-12">
           <select class="form-control lbl-select-val" id="domain" formControlName="domain">
@@ -112,7 +112,7 @@
       </div>
 
       <!--date of birth-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="dob" class="col-xs-12 col-form-label lbl-txt">Date of Birth</label>
         <div class="col-xs-12">
           <input type="date" class="form-control lbl-select-val date-icon" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
@@ -123,7 +123,7 @@
       </div>
 
       <!--date of joining-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="doj" class="col-xs-12 col-form-label lbl-txt">Date of Joining</label>
         <div class="col-xs-12">
           <input type="date" class="form-control lbl-select-val date-icon" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
@@ -134,7 +134,7 @@
       </div>
 
       <!--skills-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="skills" class="col-xs-12 col-form-label lbl-txt">Skills</label>
         <div class="col-xs-12">
           <input type="text" class="form-control lbl-val" id="skills" formControlName="skills" placeholder="Skills">
@@ -145,7 +145,7 @@
       </div>
 
       <!--visa-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="visa" class="col-xs-12 col-form-label lbl-txt">Visa (if any)</label>
         <div class="col-xs-12">
           <input type="text" class="form-control lbl-val" id="visa" formControlName="visa" placeholder="Visa">
@@ -153,7 +153,7 @@
       </div>
 
       <!--about-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="about" class="col-xs-12 col-form-label lbl-txt">About me</label>
         <div class="col-xs-12">
           <input type="text" class="form-control lbl-val" id="about" formControlName="about" placeholder="About me">
@@ -164,7 +164,7 @@
       </div>
 
       <!--profile img-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
   	    <label for="profile-img" class="col-xs-12 col-form-label lbl-txt">Profile Image</label>
         <div class="col-xs-12">
     	    <input type="file" id="profile-img" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
