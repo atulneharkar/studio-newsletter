@@ -63,6 +63,9 @@ input[type="date"]::-webkit-inner-spin-button{
 	    padding: 0 0 10px 0;
 	    margin-bottom:0;
 	}
+	.lbl-val::placeholder,{
+		color:#53627b;
+	}
 	.lbl-select-val{
 		-webkit-appearance: none;
 	    -moz-appearance: none;
@@ -87,7 +90,12 @@ input[type="date"]::-webkit-inner-spin-button{
 	    box-shadow:none;
 	    option{
 	    	background:#3c4960;
+	    	color:#fff;
 	    }
+	}
+	.lbl-select-val:invalid,
+	.lbl-select-val option[value=""] {
+		color: #53627b;
 	}
 	.date-icon{
 		background-image: url(/assets/icons/calendar.svg) !important;

@@ -87,8 +87,8 @@
       <div class="form-group row space-btm">
         <label for="designation" class="col-xs-12 col-form-label lbl-txt">Designation</label>
         <div class="col-xs-12">
-          <select class="form-control lbl-select-val" id="designation" formControlName="designation">
-            <option value="">Select Designation</option>
+          <select required class="form-control lbl-select-val" id="designation" formControlName="designation">
+            <option value="" selected disabled hidden>Select Designation</option>
             <option *ngFor="let name of designations" [selected]="selectedDesignation === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && userForm.get('designation').hasError('required')" class="error-msg">
@@ -101,8 +101,8 @@
       <div class="form-group row space-btm">
         <label for="domain" class="col-xs-12 col-form-label lbl-txt">Domain</label>
         <div class="col-xs-12">
-          <select class="form-control lbl-select-val" id="domain" formControlName="domain">
-            <option value="">Select Domain</option>
+          <select required class="form-control lbl-select-val" id="domain" formControlName="domain">
+            <option selected disabled hidden value="">Select Domain</option>
             <option *ngFor="let name of domains" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
           <p *ngIf="submitted && userForm.get('domain').hasError('required')" class="error-msg">
@@ -115,7 +115,7 @@
       <div class="form-group row space-btm">
         <label for="dob" class="col-xs-12 col-form-label lbl-txt">Date of Birth</label>
         <div class="col-xs-12">
-          <input type="date" class="form-control lbl-select-val date-icon" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
+          <input required type="date" class="form-control lbl-select-val date-icon" id="dob" formControlName="dob" placeholder="Date of Birth" [(ngModel)]="setDobDate">
           <p *ngIf="submitted && userForm.get('dob').hasError('required')" class="error-msg">
               Date of birth is required.
           </p>
@@ -126,7 +126,7 @@
       <div class="form-group row space-btm">
         <label for="doj" class="col-xs-12 col-form-label lbl-txt">Date of Joining</label>
         <div class="col-xs-12">
-          <input type="date" class="form-control lbl-select-val date-icon" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
+          <input required type="date" class="form-control lbl-select-val date-icon" id="doj" formControlName="doj" placeholder="Date of Joining" [(ngModel)]="setDojDate">
           <p *ngIf="submitted && userForm.get('doj').hasError('required')" class="error-msg">
               Date of joining is required.
           </p>
