@@ -12,6 +12,12 @@ import {Router} from "@angular/router";
 export class UserListComponent implements OnInit {
   public currentUser: User;
   public users: User[] = [];
+  public uxUsers: User[] = [];
+  public njUsers: User[] = [];
+  public vdUsers: User[] = [];
+  public qaUsers: User[] = [];
+  public fedUsers: User[] = [];
+  public fxUsers: User[] = [];
   public message: string = '';
   public modalType: string = "confirm";
   public showModal: boolean = false;
@@ -76,6 +82,29 @@ export class UserListComponent implements OnInit {
         users => { 
           this.users = users;
           console.log("users are",this.users);
+          this.uxUsers = this.users.filter(function(item){
+            return item.domain === 'UX';
+          });
+          this.njUsers = this.users.filter(function(item){
+            // console.log("item",item.doj.slice(0,10) + 2weeks >= todaysdate);
+            var curDate = new Date(Date.parse(item.doj));
+            var newDate = curDate;
+            newDate.setDate(curDate.getDate()+14);
+            //console.log("newDate",newDate);
+            return newDate >= new Date();
+          });
+          this.vdUsers = this.users.filter(function(item){
+            return item.domain === 'VD';
+          })
+          this.qaUsers = this.users.filter(function(item){
+            return item.domain === 'QA';
+          });
+          this.fedUsers = this.users.filter(function(item){
+            return item.domain === 'FE';
+          });
+          this.fxUsers = this.users.filter(function(item){
+            return item.domain === 'FX';
+          })
         });
   }
   private sendUserId(id) {
