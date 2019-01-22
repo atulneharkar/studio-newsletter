@@ -177,7 +177,7 @@ export class EventComponent implements OnInit {
               setTimeout(() => {
                 this.loading = false;
                 this.successMsg = false;
-                this.router.navigate(['/events']);
+                this.router.navigate(['/']);
               }, 3000);
             }
           },
@@ -198,7 +198,7 @@ export class EventComponent implements OnInit {
               this.successMsg = true;
               setTimeout(() => {
                 this.successMsg = false;
-                this.router.navigate(['/events']);
+                this.router.navigate(['/']);
               }, 3000);
             }
           },
@@ -237,13 +237,13 @@ export class EventComponent implements OnInit {
         this.loading = false;
         setTimeout(() => {
           this.successMsg = false;
-          this.router.navigate(['/events']);
+          this.router.navigate(['/']);
         }, 3000);
       }, err => {
         this.uploadError = true;
         setTimeout(() => {
           this.successMsg = false;
-          this.router.navigate(['/events']);
+          this.router.navigate(['/']);
         }, 3000);
       })
   }

@@ -262,6 +262,9 @@ input[type=number]::-webkit-outer-spin-button{
             background-image: url(/assets/icons/arrow-down.svg) !important;
             background-repeat: no-repeat !important;
             background-position: right !important;
+		}
+		.from-time{
+            text-align:right;
         }
         .date-icon{
             background-image: url(/assets/icons/calendar.svg) !important;

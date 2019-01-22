@@ -32,14 +32,14 @@
         Date of birth
       </div>
       <div class="value">
-        {{users.dob}}
+        {{users.dob.slice(0,10)}}
       </div>
 
       <div class="title-head">
         Visa Holding
       </div>
       <div class="value">
-        {{users.visa}}
+        {{users.visa || 'None'}}
       </div>
 
     </div>
@@ -51,7 +51,7 @@
         {{users.phone}}
       </div>
       <div class="title-head">
-        Deloitte
+        Deloitte Experience
       </div>
       <div class="value">
         {{users.previousExp}}
@@ -61,7 +61,7 @@
         Skills
       </div>
       <div class="value">
-        {{users.skills}}
+        {{users.skills || 'None'}}
       </div>
     </div>
     <div class="about">

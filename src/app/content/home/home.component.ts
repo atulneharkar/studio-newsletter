@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class HomeComponent implements OnInit {
   public events: Event[] = [];
   public userInfo: String;
+  public domain: String;
   public gradientArray: String[] = [];
   menuList = [];
 
@@ -26,8 +27,8 @@ export class HomeComponent implements OnInit {
       'linear-gradient(-134deg, #4E3DEC 0%, #F08585 100%)'
     ]
 
-  	this.getAllEvents();
-    this.userInfo = this.commonService.getUserCookies();
+  	this.userInfo = this.commonService.getUserCookies();
+    this.getAllEvents();
     if(!!this.userInfo){
       console.log("user logged in");
       this.menuList = [{"link":"","text":"Logout"}];
@@ -46,13 +47,29 @@ export class HomeComponent implements OnInit {
       .subscribe(
         events => {
           this.events = events;
+          var domain = this.commonService.getUserCookies().domain;
+          console.log("domain",domain);
+          console.log("todays date",new Date());
           this.events = this.events.reverse();
+          console.log("this.events",this.events);
+          // var filterCriteria = {
+          //   "domain":domain,
+          //   "date":"123"
+          // };
+          // console.log("filterCriteria",filterCriteria);
+          this.events = this.events.filter(function(event){
+            return event.invitees == domain;
+          })
+          this.events = this.events.filter(function(event){
+            return new Date(event.slots[0].fromDate.slice(0,10)).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)
+          })
+          console.log("this.events",this.events);
           this.events.forEach(event => {
             if(!event.image) {
               event['gradient'] = Math.floor(Math.random() * 5)
             }
           })
-          console.log("this.events",this.events);
+          
         });
   }
   clearLogin(event) {

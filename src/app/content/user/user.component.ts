@@ -24,8 +24,8 @@ export class UserComponent implements OnInit {
   public loading = false;
   public userId: number;
   public userInfo: User;
-  public designations: any[] = ['BTA', 'Consultant', 'Senior Consultant', 'Manager', 'Senior Manager'];
-  public domains: any[] = ['UX', 'VD', 'QA', 'FE'];
+  public designations: any[] = ['AA','BTA', 'Consultant', 'Senior Consultant', 'Manager', 'Senior Manager'];
+  public domains: any[] = ['UX', 'VD', 'QA', 'FE','FX'];
   public selectedDesignation: string = '';
   public selectedDomain: string = '';
   private imageInfo: any;
