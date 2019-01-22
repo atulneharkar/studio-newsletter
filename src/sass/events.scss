@@ -8,6 +8,7 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button{
   -webkit-appearance: none;
 }
+
 .timeline{
 	background-color: #2b3444;
 	height: 44px;
@@ -152,7 +153,6 @@ input[type=number]::-webkit-outer-spin-button{
         			padding-left: 15px;
         		}
         		.head{
-					font-family: 'Barlow-Bold';
 					font-weight: 700;
         			color: #fff;
         			font-size: 21px;

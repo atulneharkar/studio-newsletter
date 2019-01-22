@@ -1,0 +1,13 @@
+// Placeholder color for inputs
+::placeholder {
+	color: #a8aeb9!important;
+	opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #a8aeb9 !important;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+   color: #a8aeb9 !important;
+  }
