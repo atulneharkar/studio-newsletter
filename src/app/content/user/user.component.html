@@ -31,7 +31,7 @@
           <div class="form-group__email d-flex">
             <input type="email" class="form-control lbl-val" id="email" formControlName="email" placeholder="Email"
             pattern="[A-Za-z0-9]+"
-            [style.width]="userForm.get('email').value ? (userForm.get('email').value.length)*8+ 'px' : '100%'">
+            [style.width]="userForm.get('email').value ? (userForm.get('email').value.length)*9+ 'px' : '100%'">
             <span class="form-group__email__domain lbl-val"
                   *ngIf="userForm.get('email').value">@deloitte.com</span>
           </div>
