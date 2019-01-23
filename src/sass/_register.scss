@@ -47,7 +47,7 @@ input[type="date"]::-webkit-inner-spin-button{
 	}
 	.lbl-val{
 		font-family: Barlow;
-	    font-size: 15px;
+	    font-size: 16px;
 	    font-weight: normal;
 	    font-style: normal;
 	    font-stretch: normal;
@@ -111,6 +111,22 @@ input[type="date"]::-webkit-inner-spin-button{
 	    line-height: normal;
 	    letter-spacing: normal;
 	    color:#96a5a7;
+	}
+	.form-group {
+		&__email {
+			display: flex;
+			align-items: baseline;
+			border-bottom: 1px solid #53627b;
+
+			input,
+			&__domain.lbl-val {
+				border-bottom: 0;
+			}
+
+			&__domain {
+				color: #fff;
+			}
+		}
 	}
 }
 .booking-room-content{
