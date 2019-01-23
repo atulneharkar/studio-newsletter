@@ -3,11 +3,11 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@ang
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Headers } from '@angular/http';
 
-import { 
-  UserService, 
-  CommonService, 
-  FileUploadService, 
-  HelperService, 
+import {
+  UserService,
+  CommonService,
+  FileUploadService,
+  HelperService,
   ValidationService } from '../../_services';
 import { User } from '../../_interfaces';
 
@@ -45,7 +45,7 @@ export class UserComponent implements OnInit {
   public title: string = 'Register';
   public buttonText: string = 'Save';
 
-  constructor(private _fb: FormBuilder, 
+  constructor(private _fb: FormBuilder,
         private router: Router,
         private route: ActivatedRoute,
         private userService: UserService,
@@ -84,16 +84,15 @@ export class UserComponent implements OnInit {
 
   //method to create user form - reactive way
   buildUserForm(): void {
-    //initialize our form 
+    //initialize our form
     this.userForm = this._fb.group({
       name: ['', [
-          Validators.required, 
+          Validators.required,
           Validators.minLength(2)
         ]
       ],
       email: ['', [
-          Validators.required,
-          Validators.pattern(this.validationService.getEmailPattern())
+          Validators.required
         ]
       ],
       credentials: this._fb.group({
@@ -112,7 +111,7 @@ export class UserComponent implements OnInit {
       skills: ['', [Validators.required]],
       visa: ['', [Validators.required]],
       about: ['', [Validators.required]],
-      avatar: ['', ''],
+      avatar: [''],
       role: ['user', '']
     });
 
@@ -121,8 +120,8 @@ export class UserComponent implements OnInit {
       //set page title and button text if user is editing profile
       this.title = 'Edit Profile';
       this.buttonText = 'Update';
-      
-      //prefill the form 
+
+      //prefill the form
       let userObj = this.formatUser(this.userInfo);
       this.selectedDesignation = userObj.designation;
       this.selectedDomain = userObj.domain;
@@ -149,8 +148,11 @@ export class UserComponent implements OnInit {
       return;
     }
 
-    this.user = this.userForm.value;
     if(isValid) {
+      this.userForm.controls['email'].setValue(`${this.userForm.get('email').value.replace('@deloitte.com', '')}@deloitte.com`)
+      console.log(this.userForm)
+
+      this.user = this.userForm.value;
       this.loading = true;
       if(!this.userId) {
         this.message = "Registered Successfully";
@@ -286,7 +288,7 @@ export class UserComponent implements OnInit {
   //method to set error messages
   setError(error) {
     if(error.status === 400) {
-      if(error._body.trim() === 'email') { 
+      if(error._body.trim() === 'email') {
         this.uniqueEmailError = true;
       } else if(error._body.trim() === 'phone') {
         this.uniquePhoneError = true;
