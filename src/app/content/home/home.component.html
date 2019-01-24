@@ -111,10 +111,10 @@
     <div class="i-pitch-container">
       <div class="ipitch-content"
           [style.backgroundImage]="event.image || gradientArray[event.gradient]">
-        <span>-</span>
+        <span>&nbsp;</span>
         <div class="content-heading">
           <div class="lbl-head">{{event.title}}</div>
-          <div class="lbl-date">{{event.slots[0].fromDate}}</div>
+          <div class="lbl-date">{{event.slots[0].fromDate.slice(0,10)}}</div>
           <div><input type="button" value="I'm interested" /></div>
         </div>
       </div>
@@ -126,7 +126,7 @@
       </div>
       <div>
         <div class="lbl-txt">Time</div>
-        <div class="lbl-val">9 PM ONWARDS</div>
+        <div class="lbl-val">{{event.slots[0].fromTime.slice(11,16)}} ONWARDS</div>
       </div>
     </div>
   </div>

@@ -88,4 +88,7 @@ input:-webkit-autofill {
 	.login-label-val:focus{
 		box-shadow:none;
 	}
+	.login-label-val::placeholder{
+		color:#53627b;
+	}
 }

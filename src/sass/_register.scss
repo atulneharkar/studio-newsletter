@@ -47,7 +47,7 @@ input[type="date"]::-webkit-inner-spin-button{
 	}
 	.lbl-val{
 		font-family: Barlow;
-	    font-size: 15px;
+	    font-size: 16px;
 	    font-weight: normal;
 	    font-style: normal;
 	    font-stretch: normal;
@@ -62,6 +62,9 @@ input[type="date"]::-webkit-inner-spin-button{
 	    background:#3c4960;
 	    padding: 0 0 10px 0;
 	    margin-bottom:0;
+	}
+	.lbl-val::placeholder,{
+		color:#53627b;
 	}
 	.lbl-select-val{
 		-webkit-appearance: none;
@@ -87,7 +90,12 @@ input[type="date"]::-webkit-inner-spin-button{
 	    box-shadow:none;
 	    option{
 	    	background:#3c4960;
+	    	color:#fff;
 	    }
+	}
+	.lbl-select-val:invalid,
+	.lbl-select-val option[value=""] {
+		color: #53627b;
 	}
 	.date-icon{
 		background-image: url(/assets/icons/calendar.svg) !important;
@@ -103,6 +111,22 @@ input[type="date"]::-webkit-inner-spin-button{
 	    line-height: normal;
 	    letter-spacing: normal;
 	    color:#96a5a7;
+	}
+	.form-group {
+		&__email {
+			display: flex;
+			align-items: baseline;
+			border-bottom: 1px solid #53627b;
+
+			input,
+			&__domain.lbl-val {
+				border-bottom: 0;
+			}
+
+			&__domain {
+				color: #fff;
+			}
+		}
 	}
 }
 .booking-room-content{
