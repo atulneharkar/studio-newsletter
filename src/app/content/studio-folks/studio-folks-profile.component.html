@@ -20,28 +20,34 @@
     </div>
   </div>
   <div class="details-area">
-    <div class="left">
       <div class="title-head">
-        EMAIL
-      </div>
-      <div class="value">
-        {{users.email}}
-      </div>
+          EMAIL
+        </div>
+        <div class="value">
+          {{users.email}}
+        </div>
+    <div class="left">
 
       <div class="title-head">
         Date of birth
       </div>
       <div class="value">
-        {{users.dob}}
+        {{users.dob | date: 'mediumDate'}}
       </div>
 
       <div class="title-head">
         Visa Holding
       </div>
       <div class="value">
-        {{users.visa || 'None'}}
+        {{users.visa  || 'None'}}
       </div>
 
+      <div class="title-head">
+        Skills
+      </div>
+      <div class="value">
+        {{users.skills || 'None'}}
+      </div>
     </div>
     <div class="right">
       <div class="title-head">
@@ -56,22 +62,15 @@
       <div class="value">
         {{users.previousExp}}
       </div>
-
-      <div class="title-head">
-        Skills
-      </div>
-      <div class="value">
-        {{users.skills || 'None'}}
-      </div>
     </div>
     <div class="about">
-      <div class="title-head">
-          About me
-        </div>
-        <div class="value">
-          {{users.phone}}
-        </div>
-    </div>
+        <div class="title-head">
+            About me
+          </div>
+          <div class="value">
+            {{users.phone}}
+          </div>
+      </div>
   </div>
   <div class="shoutouts-title">
     <div class="title-head">

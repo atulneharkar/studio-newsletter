@@ -139,6 +139,7 @@
 		.name-head{
 			display: inline-block;
 			vertical-align: bottom;
+			margin-left: 44px;
 			.name{
 				font-family: 'Barlow-Bold';
 				font-size: 24px;
@@ -147,6 +148,7 @@
 				letter-spacing: -0.1px;
 				font-weight: bold;
 				margin-bottom: 2px;
+				text-transform: capitalize;
 			}
 			.designation{
 				font-family: 'Barlow';
@@ -154,8 +156,9 @@
 				line-height: normal;
 				color: #a8aeb9;
 				letter-spacing: 0.3px;
-				font-weight: bold;
+				font-weight: normal;
 				margin: 0;
+				text-transform: capitalize;
 			}
 		}
 	}
@@ -185,6 +188,7 @@
 			float: right;
 		}
 		.about{
+			clear: both;
 			.value{
 				margin-bottom: -26px;
 			}
