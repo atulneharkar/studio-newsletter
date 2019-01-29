@@ -59,7 +59,6 @@
   },
   "assets": [
     "assets",
-    "favicon.ico",
-    "manifest.json"
+    "favicon.ico"
   ]
 }
