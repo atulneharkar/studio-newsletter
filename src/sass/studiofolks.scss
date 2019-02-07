@@ -132,6 +132,9 @@
 	.profile-head{
 		padding: 15px;
 		border-bottom: 2px solid #53627b;
+		display: flex;
+		align-items: flex-end;
+
 		.profile-photo{
 			width: 106px;
 			height: 106px;
