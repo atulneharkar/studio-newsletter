@@ -199,7 +199,10 @@ input[type=number]::-webkit-outer-spin-button{
         padding-top: 0px;
     }
     .event-content{
-    	background: #3c4960;
+		background: #3c4960;
+		min-height: calc(100vh - 44px);
+		padding-bottom: 20px;
+
     	.form-control{
     		background: #3c4960;
     		border:none;
