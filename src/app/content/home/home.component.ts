@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
       'linear-gradient(44deg, #41FFA4 0%, #E14B79 100%)',
       'linear-gradient(-134deg, #4E3DEC 0%, #F08585 100%)'
     ]
-
-  	this.userInfo = this.commonService.getUserCookies();
+    
+    this.userInfo = this.commonService.getUserCookies();
     this.getAllEvents();
     if(!!this.userInfo){
       console.log("user logged in");
@@ -52,9 +52,9 @@ export class HomeComponent implements OnInit {
           console.log("todays date",new Date());
           this.events = this.events.reverse();
           console.log("this.events",this.events);
-          // this.events = this.events.filter(function(event){
-          //   return event.invitees == domain;
-          // })
+          this.events = this.events.filter(function(event){
+            return event.invitees == domain;
+          })
           this.events = this.events.filter(function(event){
             return new Date(event.slots[0].fromDate.slice(0,10)).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)
           })

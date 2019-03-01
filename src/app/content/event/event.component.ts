@@ -176,7 +176,8 @@ export class EventComponent implements OnInit {
               let token = Cookie.get('userToken');
               console.log("event token",token);
               let id = JSON.parse(data['_body'])['_id'];
-              this.saveImage(this.imageInfo,token,'5c4af91a3fabd200042d6233');
+              //this.saveImage(this.imageInfo,token,'5c4af91a3fabd200042d6233');
+              this.saveImage(this.imageInfo,token,id);
             } else {
               this.successMsg = true;
               setTimeout(() => {

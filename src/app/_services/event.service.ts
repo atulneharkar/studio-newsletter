@@ -22,6 +22,10 @@ export class EventService {
   getAll() {
     return this.http.get(`${this.commonService.getDomainUrl()}/event/all`, this.commonService.getJwt()).map((response: Response) => response.json());
   }
+  
+  getEventImageById(id:number) {
+    return this.http.get(`${this.commonService.getDomainUrl()}/event/pic/${id}`, this.commonService.getJwt()).map((response: Response) => response.json());
+  }
 
   //method to get meeting by id
   getById(id: number) {
