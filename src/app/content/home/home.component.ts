@@ -52,14 +52,9 @@ export class HomeComponent implements OnInit {
           console.log("todays date",new Date());
           this.events = this.events.reverse();
           console.log("this.events",this.events);
-          // var filterCriteria = {
-          //   "domain":domain,
-          //   "date":"123"
-          // };
-          // console.log("filterCriteria",filterCriteria);
-          this.events = this.events.filter(function(event){
-            return event.invitees == domain;
-          })
+          // this.events = this.events.filter(function(event){
+          //   return event.invitees == domain;
+          // })
           this.events = this.events.filter(function(event){
             return new Date(event.slots[0].fromDate.slice(0,10)).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)
           })
