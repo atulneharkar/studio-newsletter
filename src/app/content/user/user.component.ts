@@ -25,9 +25,11 @@ export class UserComponent implements OnInit {
   public userId: number;
   public userInfo: User;
   public designations: any[] = ['AA','BTA', 'Consultant', 'Senior Consultant', 'Manager', 'Senior Manager'];
-  public domains: any[] = ['UX', 'VD', 'QA', 'FE','FX'];
+  public domains: any[] = ['All', 'UX', 'VD', 'QA', 'FE','FX', 'BxD','EM', 'iOS', 'Android'];
+  public visaTypes: any[] = ['None', 'H1B', 'L1', 'Australia', 'Others'];
   public selectedDesignation: string = '';
   public selectedDomain: string = '';
+  public selectedVisaType: string = '';
   private imageInfo: any;
   private fileSize: number = 0;
   public setDobDate: string;
@@ -125,6 +127,7 @@ export class UserComponent implements OnInit {
       let userObj = this.formatUser(this.userInfo);
       this.selectedDesignation = userObj.designation;
       this.selectedDomain = userObj.domain;
+      this.selectedVisaType = userObj.visa;
       this.setDobDate = this.helperService.getFormattedDate(userObj.dob);
       this.setDojDate = this.helperService.getFormattedDate(userObj.doj);
 

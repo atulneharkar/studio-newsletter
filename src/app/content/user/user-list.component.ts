@@ -12,12 +12,16 @@ import {Router} from "@angular/router";
 export class UserListComponent implements OnInit {
   public currentUser: User;
   public users: User[] = [];
-  public uxUsers: User[] = [];
-  public njUsers: User[] = [];
-  public vdUsers: User[] = [];
-  public qaUsers: User[] = [];
-  public fedUsers: User[] = [];
-  public fxUsers: User[] = [];
+  public uxUsers: User[] = []; // UX
+  public njUsers: User[] = []; // New joinees
+  public vdUsers: User[] = []; // VD
+  public qaUsers: User[] = []; // QA
+  public fedUsers: User[] = []; // FE
+  public fxUsers: User[] = []; // FX
+  public bxdUsers : User[] = []; // BxD
+  public emUsers: User[] = []; // EM
+  public iosUsers: User[] = []; // iOS
+  public androidUsers: User[] = []; // Android
   public message: string = '';
   public modalType: string = "confirm";
   public showModal: boolean = false;
@@ -86,10 +90,10 @@ export class UserListComponent implements OnInit {
             return item.domain === 'UX';
           });
           this.njUsers = this.users.filter(function(item){
-            // console.log("item",item.doj.slice(0,10) + 2weeks >= todaysdate);
+            // console.log("item",item.doj.slice(0,10) + 30 days >= todaysdate);
             var curDate = new Date(Date.parse(item.doj));
             var newDate = curDate;
-            newDate.setDate(curDate.getDate()+14);
+            newDate.setDate(curDate.getDate()+30);
             //console.log("newDate",newDate);
             return newDate >= new Date();
           });
@@ -104,7 +108,22 @@ export class UserListComponent implements OnInit {
           });
           this.fxUsers = this.users.filter(function(item){
             return item.domain === 'FX';
-          })
+          });
+          this.uxUsers = this.users.filter(function(item){
+            return item.domain === 'UX';
+          });
+          this.bxdUsers = this.users.filter(function(item){
+            return item.domain === 'BxD';
+          });
+          this.emUsers = this.users.filter(function(item){
+            return item.domain === 'EM';
+          });
+          this.iosUsers = this.users.filter(function(item){
+            return item.domain === 'iOS';
+          });
+          this.androidUsers = this.users.filter(function(item){
+            return item.domain === 'Android';
+          });
         });
   }
   private sendUserId(id) {
