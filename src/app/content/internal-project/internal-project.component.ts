@@ -23,6 +23,7 @@ export class InternalProjectComponent implements OnInit {
   public technologies: any[] = ['Oracle', 'Node JS', 'Angular', 'React'];
   public projectTypes: any[] = ['FI', 'RFP', 'POC'];
   public domains: any[] = ['UX', 'VD', 'FE', 'BA'];
+  // public domains: any[] = ['All', 'UX', 'VD', 'QA', 'FE','FX', 'BxD','EM', 'iOS', 'Android'];
   public selectedContactPerson: string = '';
   public selectedProjectType: string = '';
   public successMsg: boolean = false;

@@ -38,7 +38,7 @@ export class EventComponent implements OnInit {
   public buttonText: string = 'Save';
   public source: string = "";
   public users: User[] = [];
-  public domains: any[] = ['UX', 'VD', 'QA', 'FE', 'BA', 'All'];
+  public domains: any[] = ['All', 'UX', 'VD', 'QA', 'FE','FX', 'BxD','EM', 'iOS', 'Android'];
   public locations: any[] = ['Colaba', 'Studio', 'Churchgate'];
   public selectedInvitees: string = '';
   private imageInfo: any;
