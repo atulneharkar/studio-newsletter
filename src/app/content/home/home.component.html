@@ -110,7 +110,9 @@
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding" *ngFor="let event of events |slice:0:show let i = index">
     <div class="i-pitch-container">
       <div class="ipitch-content"
-          [style.backgroundImage]="event.image || gradientArray[event.gradient]">
+          [style.backgroundImage]="event.eventPic || gradientArray[event.gradient]"
+          [ngStyle]="{'background-image': 'url(' + event.eventPic + ')'}">
+          <!-- <img src="{{event.eventPic}}"> -->
         <span>&nbsp;</span>
         <div class="content-heading">
           <div class="lbl-head">{{event.title}}</div>

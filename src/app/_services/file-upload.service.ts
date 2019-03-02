@@ -17,8 +17,9 @@ export class FileUploadService {
   }
 
   //method to upload event image (avatar)
-  uploadEventImage(formData, token) {
-    const url = `${this.commonService.getDomainUrl()}/event/pic/id`;
+  uploadEventImage(formData, token, ids) {
+    // const url = `${this.commonService.getDomainUrl()}/event/pic/5c4af91a3fabd200042d6233`;
+    const url = `${this.commonService.getDomainUrl()}/event/pic/${ids}`;
     return this.http.post(url, formData, this.commonService.getJwt(token)).map((response: Response) => 
     	(token) ? '' : this.commonService.setUserCookies(response, ''));
   }

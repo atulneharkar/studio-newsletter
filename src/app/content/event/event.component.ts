@@ -5,6 +5,7 @@ import { Headers } from '@angular/http';
 
 import { CommonService, HelperService, EventService, UserService, FileUploadService } from '../../_services';
 import { Event, User } from '../../_interfaces';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Component({
   selector: 'app-event',
@@ -168,10 +169,15 @@ export class EventComponent implements OnInit {
         this.eventService.create(this.event)
         .subscribe(
           data => {
+            console.log("harpreet data",data);
             if(this.imageInfo) {
               let headers: Headers;              
-              let token = data.headers.get('x-auth');
-              this.saveImage(this.imageInfo,token);
+              // let token = data.headers.get('x-auth');
+              let token = Cookie.get('userToken');
+              console.log("event token",token);
+              let id = JSON.parse(data['_body'])['_id'];
+              //this.saveImage(this.imageInfo,token,'5c4af91a3fabd200042d6233');
+              this.saveImage(this.imageInfo,token,id);
             } else {
               this.successMsg = true;
               setTimeout(() => {
@@ -193,7 +199,7 @@ export class EventComponent implements OnInit {
         .subscribe(
           data => {
             if(this.imageInfo) {
-              this.saveImage(this.imageInfo);
+              this.saveImage(this.imageInfo,'token','id');
             } else {
               this.successMsg = true;
               setTimeout(() => {
@@ -229,8 +235,8 @@ export class EventComponent implements OnInit {
   }
 
   //save uploaded file (profile pic)
-  saveImage(data, userToken = null) {
-    this._fileUpload.uploadEventImage(data, userToken)
+  saveImage(data, userToken = null, id) {
+    this._fileUpload.uploadEventImage(data, userToken,id)
       .take(1)
       .subscribe(x => {
         this.successMsg = true;
