@@ -65,12 +65,12 @@
     <div class="filter-icon">
       <img src="../../assets/icons/filter.svg"/>
     </div>
-    <div class="search-icon" (click)="show=!show">
+    <div class="search-icon" (click)="showTextBox=!showTextBox">
       <img src="../../assets/icons/Search.svg"/>
     </div>
   </div>
 </div>
-<div class="search-bar" *ngIf="show">
+<div class="search-bar" *ngIf="showTextBox" [(ngModel)]="queryString" ngDefaultControl>
   <input type="text">
 </div>
 <!--Start thre accordion here-->
@@ -80,7 +80,7 @@
     
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-      <div class="panel panel-default" *ngFor="let event of events let i = index ">
+      <div class="panel panel-default" *ngFor="let event of events | filterdata: queryString : 'title'; let i = index ">
         <div class="panel-heading" role="tab">
           <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="#accordion" [href]="'#'+i" aria-expanded="true" aria-controls="i">

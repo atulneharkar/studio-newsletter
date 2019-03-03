@@ -64,6 +64,7 @@ export class EventListComponent implements OnInit {
         events => { 
           this.events = events;
           this.events = this.events.reverse();
+          console.log("this.events",this.events);
         });
   }
 
