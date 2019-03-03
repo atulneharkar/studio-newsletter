@@ -26,9 +26,11 @@ export class UserListComponent implements OnInit {
   public modalType: string = "confirm";
   public showModal: boolean = false;
   public isConfirmed: boolean = false;
+  public showTextBox: boolean = false;
   private userObj: any;
   private userId: number;
   public showSnapshot: boolean = true;
+  public queryString: string = '';
 
   constructor(
       private userService: UserService,
@@ -59,6 +61,9 @@ export class UserListComponent implements OnInit {
     this.showModal = false;
   }
 
+  toggleSearchBar(){
+    this.showTextBox = !this.showTextBox;
+  }
   //method to update users status
   changeStatus(id: number, status: string) {
     this.message = "Are you sure you want to change status?";

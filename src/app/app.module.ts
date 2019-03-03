@@ -45,6 +45,7 @@ import { StudioFolksComponent,StudioFolksProfileComponent} from './content/studi
 import { InternalProjectComponent, InternalProjectListComponent } from './content/internal-project';
 import { ForgotPasswordComponent, ResetPasswordComponent } from './forgot-password';
 import { CalcExpPipe } from './_pipes';
+import { FilterdataPipe } from './filterdata.pipe';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { CalcExpPipe } from './_pipes';
     ResetPasswordComponent,
     HomeComponent,
     ModalComponent,
-    CalcExpPipe
+    CalcExpPipe,
+    FilterdataPipe
   ],
   imports: [
     BrowserModule,

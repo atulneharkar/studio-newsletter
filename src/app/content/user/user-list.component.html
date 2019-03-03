@@ -65,10 +65,13 @@
     <h2>Studio Folks</h2>
   </div>
   <div class="col-xs-3 icon-head">
-    <div class="search-icon">
+    <div class="search-icon" (click)=toggleSearchBar()>
       <img src="../../assets/icons/Search.svg"/>
     </div>
   </div>
+</div>
+<div class="search-bar" *ngIf = "showTextBox" [(ngModel)]="queryString" ngDefaultControl>
+  <input type="text" class="search"/>
 </div>
 <div class="folks-head">
   <ul class="nav nav-tabs folk-types">
@@ -90,7 +93,7 @@
         <p>New Joinees</p>
       </div>
       <div class="list-head">
-          <div class="item" *ngFor="let user of njUsers" (click)="sendUserId(user._id)">
+          <div class="item" *ngFor="let user of njUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
             <img src="../../assets/img/skill-building.png" class="profile-photo" />
             <div class="detail">
               <p class="name">{{user.name}}</p>
@@ -102,7 +105,7 @@
         <p>All</p>
       </div>
       <div class="list-head">
-        <div class="item" *ngFor="let user of users" (click)="sendUserId(user._id)">
+        <div class="item" *ngFor="let user of users | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
           <img src="../../assets/img/skill-building.png" class="profile-photo" />
           <div class="detail">
             <p class="name">{{user.name}}</p>
@@ -116,7 +119,7 @@
         <p>All</p>
       </div>
       <div class="list-head">
-          <div class="item" *ngFor="let user of uxUsers" (click)="sendUserId(user._id)">
+          <div class="item" *ngFor="let user of uxUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
             <img src="../../assets/img/skill-building.png" class="profile-photo" />
             <div class="detail">
               <p class="name">{{user.name}}</p>
@@ -130,7 +133,7 @@
           <p>All</p>
         </div>
         <div class="list-head">
-            <div class="item" *ngFor="let user of vdUsers" (click)="sendUserId(user._id)">
+            <div class="item" *ngFor="let user of vdUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
               <img src="../../assets/img/skill-building.png" class="profile-photo" />
               <div class="detail">
                 <p class="name">{{user.name}}</p>
@@ -144,7 +147,7 @@
             <p>All</p>
           </div>
           <div class="list-head">
-              <div class="item" *ngFor="let user of qaUsers" (click)="sendUserId(user._id)">
+              <div class="item" *ngFor="let user of qaUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
                 <img src="../../assets/img/skill-building.png" class="profile-photo" />
                 <div class="detail">
                   <p class="name">{{user.name}}</p>
@@ -158,7 +161,7 @@
               <p>All</p>
             </div>
             <div class="list-head">
-                <div class="item" *ngFor="let user of fedUsers" (click)="sendUserId(user._id)">
+                <div class="item" *ngFor="let user of fedUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
                   <img src="../../assets/img/skill-building.png" class="profile-photo" />
                   <div class="detail">
                     <p class="name">{{user.name}}</p>
@@ -172,7 +175,63 @@
                 <p>All</p>
               </div>
               <div class="list-head">
-                  <div class="item" *ngFor="let user of fxUsers" (click)="sendUserId(user._id)">
+                  <div class="item" *ngFor="let user of fxUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
+                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <div class="detail">
+                      <p class="name">{{user.name}}</p>
+                      <p class="title">{{user.designation}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab7">
+              <div class="title">
+                <p>All</p>
+              </div>
+              <div class="list-head">
+                  <div class="item" *ngFor="let user of iosUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
+                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <div class="detail">
+                      <p class="name">{{user.name}}</p>
+                      <p class="title">{{user.designation}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab8">
+              <div class="title">
+                <p>All</p>
+              </div>
+              <div class="list-head">
+                  <div class="item" *ngFor="let user of androidUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
+                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <div class="detail">
+                      <p class="name">{{user.name}}</p>
+                      <p class="title">{{user.designation}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab9">
+              <div class="title">
+                <p>All</p>
+              </div>
+              <div class="list-head">
+                  <div class="item" *ngFor="let user of emUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
+                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <div class="detail">
+                      <p class="name">{{user.name}}</p>
+                      <p class="title">{{user.designation}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab10">
+              <div class="title">
+                <p>All</p>
+              </div>
+              <div class="list-head">
+                  <div class="item" *ngFor="let user of bxdUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
                     <img src="../../assets/img/skill-building.png" class="profile-photo" />
                     <div class="detail">
                       <p class="name">{{user.name}}</p>
