@@ -55,7 +55,7 @@
           <img src="../../assets/img/studiofy.svg" alt="logo" />
         </div>
         <div class="header-icon dropdown">
-          <img src="../../assets/img/profile-photo.png" alt="logo" data-toggle="dropdown"/>
+          <img [src]=userImage alt="logo" data-toggle="dropdown"/>
           <ul class="dropdown-menu">
             <li *ngFor="let menuItem of menuList">
               <a [routerLink]="[menuItem.link]" (click)="clearLogin($event.currentTarget.innerText)">{{menuItem.text}}</a>

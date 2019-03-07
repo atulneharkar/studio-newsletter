@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   public events: Event[] = [];
   public userInfo: String;
   public domain: String;
+  public userImage: String;
   public gradientArray: String[] = [];
   menuList = [];
 
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
           this.events = events;
           var domain = this.commonService.getUserCookies().domain;
           console.log("domain",domain);
+          this.userImage = this.commonService.getUserCookies().avatar;
           console.log("todays date",new Date());
           this.events = this.events.reverse();
           console.log("this.events",this.events);

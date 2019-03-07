@@ -120,7 +120,7 @@
       </div>
       <div class="list-head">
           <div class="item" *ngFor="let user of uxUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-            <img src="../../assets/img/skill-building.png" class="profile-photo" />
+            <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
             <div class="detail">
               <p class="name">{{user.name}}</p>
               <p class="title">{{user.designation}}</p>
