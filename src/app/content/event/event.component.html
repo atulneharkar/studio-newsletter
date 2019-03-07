@@ -56,23 +56,30 @@
       </div>
       <div class="form-group row lower-seperate">
         <div class="col-sm-6 col-xs-6">
-            <!-- <label for="location">Location</label> -->
-            <!-- <input class="form-control txt-label" id="designation" id="location" placeholder="Location" formControlName="location" /> -->
-            <!-- <p *ngIf="submitted && eventForm.get('location').hasError('required')" class="error-msg">
-              Location is required.
-            </p> -->
             <p class="form-control description location">Location</p>
         </div>
         <div class="col-sm-6 col-xs-6 text-right">
           <!-- <p class="txt-label">Colaba</p>
           <img src="../../assets/icons/Arrow-Right.svg" class="go-arrow"/> -->
-          <select required dir="rtl" class="form-control event-sel" id="location" formControlName="location">
+          <select required dir="rtl" class="form-control event-sel" id="location" formControlName="location" [(ngModel)]="location">
             <option selected disabled hidden value="">Select</option>
             <option *ngFor="let name of locations" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
           <p class="error-msg" *ngIf="submitted && eventForm.get('location').hasError('required')">
             Location is required.
           </p>
+        </div>
+      </div>
+
+      <div class="form-group row lower-seperate" *ngIf="location == 'Other'">
+        <div class="col-sm-6 col-xs-6">
+            <p class="form-control description location">Other Location</p>
+        </div>
+        <div class="col-sm-6 col-xs-6 text-right">
+          <input type="text" [(ngModel)]="selectedDomain" class="form-control description other-location" id="otherLocation" formControlName="otherLocation" placeholder="Other Location">
+            <p *ngIf="submitted && eventForm.get('otherLocation').hasError('required')" class="error-msg">
+              Other Location is required.
+            </p>
         </div>
       </div>
 

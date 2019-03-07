@@ -106,7 +106,7 @@
       </div>
       <div class="list-head">
         <div class="item" *ngFor="let user of users | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-          <img src="../../assets/img/skill-building.png" class="profile-photo" />
+          <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
           <div class="detail">
             <p class="name">{{user.name}}</p>
             <p class="title">{{user.designation}}</p>
@@ -134,7 +134,7 @@
         </div>
         <div class="list-head">
             <div class="item" *ngFor="let user of vdUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-              <img src="../../assets/img/skill-building.png" class="profile-photo" />
+              <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
               <div class="detail">
                 <p class="name">{{user.name}}</p>
                 <p class="title">{{user.designation}}</p>
@@ -148,7 +148,7 @@
           </div>
           <div class="list-head">
               <div class="item" *ngFor="let user of qaUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-                <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
                 <div class="detail">
                   <p class="name">{{user.name}}</p>
                   <p class="title">{{user.designation}}</p>
@@ -162,7 +162,7 @@
             </div>
             <div class="list-head">
                 <div class="item" *ngFor="let user of fedUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-                  <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                  <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
                   <div class="detail">
                     <p class="name">{{user.name}}</p>
                     <p class="title">{{user.designation}}</p>
@@ -176,7 +176,7 @@
               </div>
               <div class="list-head">
                   <div class="item" *ngFor="let user of fxUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
                     <div class="detail">
                       <p class="name">{{user.name}}</p>
                       <p class="title">{{user.designation}}</p>
@@ -190,7 +190,7 @@
               </div>
               <div class="list-head">
                   <div class="item" *ngFor="let user of iosUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
                     <div class="detail">
                       <p class="name">{{user.name}}</p>
                       <p class="title">{{user.designation}}</p>
@@ -204,7 +204,7 @@
               </div>
               <div class="list-head">
                   <div class="item" *ngFor="let user of androidUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
                     <div class="detail">
                       <p class="name">{{user.name}}</p>
                       <p class="title">{{user.designation}}</p>
@@ -218,7 +218,7 @@
               </div>
               <div class="list-head">
                   <div class="item" *ngFor="let user of emUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
                     <div class="detail">
                       <p class="name">{{user.name}}</p>
                       <p class="title">{{user.designation}}</p>
@@ -232,7 +232,7 @@
               </div>
               <div class="list-head">
                   <div class="item" *ngFor="let user of bxdUsers | filterdata: queryString : 'name' ; let i = index" (click)="sendUserId(user._id)">
-                    <img src="../../assets/img/skill-building.png" class="profile-photo" />
+                    <img [src]="user.avatar ? user.avatar : '../../assets/img/skill-building.png' " class="profile-photo" />
                     <div class="detail">
                       <p class="name">{{user.name}}</p>
                       <p class="title">{{user.designation}}</p>

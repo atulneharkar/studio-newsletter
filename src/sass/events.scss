@@ -234,7 +234,13 @@ input[type=number]::-webkit-outer-spin-button{
             letter-spacing:0.4px;
             padding:14px 0 14px 0px;
             margin:0;
-        }
+		}
+		.other-location{
+			letter-spacing:0.4px;
+            padding:14px 0 14px 0px;
+			margin:0;
+			text-align: right;
+		}
         select {
             -webkit-appearance: none;
             -moz-appearance: none;

@@ -40,7 +40,7 @@ export class EventComponent implements OnInit {
   public source: string = "";
   public users: User[] = [];
   public domains: any[] = ['All', 'UX', 'VD', 'QA', 'FE','FX', 'BxD','EM', 'iOS', 'Android'];
-  public locations: any[] = ['Colaba', 'Studio', 'Churchgate'];
+  public locations: any[] = ['Colaba', 'Studio', 'Churchgate','Other'];
   public selectedInvitees: string = '';
   private imageInfo: any;
   private fileSize: number = 0;
