@@ -295,7 +295,15 @@ input[type=number]::-webkit-outer-spin-button{
     		.title{
     			font-size:24px;
     			color:#fff;
-    		}
+			}
+			&__description {
+				margin-top: 30px;
+			}
+			&__time-input {
+				float: right;
+				margin-top: 5px;
+				height: 34px;
+			}
     		.txt-label{
     			color: #fff;
 			    font-family: 'Barlow';
@@ -314,6 +322,10 @@ input[type=number]::-webkit-outer-spin-button{
     		}
     		.img-upload-area{
     			display:none;
-    		}
+			}
+			.date-icon {
+				padding: 14px 0 14px 0px;
+				margin: 0;
+			}
     	}
     }

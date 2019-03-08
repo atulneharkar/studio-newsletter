@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row form-group__description">
         <div class="col-sm-12 col-xs-12">
             <!-- <label for="description">Description</label> -->
             <textarea type="text" class="form-control description" id="description" [(ngModel)]="descRet" formControlName="description" placeholder="Description"></textarea>
@@ -149,7 +149,7 @@
               <label for="form-date" class="form-control description location">Start Time</label>
             </div>
             <div class="col-xs-6">
-              <input type="time" class="form-control from-time" id="from-time" formControlName="fromTime" [(ngModel)]="setFromTime" placeholder="From Time">
+              <input type="time" class="form-control form-group__time-input from-time" id="from-time" formControlName="fromTime" [(ngModel)]="setFromTime" placeholder="From Time">
               <p *ngIf="submitted && eventForm.get('slots').get('fromTime').hasError('required')" class="error-msg">
                 From time is required.
               </p>
@@ -162,7 +162,7 @@
               <label for="to-date" class="form-control description location">End Time</label>
             </div>
             <div class="col-xs-6">
-              <input type="time" class="form-control from-time" id="to-time" formControlName="toTime" [(ngModel)]="setToTime" placeholder="To Time">
+              <input type="time" class="form-control form-group__time-input from-time" id="to-time" formControlName="toTime" [(ngModel)]="setToTime" placeholder="To Time">
               <p *ngIf="submitted && eventForm.get('slots').get('toTime').hasError('required')" class="error-msg">
                 To time is required.
               </p>
@@ -243,9 +243,10 @@
       </div>
       <!-- Submit button -->
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary btn-login">Submit</button>
+        <button type="submit" class="btn btn-primary btn-login" [disabled]="loading">Submit</button>
+        <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
       </div>
-      
+
 
     </div>
 
