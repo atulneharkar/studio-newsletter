@@ -117,7 +117,12 @@
         <div class="content-heading">
           <div class="lbl-head">{{event.title}}</div>
           <div class="lbl-date">{{event.slots[0].fromDate.slice(0,10)}}</div>
-          <div><input type="button" value="I'm interested" /></div>
+          <div><input type="button" *ngIf =!showInterested value="I'm interested" (click) = showCreaterDetails()/></div>
+          <div *ngIf =showInterested>
+            <div class="lbl-date">Name: {{event.organiser.name}}</div>
+            <div class="lbl-date">Email: {{event.organiser.email}}</div>
+            <div class="lbl-date">Phone: {{event.organiser.phone}}</div>
+          </div>
         </div>
       </div>
     </div>

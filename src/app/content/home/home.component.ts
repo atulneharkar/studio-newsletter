@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   public userInfo: String;
   public domain: String;
   public userImage: String;
+  public showInterested: Boolean;
   public gradientArray: String[] = [];
   menuList = [];
 
@@ -74,6 +75,10 @@ export class HomeComponent implements OnInit {
       this.commonService.deleteUserCookies();
       this.router.navigate(['/login']);
     }
+  }
+  showCreaterDetails(){
+    console.log("I am interste");
+    this.showInterested = true;
   }
 
 

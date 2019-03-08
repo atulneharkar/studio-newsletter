@@ -103,8 +103,16 @@
             </div>
             <div class="time">
               <span class="time-lbl">TIME</span>
-              <span class="time-name">9 PM ONWARDS</span>
+              <span class="time-name">{{event.slots[0].fromTime.slice(11,16)}} ONWARDS</span>
             </div>
+            <div class="venue">
+                <span class="venue-lbl">Organizer Name</span>
+                <span class="venue-name">{{event.organiser.name}}</span>
+              </div>
+              <div class="time">
+                <span class="time-lbl">Contact No</span>
+                <span class="time-name">{{event.organiser.phone}}</span>
+              </div>
           </div>
         </div>
       </div>
