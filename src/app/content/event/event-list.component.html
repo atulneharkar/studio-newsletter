@@ -86,6 +86,9 @@
             <a role="button" data-toggle="collapse" data-parent="#accordion" [href]="'#'+i" aria-expanded="true" aria-controls="i">
               <span class="dot"></span>
                 <span class="head">{{event.title}}</span>
+                <div class="enter-in">
+                  <img src="../../assets/img/enter-512.png" class="enter-in-icon" />
+                </div>
                 <p class="date">
                   {{event.slots[0].fromDate | date: 'MM/dd/yyyy'}} <span *ngIf="event.slots[0].toDate"> - {{event.slots[0].toDate | date: 'MM/dd/yyyy'}}</span>
                 </p>
