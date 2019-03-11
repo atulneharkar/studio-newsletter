@@ -2,6 +2,7 @@ export interface Event {
   title: string;
   description: string;
   location: string;
+  // isInterested: Boolean;
   slots: Array <{
     fromDate: string,
     toDate: string,

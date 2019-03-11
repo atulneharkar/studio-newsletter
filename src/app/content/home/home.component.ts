@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
 
   //method to get event list
   private getAllEvents() {
-    console.log("getting all events on home page");
     this.eventService.getAll()
       .subscribe(
         events => {
@@ -52,15 +51,16 @@ export class HomeComponent implements OnInit {
           var domain = this.commonService.getUserCookies().domain;
           console.log("domain",domain);
           this.userImage = this.commonService.getUserCookies().avatar;
-          console.log("todays date",new Date());
           this.events = this.events.reverse();
-          console.log("this.events",this.events);
           this.events = this.events.filter(function(event){
             return event.invitees == domain;
           })
           this.events = this.events.filter(function(event){
             return new Date(event.slots[0].fromDate.slice(0,10)).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)
           })
+          this.events.forEach(function(ev){
+            ev['isInterested'] = false;
+          });
           console.log("this.events",this.events);
           this.events.forEach(event => {
             if(!event.image) {
@@ -76,9 +76,8 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-  showCreaterDetails(){
-    console.log("I am interste");
-    this.showInterested = true;
+  showCreaterDetails(index){
+    this.events[index]['isInterested'] = true;
   }
 
 

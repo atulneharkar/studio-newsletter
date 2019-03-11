@@ -112,13 +112,12 @@
       <div class="ipitch-content"
           [style.backgroundImage]="event.eventPic || gradientArray[event.gradient]"
           [ngStyle]="{'background-image': 'url(' + event.eventPic + ')'}">
-          <!-- <img src="{{event.eventPic}}"> -->
         <span>&nbsp;</span>
         <div class="content-heading">
           <div class="lbl-head">{{event.title}}</div>
           <div class="lbl-date">{{event.slots[0].fromDate.slice(0,10)}}</div>
-          <div><input type="button" *ngIf =!showInterested value="I'm interested" (click) = showCreaterDetails()/></div>
-          <div *ngIf =showInterested>
+          <div><input type="button" *ngIf =!event.isInterested value="I'm interested" (click) = showCreaterDetails(i)/></div>
+          <div *ngIf =event.isInterested>
             <div class="lbl-date">Name: {{event.organiser.name}}</div>
             <div class="lbl-date">Email: {{event.organiser.email}}</div>
             <div class="lbl-date">Phone: {{event.organiser.phone}}</div>
