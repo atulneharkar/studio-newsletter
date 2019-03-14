@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
     this.userInfo = this.commonService.getUserCookies();
     this.getAllEvents();
     if(!!this.userInfo){
-      console.log("user logged in");
       this.menuList = [{"link":"","text":"Logout"}];
     }
     else{
@@ -49,7 +48,7 @@ export class HomeComponent implements OnInit {
         events => {
           this.events = events;
           var domain = this.commonService.getUserCookies().domain;
-          console.log("domain",domain);
+          console.log("domain name",domain);
           this.userImage = this.commonService.getUserCookies().avatar;
           this.events = this.events.reverse();
           this.events = this.events.filter(function(event){
