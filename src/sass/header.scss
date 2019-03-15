@@ -176,4 +176,17 @@ header {
     }
   }
 }
+.empty-msg-container{
+  min-height: 69vh;
+  .empty-msg{
+    font-family: 'Barlow';
+    font-size: 16px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    color: #fff;
+    position: absolute;
+    top:20%;
+  }
+}
 

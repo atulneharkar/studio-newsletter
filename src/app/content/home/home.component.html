@@ -1,52 +1,3 @@
-<!-- <div class="container">
-  <div class="row"> -->
-
-<!--left section-->
-<!-- <div class="col-md-8"> -->
-<!--main nav-->
-<!-- <div class="content-nav-section">
-        <app-main-navigation></app-main-navigation>
-      </div> -->
-
-<!--photo gallery-->
-<!-- <div class="photo-gallery">
-        <app-main-carousel></app-main-carousel>
-      </div> -->
-
-<!--feedback/news highlight section-->
-<!-- <div class="feedback-section">
-        <app-feedback-carousel></app-feedback-carousel>
-      </div>
-
-    </div> -->
-
-<!--right section-->
-<!-- <div class="col-md-4"> -->
-<!--booking snapshot-->
-<!-- <div class="booking-snapshot card">
-        <app-meeting-list></app-meeting-list>
-      </div> -->
-
-<!--booking room-->
-<!-- <div class="booking-room-section card">
-        <app-meeting></app-meeting>
-      </div> -->
-
-<!--events snapshot-->
-<!-- <div class="events-snapshot card">
-        <app-event-list></app-event-list>
-      </div> -->
-
-<!--birthdays snapshot-->
-<!-- <div class="birthdays-snapshot card">
-        <app-user-list></app-user-list>
-      </div>
-
-    </div>
-
-  </div>
-</div> -->
-
 <div class="container-fluid login-container">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
     <header>
@@ -136,46 +87,16 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-    <div class="i-pitch-container">
-      <div class="ipitch-content">
-        <span>-</span>
-        <div class="content-heading">
-          <div class="lbl-head">iPitch</div>
-          <div class="lbl-date">2017, Fri</div>
-          <div><input type="button" value="I'm interested" /></div>
-        </div>
-
-      </div>
-    </div>
-    <div class="i-pitch-details">
-      <div>
-        <div>Venue</div>
-        <div>Bombay Cocktail Bar, Off New Link Road, Andheri West, Mumbai</div>
-      </div>
-      <div>
-        <div>Time</div>
-        <div>9 PM ONWARDS</div>
-      </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding empty-msg-container" *ngIf=showEmptyMsg>
+    <div class="empty-msg">
+      There are no events for your domain,please refer timeline for events from other domains or login.
     </div>
   </div>
-
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding component-3-head">
-    <div class="component-3">
-      <div class="lbl-txt">Vodafone Hackathon</div>
-      <div class="lbl-val">If you had 10 Cr to invest, in which company would you invest?</div>
-    </div>
-  </div> -->
-
-  <!--End repeater here-->
+<!--End repeater here-->
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding text-center">
     <div class="i-pitch-container">
       <input type="button" value="Show More" class="btn-show-more" *ngIf="i==4 && show == 5" (click)="show = events.length"/>
     </div>
-    <!-- <input type="button" class="show-more" (click)="getData()" [disabled]="counter>=content.length">
-      Show more
-    </input> -->
   </div>
 </div>
 

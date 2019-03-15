@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   public domain: String;
   public userImage: String;
   public showInterested: Boolean;
+  public showEmptyMsg: Boolean;
   public gradientArray: String[] = [];
   menuList = [];
 
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
     }
     else{
       this.menuList = [{"link":"login","text":"Login"},{"link":"register","text":"Register"}];
+      this.showEmptyMsg = true;
     }
   	let elem:Element = document.getElementById("myDropdown");
   	//elem.hide();
@@ -61,6 +63,9 @@ export class HomeComponent implements OnInit {
             ev['isInterested'] = false;
           });
           console.log("this.events",this.events);
+          if(this.events.length < 1){
+            this.showEmptyMsg=true;
+          }
           this.events.forEach(event => {
             if(!event.image) {
               event['gradient'] = Math.floor(Math.random() * 5)
