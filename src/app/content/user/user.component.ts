@@ -152,8 +152,6 @@ export class UserComponent implements OnInit {
     }
 
     if(isValid) {
-      this.userForm.controls['email'].setValue(this.userForm.get('email').value.replace('@deloitte.com', ''))
-      console.log(this.userForm)
       const userEmail = this.userForm.get('email').value
       const deloitteEmail = userEmail.indexOf('@') !== -1 ? userEmail.substring(0, userEmail.indexOf('@')) : userEmail
       this.user = {...this.userForm.value, email: `${deloitteEmail}@deloitte.com`};
