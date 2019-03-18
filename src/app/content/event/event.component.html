@@ -61,7 +61,7 @@
         <div class="col-sm-6 col-xs-6 text-right">
           <!-- <p class="txt-label">Colaba</p>
           <img src="../../assets/icons/Arrow-Right.svg" class="go-arrow"/> -->
-          <select required dir="rtl" class="form-control event-sel" id="location" formControlName="location" [(ngModel)]="location">
+          <select required dir="rtl" class="form-control event-sel" id="location" formControlName="location">
             <option selected disabled hidden value="">Select</option>
             <option *ngFor="let name of locations" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
@@ -116,7 +116,7 @@
               <label for="form-date" class="form-control description location">Start Date</label>
             </div>
             <div class="col-xs-6">
-              <input required type="date" class="form-control event-sel from-dates date-icon" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
+              <input required type="date" class="description form-control event-sel from-dates date-icon" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
               <p *ngIf="submitted && eventForm.get('slots').get('fromDate').hasError('required')" class="error-msg text-right">
                 From date is required.
               </p>
@@ -129,7 +129,7 @@
               <label for="to-date" class="form-control description location">End Date</label>
             </div>
             <div class="col-xs-6">
-              <input type="date" required class="form-control from-dates date-icon event-sel" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
+              <input type="date" required class="description form-control from-dates date-icon event-sel" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
               <p *ngIf="submitted && eventForm.get('slots').get('toDate').hasError('required')" class="error-msg text-right">
                 To date is required.
               </p>
@@ -149,7 +149,7 @@
               <label for="form-date" class="form-control description location">Start Time</label>
             </div>
             <div class="col-xs-6">
-              <input type="time" class="form-control form-group__time-input from-time" id="from-time" formControlName="fromTime" [(ngModel)]="setFromTime" placeholder="From Time">
+              <input type="time" class="time-icon event-sel form-control form-group__time-input from-dates" id="from-time" formControlName="fromTime" [(ngModel)]="setFromTime" placeholder="From Time">
               <p *ngIf="submitted && eventForm.get('slots').get('fromTime').hasError('required')" class="error-msg">
                 From time is required.
               </p>
@@ -162,7 +162,7 @@
               <label for="to-date" class="form-control description location">End Time</label>
             </div>
             <div class="col-xs-6">
-              <input type="time" class="form-control form-group__time-input from-time" id="to-time" formControlName="toTime" [(ngModel)]="setToTime" placeholder="To Time">
+              <input type="time" class="form-control form-group__time-input from-dates time-icon event-sel" id="to-time" formControlName="toTime" [(ngModel)]="setToTime" placeholder="To Time">
               <p *ngIf="submitted && eventForm.get('slots').get('toTime').hasError('required')" class="error-msg">
                 To time is required.
               </p>
