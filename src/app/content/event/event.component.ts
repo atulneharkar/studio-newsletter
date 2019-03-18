@@ -169,6 +169,7 @@ export class EventComponent implements OnInit {
         this.eventService.create(this.event)
         .subscribe(
           data => {
+            document.documentElement.scrollTop = 0
             console.log("harpreet data",data);
             if(this.imageInfo) {
               let headers: Headers;              
@@ -176,7 +177,6 @@ export class EventComponent implements OnInit {
               let token = Cookie.get('userToken');
               console.log("event token",token);
               let id = JSON.parse(data['_body'])['_id'];
-              //this.saveImage(this.imageInfo,token,'5c4af91a3fabd200042d6233');
               this.saveImage(this.imageInfo,token,id);
             } else {
               this.successMsg = true;
@@ -188,6 +188,7 @@ export class EventComponent implements OnInit {
             }
           },
           error => {
+            document.documentElement.scrollTop = 0
             this.loading = false;
             this.setError(error);
           });
@@ -209,6 +210,7 @@ export class EventComponent implements OnInit {
             }
           },
           error => {
+            document.documentElement.scrollTop = 0
             this.loading = false;
             this.setError(error);
           });

@@ -206,6 +206,15 @@ input[type=number]::-webkit-outer-spin-button{
         padding-top: 0px;
     }
     .event-content{
+		.loading-img{
+			width: 34px;
+			position: absolute;
+			top:50%;
+		}
+		.page-disabled{
+			pointer-events: none;
+			background: #fff;
+		}
     	background: #3c4960;
     	.form-control{
     		background: #3c4960;

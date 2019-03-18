@@ -1,66 +1,50 @@
 <div class="login-container container-fluid">
   <form [formGroup]="eventForm" novalidate (ngSubmit)="onSubmit(eventForm.valid)">
-    <!-- <div class="row event-header">
-      <div class="col-sm-9 col-xs-9">
-        <h2>{{title}}</h2>
-      </div>
-      <div class="col-sm-3 col-xs-3">
-        <button class="btn btn-primary pull-right" type="submit">{{buttonText}}</button>
-        <a [routerLink]="['/events']" class="btn btn-link">Cancel</a>
-      </div>
-    </div> -->
-
     <div class="row timeline">
       <div class="col-xs-3 arrow-left">
-         <img src="../../assets/icons/arrow.svg" onclick="window.history.go(-1); return false;"/>
-         <!-- <button class="btn btn-primary pull-right" type="submit">{{buttonText}}</button> -->
+        <img src="../../assets/icons/arrow.svg" onclick="window.history.go(-1); return false;" />
       </div>
       <div class="col-xs-6 page-heading">
         <h2>{{title}}</h2>
       </div>
       <div class="col-xs-3 icon-head">
         <div class="search-icon">
-          <!-- <img src="../../assets/icons/Check.svg"/> -->
           <button type="submit" class="btn-event-submit">
-            <img src="../../assets/icons/Check.svg"/>
+            <img src="../../assets/icons/Check.svg" />
           </button>
         </div>
       </div>
     </div>
-
     <div class="event-content">
-
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12 lower-seperate">
-            <!-- <label for="title">Title</label> -->
-            <input type="text" [(ngModel)]="titleRet" class="form-control title" id="title" formControlName="title" placeholder="Title">
-            <p *ngIf="submitted && eventForm.get('title').hasError('required')" class="error-msg">
-              Title is required.
-            </p>
+          <input type="text" [(ngModel)]="titleRet" class="form-control title" id="title" formControlName="title"
+            placeholder="Title">
+          <p *ngIf="submitted && eventForm.get('title').hasError('required')" class="error-msg">
+            Title is required.
+          </p>
         </div>
       </div>
 
       <div class="form-group row form-group__description">
         <div class="col-sm-12 col-xs-12">
-            <!-- <label for="description">Description</label> -->
-            <textarea type="text" class="form-control description" id="description" [(ngModel)]="descRet" formControlName="description" placeholder="Description"></textarea>
-            <p *ngIf="submitted && eventForm.get('description').hasError('required')" class="error-msg">
-              Description is required.
-            </p>
+          <textarea type="text" class="form-control description" id="description" [(ngModel)]="descRet" formControlName="description"
+            placeholder="Description"></textarea>
+          <p *ngIf="submitted && eventForm.get('description').hasError('required')" class="error-msg">
+            Description is required.
+          </p>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12 title-heading no-padding">
-            <p>Event Details</p>
+          <p>Event Details</p>
         </div>
       </div>
       <div class="form-group row lower-seperate">
         <div class="col-sm-6 col-xs-6">
-            <p class="form-control description location">Location</p>
+          <p class="form-control description location">Location</p>
         </div>
         <div class="col-sm-6 col-xs-6 text-right">
-          <!-- <p class="txt-label">Colaba</p>
-          <img src="../../assets/icons/Arrow-Right.svg" class="go-arrow"/> -->
           <select required dir="rtl" class="form-control event-sel" id="location" formControlName="location">
             <option selected disabled hidden value="">Select</option>
             <option *ngFor="let name of locations" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
@@ -73,24 +57,24 @@
 
       <div class="form-group row lower-seperate" *ngIf="location == 'Other'">
         <div class="col-sm-6 col-xs-6">
-            <p class="form-control description location">Other Location</p>
+          <p class="form-control description location">Other Location</p>
         </div>
         <div class="col-sm-6 col-xs-6 text-right">
-          <input type="text" [(ngModel)]="selectedDomain" class="form-control description other-location" id="otherLocation" formControlName="otherLocation" placeholder="Other Location">
-            <p *ngIf="submitted && eventForm.get('otherLocation').hasError('required')" class="error-msg">
-              Other Location is required.
-            </p>
+          <input type="text" [(ngModel)]="selectedDomain" class="form-control description other-location" id="otherLocation"
+            formControlName="otherLocation" placeholder="Other Location">
+          <p *ngIf="submitted && eventForm.get('otherLocation').hasError('required')" class="error-msg">
+            Other Location is required.
+          </p>
         </div>
       </div>
 
       <div class="form-group row lower-seperate">
-        <!-- <label for="profile-img" class="col-sm-4 col-form-label">Event Image</label> -->
         <div class="col-xs-6 col-sm-6">
           <p class="form-control description location">Upload Image</p>
         </div>
         <div class="col-xs-6 col-sm-6 text-right">
-          <input class="txt-label img-upload-area" type="file" formControlName="eventPic" id="eventPic" [name]="uploadFieldName" (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
-          <!-- <p class="help-block">Upload file size limit 3 MB.</p> -->
+          <input class="txt-label img-upload-area" type="file" formControlName="eventPic" id="eventPic" [name]="uploadFieldName"
+            (change)="profilePicChange($event.target.name, $event.target.files)" accept="image/*">
           <p *ngIf="fileSizeError" class="error-msg">
             File size limit exceeds.
           </p>
@@ -98,9 +82,8 @@
             Cannot upload file. Please try again.
           </p>
           <label for="eventPic" class="upload-img-icon">
-            <img src="../../assets/icons/Image.svg" class="upload-img"/>
+            <img src="../../assets/icons/Image.svg" class="upload-img" />
           </label>
-          <!-- <p class="help-block">Upload file size limit 3 MB.</p> -->
           <p *ngIf="fileSizeError" class="error-msg">
             File size limit exceeds.
           </p>
@@ -116,7 +99,8 @@
               <label for="form-date" class="form-control description location">Start Date</label>
             </div>
             <div class="col-xs-6">
-              <input required type="date" class="description form-control event-sel from-dates date-icon" id="from-date" formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
+              <input required type="date" class="description form-control event-sel from-dates date-icon" id="from-date"
+                formControlName="fromDate" [(ngModel)]="setFromDate" placeholder="From Date">
               <p *ngIf="submitted && eventForm.get('slots').get('fromDate').hasError('required')" class="error-msg text-right">
                 From date is required.
               </p>
@@ -129,7 +113,8 @@
               <label for="to-date" class="form-control description location">End Date</label>
             </div>
             <div class="col-xs-6">
-              <input type="date" required class="description form-control from-dates date-icon event-sel" id="to-date" formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
+              <input type="date" required class="description form-control from-dates date-icon event-sel" id="to-date"
+                formControlName="toDate" [(ngModel)]="setToDate" placeholder="To Date">
               <p *ngIf="submitted && eventForm.get('slots').get('toDate').hasError('required')" class="error-msg text-right">
                 To date is required.
               </p>
@@ -137,19 +122,18 @@
                 From date should be less than To date.
               </p>
             </div>
+          </div>
         </div>
       </div>
-    </div>
-
-
-    <div class="form-group row date-row lower-seperate">
+      <div class="form-group row date-row lower-seperate">
         <div class="col-sm-12 col-xs-12 form-group lower-seperate" formGroupName="slots">
           <div class="row">
             <div class="col-xs-6">
               <label for="form-date" class="form-control description location">Start Time</label>
             </div>
             <div class="col-xs-6">
-              <input type="time" class="time-icon event-sel form-control form-group__time-input from-dates" id="from-time" formControlName="fromTime" [(ngModel)]="setFromTime" placeholder="From Time">
+              <input type="time" class="time-icon event-sel form-control form-group__time-input from-dates" id="from-time"
+                formControlName="fromTime" [(ngModel)]="setFromTime" placeholder="From Time">
               <p *ngIf="submitted && eventForm.get('slots').get('fromTime').hasError('required')" class="error-msg">
                 From time is required.
               </p>
@@ -162,7 +146,8 @@
               <label for="to-date" class="form-control description location">End Time</label>
             </div>
             <div class="col-xs-6">
-              <input type="time" class="form-control form-group__time-input from-dates time-icon event-sel" id="to-time" formControlName="toTime" [(ngModel)]="setToTime" placeholder="To Time">
+              <input type="time" class="form-control form-group__time-input from-dates time-icon event-sel" id="to-time"
+                formControlName="toTime" [(ngModel)]="setToTime" placeholder="To Time">
               <p *ngIf="submitted && eventForm.get('slots').get('toTime').hasError('required')" class="error-msg">
                 To time is required.
               </p>
@@ -170,49 +155,9 @@
                 From time should be less than To time.
               </p>
             </div>
-        </div>
-      </div>
-    </div>
-
-
-
-      <!-- <div class="form-group row time-row lower-seperate">
-        <div class="col-sm-12 col-xs-12">
-          <div class="row form-inline">
-            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
-              <label for="from-time">From</label>
-              <input type="time" class="form-control" id="from-time" formControlName="fromTime" [(ngModel)]="setFromTime" placeholder="From Time">
-              <p *ngIf="submitted && eventForm.get('slots').get('fromTime').hasError('required')" class="error-msg">
-                From time is required.
-              </p>
-            </div>
-            <div class="col-sm-6 col-xs-12 form-group" formGroupName="slots">
-              <label for="to-time">To</label>
-              <input type="time" class="form-control" id="to-time" formControlName="toTime" [(ngModel)]="setToTime" placeholder="To Time">
-              <p *ngIf="submitted && eventForm.get('slots').get('toTime').hasError('required')" class="error-msg">
-                To time is required.
-              </p>
-            </div>
-            <p class="error-msg" *ngIf="submitted && eventForm.get('slots').hasError('timeError')">
-              From time should be less than To time.
-            </p>
           </div>
         </div>
-      </div> -->
-
-      <!-- <div class="form-group row">
-        <div class="col-sm-12 col-xs-12">
-          <label for="organiser">Organiser</label>
-          <select class="form-control" id="organiser" formControlName="organiser">
-            <option value="">Please Select</option>
-            <option *ngFor="let user of users" [selected]="selectedOrganiser === user._id" [ngValue]="user._id">{{user.name}}</option>
-          </select>
-          <p class="error-msg" *ngIf="submitted && eventForm.get('organiser').hasError('required')">
-            Organiser is required.
-          </p>
-        </div>
-      </div> -->
-
+      </div>
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12">
           <div class="row">
@@ -233,21 +178,20 @@
       </div>
       <div class="form-group row">
         <div class="col-sm-12 col-xs-12 title-heading no-padding">
-            <p>Notes</p>
+          <p>Notes</p>
         </div>
       </div>
       <div class="form-group row last-row-space">
         <div class="col-sm-12 col-xs-12 no-padding">
-            <textarea type="text" [(ngModel)]="notesRet" class="form-control" id="notes" formControlName="notes" placeholder="Notes"></textarea>
+          <textarea type="text" [(ngModel)]="notesRet" class="form-control" id="notes" formControlName="notes"
+            placeholder="Notes"></textarea>
         </div>
       </div>
       <!-- Submit button -->
       <div class="form-group text-center">
         <button type="submit" class="btn btn-primary btn-login" [disabled]="loading">Submit</button>
-        <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
+        <img class="loading-img" *ngIf="loading" src="assets/img/loading.gif" />
       </div>
-
-
     </div>
 
     <!--server connection error-->
@@ -256,5 +200,4 @@
     </p>
   </form>
 </div>
-
 <app-modal [message]="message" [modalType]="modalType" [hidden]="!successMsg"></app-modal>
