@@ -152,10 +152,11 @@ export class UserComponent implements OnInit {
     }
 
     if(isValid) {
-      this.userForm.controls['email'].setValue(`${this.userForm.get('email').value.replace('@deloitte.com', '')}@deloitte.com`)
+      this.userForm.controls['email'].setValue(this.userForm.get('email').value.replace('@deloitte.com', ''))
       console.log(this.userForm)
-
-      this.user = this.userForm.value;
+      const userEmail = this.userForm.get('email').value
+      const deloitteEmail = userEmail.indexOf('@') !== -1 ? userEmail.substring(0, userEmail.indexOf('@')) : userEmail
+      this.user = {...this.userForm.value, email: `${deloitteEmail}@deloitte.com`};
       this.loading = true;
       if(!this.userId) {
         this.message = "Registered Successfully";
