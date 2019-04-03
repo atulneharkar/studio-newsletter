@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EventService, CommonService, UserService } from '../../_services';
+import { EventService, CommonService, UserService, HelperService } from '../../_services';
 import { User } from '../../_interfaces';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 
@@ -11,11 +11,13 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 export class StudioFolksProfileComponent implements OnInit {
 
   public userId: number;
+  public dojoining: String;
   public users: User[] = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService) {
+    private userService: UserService,
+    private helperService: HelperService) {
   }
 
   ngOnInit() {
@@ -30,6 +32,11 @@ export class StudioFolksProfileComponent implements OnInit {
       .subscribe(
         data => {
           this.users = data;
+          const dojoining = this.users['doj'].slice(0,10).toString();
+          const todayDate = this.helperService.getFormattedDate(new Date()).toString();
+          const diffTime = Math.abs(new Date(todayDate).getTime() - new Date(dojoining).getTime());
+          const diff = Math.ceil(diffTime / (1000 * 60 * 60 * 24)/365); 
+          this.users['diff'] =diff;
         },
         error => {
         });

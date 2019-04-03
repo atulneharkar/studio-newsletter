@@ -135,6 +135,7 @@ export class EventComponent implements OnInit {
       this.titleRet = eventObj.title;
       this.descRet = eventObj.description;
       this.notesRet = eventObj.notes;
+      console.log("eventObj.slots.fromDate",eventObj.slots.fromDate);
       this.setFromDate = this.helperService.getFormattedDate(eventObj.slots.fromDate);
       console.log("this.setFromDate",this.setFromDate);
       if(eventObj.slots.toDate) {
