@@ -190,7 +190,6 @@
       <!-- Submit button -->
       <div class="form-group text-center">
         <button type="submit" class="btn btn-primary btn-login" [disabled]="loading">Submit</button>
-        <img class="loading-img" *ngIf="loading" src="assets/img/loading.gif" />
       </div>
     </div>
 
@@ -200,4 +199,5 @@
     </p>
   </form>
 </div>
+<app-loader [isLoading]="loading"></app-loader>
 <app-modal [message]="message" [modalType]="modalType" [hidden]="!successMsg"></app-modal>

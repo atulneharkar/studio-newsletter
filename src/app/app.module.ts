@@ -7,20 +7,20 @@ import { HttpModule } from '@angular/http';
 import { appRouterModule } from "./app.routing";
 
 //services
-import { 
-    AuthenticationService, 
-    UserService, 
-    CommonService, 
-    FileUploadService, 
-    HelperService, 
-    ProjectService, 
+import {
+    AuthenticationService,
+    UserService,
+    CommonService,
+    FileUploadService,
+    HelperService,
+    ProjectService,
     EventService,
     MeetingRoomService,
     ValidationService
 } from './_services/index';
 
 //directives
-import { 
+import {
     ModalComponent
 } from './_directives/index';
 
@@ -32,7 +32,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header';
 import { LoginComponent } from './login';
 import { FooterComponent } from './footer';
-import { 
+import { LoaderComponent } from './loader';
+import {
     MainCarouselComponent,
     MainNavigationComponent,
     FeedbackCarouselComponent,
@@ -53,6 +54,7 @@ import { FilterdataPipe } from './filterdata.pipe';
     HeaderComponent,
     LoginComponent,
     FooterComponent,
+    LoaderComponent,
     HomeComponent,
     MainCarouselComponent,
     MainNavigationComponent,
