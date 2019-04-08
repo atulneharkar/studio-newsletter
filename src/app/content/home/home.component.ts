@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
             return event.invitees == domain;
           })
           this.events = this.events.filter(function(event){
-            return new Date(event.slots[0].fromDate.slice(0,10)).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)
+            return new Date(event.slots[0].toDate.slice(0,10)).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)
           })
           this.events.forEach(function(ev){
             ev['isInterested'] = false;
