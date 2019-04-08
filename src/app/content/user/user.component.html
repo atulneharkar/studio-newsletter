@@ -197,11 +197,11 @@
           <button type="submit" class="btn btn-primary btn-login">{{buttonText}}</button>
         </div>
         <a [routerLink]="['/login']" class="btn btn-link btn-cancel">Cancel</a>
-        <img *ngIf="loading" width="34" src="assets/img/loading.gif" />
       </div>
 
     </form>
   </div>
 </div>
 
+<app-loader [isLoading]="loading"></app-loader>
 <app-modal [message]="message" [modalType]="modalType" [hidden]="!successMsg"></app-modal>
