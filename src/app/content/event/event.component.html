@@ -45,7 +45,7 @@
           <p class="form-control description location">Location</p>
         </div>
         <div class="col-sm-6 col-xs-6 text-right">
-          <select required dir="rtl" class="form-control event-sel" id="location" formControlName="location">
+          <select required dir="rtl" class="form-control event-sel" [(ngModel)]="location" id="location" formControlName="location">
             <option selected disabled hidden value="">Select</option>
             <option *ngFor="let name of locations" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
@@ -60,7 +60,7 @@
           <p class="form-control description location">Other Location</p>
         </div>
         <div class="col-sm-6 col-xs-6 text-right">
-          <input type="text" [(ngModel)]="selectedDomain" class="form-control description other-location" id="otherLocation"
+          <input type="text" [(ngModel)]="otherLocation" class="form-control description other-location" id="otherLocation"
             formControlName="otherLocation" placeholder="Other Location">
           <p *ngIf="submitted && eventForm.get('otherLocation').hasError('required')" class="error-msg">
             Other Location is required.

@@ -23,6 +23,7 @@ export class EventComponent implements OnInit {
   public selectedOrganiser: string = '';
   public setFromDate: string = '';
   public titleRet: string = '';
+  public otherLocation: string = '';
   public descRet: string = '';
   public notesRet: string = '';
   public setToDate: string = '';
@@ -110,6 +111,7 @@ export class EventComponent implements OnInit {
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       location: ['', [Validators.required]],
+      otherLocation: ['', [Validators.required]],
       slots: this._fb.group({
         fromDate: ['', [Validators.required]],
         toDate: ['', [Validators.required]],
@@ -265,7 +267,7 @@ export class EventComponent implements OnInit {
     return {
       title: event.title,
       description: event.description,
-      location: event.location,
+      location: event.location == 'Other' ? 'Harpreet' : event.location,
       slots: {
         fromDate: event.slots[0].fromDate,
         toDate: event.slots[0].toDate,

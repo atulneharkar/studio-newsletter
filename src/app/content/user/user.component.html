@@ -153,12 +153,23 @@
 <div class="form-group row space-btm">
   <label for="visa" class="col-xs-12 col-form-label lbl-txt">Visa (if any)</label>
   <div class="col-xs-12">
-    <select required class="form-control lbl-select-val" id="visa" formControlName="visa">
+    <select required class="form-control lbl-select-val" id="visa" formControlName="visa" [(ngModel)]="visa">
       <option selected disabled hidden value="">Select Visa Type</option>
       <option *ngFor="let name of visaTypes" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
     </select>
   </div>
 </div>
+
+<!--Other visa-->
+<div class="form-group row space-btm" *ngIf="visa == 'Others'">
+    <label for="otherVisa" class="col-xs-12 col-form-label lbl-txt">Other Visa (if any)</label>
+    <div class="col-xs-12">
+        <input type="text" class="form-control lbl-val" id="otherVisa" formControlName="otherVisa" placeholder="Other Visa">
+        <p *ngIf="submitted && userForm.get('otherVisa').hasError('required')" class="error-msg">
+            other Visa is required.
+        </p>
+    </div>
+  </div>
 
       <!--about-->
       <div class="form-group row space-btm">

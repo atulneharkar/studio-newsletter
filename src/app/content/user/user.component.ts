@@ -112,6 +112,7 @@ export class UserComponent implements OnInit {
       doj: ['', [Validators.required]],
       skills: ['', [Validators.required]],
       visa: ['', [Validators.required]],
+      otherVisa: ['', [Validators.required]],
       about: ['', [Validators.required]],
       avatar: [''],
       role: ['user', '']
