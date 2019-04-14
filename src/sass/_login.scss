@@ -66,9 +66,11 @@ input:-webkit-autofill {
 	    background:#3c4960;
 	    padding: 10px 0;
 	    border:none;
-	    border-bottom:1px solid #53627b;
 	    box-shadow:none;
-	    width:100%;
+	    border-bottom:1px solid #53627b;
+	}
+	.lbl-val{
+		border-bottom:1px solid #53627b;
 	}
 	.btn-forgot-password{
 		padding:0 0 0 15px;

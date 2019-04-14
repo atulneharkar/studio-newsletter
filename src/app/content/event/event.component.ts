@@ -222,6 +222,9 @@ export class EventComponent implements OnInit {
 
   //capture uploaded file (profile pic)
   profilePicChange(fieldName: string, fileList: FileList) {
+    console.log("hello");
+    document.querySelector('.file-name').innerHTML = fileList[0].name;
+    document.querySelector('.file-name').classList.add('white');
     this.fileSizeError = false;
     // handle file changes
     this.imageInfo = new FormData();

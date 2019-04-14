@@ -2,26 +2,32 @@
   <div class="login-img-container">
     <img src="../../assets/img/studiofy-bg.png"/>
   </div>
-  <div class="container-fluid login-wrapper">
+  <div class="container-fluid login-wrapper register-container">
+    <div class="register-wrapper">
     <!-- <h2 class="heading">Login</h2> -->
     <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit(loginForm.valid)">
 
       <!--email-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="email" class="col-xs-12 col-form-label login-label-txt">Email</label>
         <div class="col-xs-12">
-          <input type="email" class="form-control login-label-val" id="email" formControlName="email" placeholder="something@deloitte.com">
+            <div class="form-group__email d-flex">
+              <input type="text" class="form-control login-label-val" id="email" formControlName="email" placeholder="something@deloitte.com"
+              pattern="[A-Za-z0-9]+"
+                [style.width]="loginForm.get('email').value ? (loginForm.get('email').value.length)*8.4+ 'px' : '100%'"
+              >
+              <span class="form-group__email__domain lbl-val"
+                      *ngIf="loginForm.get('email').value">@deloitte.com</span>
+          </div>
           <p *ngIf="submitted && loginForm.get('email').hasError('required')" class="error-msg">
               Email is required.
           </p>
-          <p *ngIf="submitted && loginForm.get('email').hasError('pattern')" class="error-msg">
-            Please enter a valid email.
-          </p>
+          
         </div>
       </div>
 
       <!--password-->
-      <div class="form-group row">
+      <div class="form-group row space-btm">
         <label for="password" class="col-xs-12 col-form-label login-label-txt">Password</label>
         <div class="col-xs-12">
           <input type="password" class="form-control login-label-val" id="password" formControlName="password" placeholder="Password">
@@ -52,6 +58,7 @@
       </div>
     </form>
   </div>
+</div>
 </div>
 
 <app-loader [isLoading]="loading"></app-loader>

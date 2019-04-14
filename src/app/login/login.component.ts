@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
   buildLoginForm(): void {
     this.loginForm = this._fb.group({
       email: ['', [
-          Validators.required,
-          Validators.pattern(this.validationService.getEmailPattern())
+          Validators.required
         ]
       ],
       password: ['', [Validators.required]]
@@ -58,9 +57,18 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     this.unauthorizedError = false;
     this.serverError = false;
-    this.credentials = this.loginForm.value;
+    
+    const userEmail = this.loginForm.get('email').value;
+    const deloitteEmail = userEmail.indexOf('@') !== -1 ? userEmail.substring(0, userEmail.indexOf('@')) : userEmail
+
+    //this.credentials = this.loginForm.value;
+    this.credentials = {email: `${deloitteEmail}@deloitte.com`, password: this.loginForm.get('password').value};
 
     if(isValid) {
+
+      
+      
+
       this.loading = true;
 
       //call to login method to check if credentilas are valid

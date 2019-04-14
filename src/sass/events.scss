@@ -277,8 +277,14 @@ input[type=number]::-webkit-outer-spin-button{
         }
         .upload-img-icon{
             padding: 14px 0px 14px 15px;
-            margin: 0;
-        }
+			margin: 0;
+		}
+		.file-name{
+			color: #53627b;
+		}
+		.white{
+			color:#fff;
+		}
         .from-dates{
             text-align:right;
             background-image: url(/assets/icons/arrow-down.svg) !important;
