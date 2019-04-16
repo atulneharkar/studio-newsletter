@@ -72,6 +72,9 @@ input:-webkit-autofill {
 	.lbl-val{
 		border-bottom:1px solid #53627b;
 	}
+	.label-value{
+		border-bottom:none !important;
+	}
 	.btn-forgot-password{
 		padding:0 0 0 15px;
 		font-family: 'Barlow';

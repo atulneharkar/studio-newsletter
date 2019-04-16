@@ -36,7 +36,7 @@
         Visa Holding
       </div>
       <div class="value">
-        {{users.visa  || 'None'}}
+        {{users.visa =='Others' ?  users.otherVisa : users.visa}}
       </div>
 
       <div class="title-head">

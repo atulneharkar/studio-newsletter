@@ -79,7 +79,7 @@
     <div class="i-pitch-details">
       <div>
         <div class="lbl-txt">Venue</div>
-        <div class="lbl-val">{{event.location}}</div>
+        <div class="lbl-val label-value">{{event.location == 'Other' ? event.otherLocation : event.location}}</div>
       </div>
       <div>
         <div class="lbl-txt">Time</div>
