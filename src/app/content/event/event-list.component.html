@@ -99,7 +99,7 @@
           <div class="panel-body">
             <div class="venue">
               <span class="venue-lbl">VENUE</span>
-              <span class="venue-name">{{event.location}}</span>
+              <span class="venue-name">{{event.location == 'Other' ? event.otherLocation : event.location}}</span>
             </div>
             <div class="time">
               <span class="time-lbl">TIME</span>
