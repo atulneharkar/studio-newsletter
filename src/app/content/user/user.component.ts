@@ -10,6 +10,9 @@ import {
   HelperService,
   ValidationService } from '../../_services';
 import { User } from '../../_interfaces';
+import {
+  RequiredIfDirective
+} from '../../_directives/index';
 
 @Component({
   selector: 'app-user',

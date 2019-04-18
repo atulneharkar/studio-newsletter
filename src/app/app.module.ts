@@ -21,7 +21,8 @@ import {
 
 //directives
 import {
-    ModalComponent
+    ModalComponent,
+    RequiredIfDirective
 } from './_directives/index';
 
 //guards
@@ -73,6 +74,7 @@ import { FilterdataPipe } from './filterdata.pipe';
     ResetPasswordComponent,
     HomeComponent,
     ModalComponent,
+    RequiredIfDirective,
     CalcExpPipe,
     FilterdataPipe
   ],

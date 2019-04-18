@@ -164,7 +164,7 @@
 <div class="form-group row space-btm" *ngIf="visa == 'Others'">
     <label for="otherVisa" class="col-xs-12 col-form-label lbl-txt">Other Visa (if any)</label>
     <div class="col-xs-12">
-        <input type="text" class="form-control lbl-val" id="otherVisa" formControlName="otherVisa" placeholder="Other Visa">
+        <input type="text" class="form-control lbl-val" id="otherVisa" formControlName="otherVisa" [requiredIf]="visa=='Others'" placeholder="Other Visa">
         <p *ngIf="submitted && userForm.get('otherVisa').hasError('required')" class="error-msg">
             other Visa is required.
         </p>

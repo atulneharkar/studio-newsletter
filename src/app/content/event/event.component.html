@@ -61,7 +61,7 @@
         </div>
         <div class="col-sm-6 col-xs-6 text-right">
           <input type="text" [(ngModel)]="otherLocation" class="form-control description other-location" id="otherLocation"
-            formControlName="otherLocation" placeholder="Other Location">
+            formControlName="otherLocation" [requiredIf]="location =='Other'" placeholder="Other Location">
           <p *ngIf="submitted && eventForm.get('otherLocation').hasError('required')" class="error-msg">
             Other Location is required.
           </p>

@@ -6,6 +6,7 @@ import { Headers } from '@angular/http';
 import { CommonService, HelperService, EventService, UserService, FileUploadService } from '../../_services';
 import { Event, User } from '../../_interfaces';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
+import {RequiredIfDirective} from '../../_directives/index';
 
 @Component({
   selector: 'app-event',
