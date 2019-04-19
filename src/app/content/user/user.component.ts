@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
   public message: string = "";
   public modalType: string = "success";
   public title: string = 'Register';
-  public buttonText: string = 'Save';
+  public buttonText: string = 'Register';
 
   constructor(private _fb: FormBuilder,
         private router: Router,
