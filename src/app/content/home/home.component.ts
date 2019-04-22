@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
           this.userImage = this.commonService.getUserCookies().avatar;
           this.events = this.events.reverse();
           this.events = this.events.filter(function(event){
-            return event.invitees == domain;
+            return event.invitees == domain || event.invitees=='All';
           })
           this.events = this.events.filter(function(event){
             return new Date(event.slots[0].toDate.slice(0,10)).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)
