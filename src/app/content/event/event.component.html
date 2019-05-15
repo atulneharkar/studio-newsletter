@@ -45,7 +45,7 @@
           <p class="form-control description location">Location</p>
         </div>
         <div class="col-sm-6 col-xs-6 text-right">
-          <select required dir="rtl" class="form-control event-sel" [(ngModel)]="location" id="location" formControlName="location">
+          <select required dir="rtl" class="form-control event-sel"  id="location" formControlName="location">
             <option selected disabled hidden value="">Select</option>
             <option *ngFor="let name of locations" [selected]="selectedDomain === name" [ngValue]="name">{{name}}</option>
           </select>
@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <div class="form-group row lower-seperate" *ngIf="location == 'Other'">
+      <div class="form-group row lower-seperate" *ngIf="eventForm.get('location').value == 'Other'">
         <div class="col-sm-6 col-xs-6">
           <p class="form-control description location">Other Location</p>
         </div>
